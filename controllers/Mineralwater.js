@@ -7,8 +7,8 @@ http://www.eupedia.com/europe/european_mineral_waters.shtml
   var company = require('../models/Company.js');
   var product = require('../models/Product.js');
   var observation = require('../models/Observation.js');
-  var Uom = require('../models/Uom.js').schema;
-  var Code = require('../models/Code.js').schema;
+  var Uom = require('../models/Uom.js');
+  var Code = require('../models/Code.js');
   module.exports.get = function (req, res, next) {
     var params = req.swagger.params;
     var mgl = new Uom.model({

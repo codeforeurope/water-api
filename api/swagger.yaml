@@ -1,15 +1,14 @@
 ---
 swagger: "2.0"
 info:
-  description: "This is a the API for Trinkwasser/Drinking water.\n\nInformation\
-    \ about the project can be found on [Github](https://github.com/codeforeurope/trinkwasser)\n"
+  description: "This is a the API for The Code For Europe Transparent Water Initiative"
   version: "1.0.0"
-  title: "Trinkwasser API"
+  title: "Water-api"
   contact:
     name: "info@codefor.eu"
   license:
-    name: "MIT"
-    url: "https://raw.githubusercontent.com/codeforeurope/trinkwasser/master/LICENSE"
+    name: "GPL-3.0"
+    url: "https://raw.githubusercontent.com/codeforeurope/water-api/master/LICENSE"
 basePath: "/api"
 schemes:
 - "https"
