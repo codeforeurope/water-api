@@ -12,3 +12,8 @@ This is a the API for the Code For Europe Transparent Water Initiative.
 npm install
 npm start
 ```
+# Test
+
+```bash
+npm test
+```
