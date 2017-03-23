@@ -1,6 +1,6 @@
 # Build status
 
-[![Travis](https://travis-ci.org/codeeurope/water-api.svg?branch=master)](https://travis-ci.org/codeforeurope/water-api)
+[![Travis](https://api.travis-ci.org/codeforeurope/water-api.svg?branch=master)](https://travis-ci.org/codeforeurope/water-api)
 [![David](https://david-dm.org/codeforeurope/water-api.svg)](https://david-dm.org/codeforeurope/water-api)
 
 # water-api
