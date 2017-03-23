@@ -1,0 +1,10 @@
+.project
+.settings
+.classpath
+.env
+.DS_Store
+Thumbs.db
+.rbenv-version
+.rvmrc
+*.log
+node_modules

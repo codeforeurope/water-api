@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 let parameter = [ 'E. coli',
   'Lead',
   'Nitrate',
@@ -52,5 +53,5 @@ let parameter = [ 'E. coli',
   'Tritium',
   'Total Indicative Dose',
   'Nitrites (at WTW)',
-  'Oxidisability' ]
-module.exports = parameter
+  'Oxidisability' ];
+module.exports = parameter;

@@ -3,62 +3,62 @@ http://www.eupedia.com/europe/european_mineral_waters.shtml
 */
 
 (function () {
-  'use strict'
-  var company = require('../models/Company.js')
-  var product = require('../models/Product.js')
-  var observation = require('../models/Observation.js')
-  var Uom = require('../models/Uom.js').schema
-  var Code = require('../models/Code.js').schema
+  'use strict';
+  var company = require('../models/Company.js');
+  var product = require('../models/Product.js');
+  var observation = require('../models/Observation.js');
+  var Uom = require('../models/Uom.js').schema;
+  var Code = require('../models/Code.js').schema;
   module.exports.get = function (req, res, next) {
-    var params = req.swagger.params
+    var params = req.swagger.params;
     var mgl = new Uom.model({
       value: 'mg/L',
       label: 'Milligram per liter, Mass concentration unit. Conversion to SI unit: 1 kg/m3 = 10^3 mg/L'
-    })
-    var natrium = new Code.model({standard: 'CAS', value: '7440-23-5', label: 'Sodium'})
-    var kalium = new Code.model({standard: 'CAS', value: '7440-09-7', label: 'Potassium'})
-    var calcium = new Code.model({standard: 'CAS', value: '7440-70-2', label: 'Calcium'})
-    var magnesium = new Code.model({standard: 'CAS', value: '7439-95-4', label: 'Magnesium'})
-    var fluorid = new Code.model({standard: 'CAS', value: '16984-48-8', label: 'Fluoride'})
-    var chlorid = new Code.model({standard: 'CAS', value: '16887-00-6', label: 'Chloride'})
-    var sulfat = new Code.model({standard: 'CAS', value: '14808-79-8', label: 'Sulfate'})
-    var hydrogene = new Code.model({standard: 'CAS', value: '1333-74-0', label: 'Hydrogen'})
-    var nitrat = new Code.model({standard: 'CAS', value: '14797-55-8', label: 'Nitrate'})
-    var bicarbonate = new Code.model({standard: 'CAS', value: '', label: 'Bicarbonate (HCO3)'})
-    var silica = new Code.model({standard: 'CAS', value: '3163-01-7', label: 'Silicate'})
-    var trihalomethane = new Code.model({standard: 'CAS', value: '', label: 'Trihalomethanes (THMS)'})
-    var microbacteria = new Code.model({standard: 'CAS', value: '', label: 'Microbacteria'})
+    });
+    var natrium = new Code.model({standard: 'CAS', value: '7440-23-5', label: 'Sodium'});
+    var kalium = new Code.model({standard: 'CAS', value: '7440-09-7', label: 'Potassium'});
+    var calcium = new Code.model({standard: 'CAS', value: '7440-70-2', label: 'Calcium'});
+    var magnesium = new Code.model({standard: 'CAS', value: '7439-95-4', label: 'Magnesium'});
+    var fluorid = new Code.model({standard: 'CAS', value: '16984-48-8', label: 'Fluoride'});
+    var chlorid = new Code.model({standard: 'CAS', value: '16887-00-6', label: 'Chloride'});
+    var sulfat = new Code.model({standard: 'CAS', value: '14808-79-8', label: 'Sulfate'});
+    var hydrogene = new Code.model({standard: 'CAS', value: '1333-74-0', label: 'Hydrogen'});
+    var nitrat = new Code.model({standard: 'CAS', value: '14797-55-8', label: 'Nitrate'});
+    var bicarbonate = new Code.model({standard: 'CAS', value: '', label: 'Bicarbonate (HCO3)'});
+    var silica = new Code.model({standard: 'CAS', value: '3163-01-7', label: 'Silicate'});
+    var trihalomethane = new Code.model({standard: 'CAS', value: '', label: 'Trihalomethanes (THMS)'});
+    var microbacteria = new Code.model({standard: 'CAS', value: '', label: 'Microbacteria'});
 
     var wueteria = new company.model({
       code: 'wueteria',
       name: 'Wüteria Mineralquellen GmbH & Co. KG',
       url: 'http://wueteria.de',
       country: 'Germany'
-    })
+    });
     var teusser = new company.model({
       code: 'teuser',
       name: 'Teusser Mineralbrunnen Karl Rössle GmbH & Co KG',
       url: 'http://wueteria.de',
       country: 'Germany'
-    })
+    });
     var jointhepipe = new company.model({
       code: 'jointhepipe',
       name: 'Join-The-Pipe',
       url: 'http://join-the-pipe.org/',
       country: 'Netherlands'
-    })
+    });
     var vittel = new company.model({
       code: 'vittel',
       name: 'Vittel',
       url: 'www.nestle-waters.com/brands/vittel',
       country: ''
-    })
+    });
     var volvic = new company.model({
       code: 'volvic',
       name: 'Volvic',
       url: 'www.nestle-waters.com/brands/vittel',
       country: ''
-    })
+    });
     /*	"salvus": {
 		"natrium": 19.9,
 		"kalium": 1.1,
@@ -108,8 +108,8 @@ http://www.eupedia.com/europe/european_mineral_waters.shtml
       ],
       sources: ['http://books.google.de/books?id=lzEoGWyqMBwC&pg=PA198&lpg=PA198&dq=volvic+nitratgehalt&source=bl&ots=pJEE0i9HwK&sig=OI_PeSr_QGBCfpeVCu70N4ohy8g&hl=de&ei=4-yvSuHrJ8jK_gbV0p3ZDA&sa=X&oi=book_result&ct=result&resnum=6#v=onepage&q&f=false'],
       vendor: volvic
-    })
-    var vittel = new product.model({
+    });
+    var vittelwater = new product.model({
       name: 'Vittel',
       observations: [
         new observation.model({value: 7.7, uom: mgl, eqr: natrium}),
@@ -124,7 +124,7 @@ http://www.eupedia.com/europe/european_mineral_waters.shtml
       ],
       sources: ['http://books.google.de/books?id=lzEoGWyqMBwC&pg=PA198&lpg=PA198&dq=volvic+nitratgehalt&source=bl&ots=pJEE0i9HwK&sig=OI_PeSr_QGBCfpeVCu70N4ohy8g&hl=de&ei=4-yvSuHrJ8jK_gbV0p3ZDA&sa=X&oi=book_result&ct=result&resnum=6#v=onepage&q&f=false"]'],
       vendor: vittel
-    })
+    });
 
     var heiligenquelleclassic = new product.model({
       name: 'HEILIGENQUELLE CLASSIC',
@@ -140,7 +140,7 @@ http://www.eupedia.com/europe/european_mineral_waters.shtml
       ],
       sources: ['http://wueteria.de/unser-wasser/unsere-mineralwasserquellen/'],
       vendor: wueteria
-    })
+    });
     var teussernaturell = new product.model({
       name: 'Teusser Naturell',
       observations: [
@@ -156,28 +156,28 @@ http://www.eupedia.com/europe/european_mineral_waters.shtml
       ],
       sources: ['http://www.teusser.de/index.php?id=225'],
       vendor: teusser
-    })
+    });
 
-    var output = [heiligenquelleclassic.toObject(), teussernaturell.toObject(), vittel.toObject(), volvicwater.toObject()]
-    res.setHeader('content-type', 'application/json')
-    res.setHeader('charset', 'utf-8')
-    res.end(JSON.stringify(output, null, 2))
-  }
+    var output = [heiligenquelleclassic.toObject(), teussernaturell.toObject(), vittel.toObject(), volvicwater.toObject()];
+    res.setHeader('content-type', 'application/json');
+    res.setHeader('charset', 'utf-8');
+    res.end(JSON.stringify(output, null, 2));
+  };
 
   module.exports.post = function (req, res, next) {
-    var params = req.swagger.params
-    res.setHeader('content-type', 'application/json')
-    res.end(JSON.stringify({'operation': 'POST'}, null, 2))
-  }
+    var params = req.swagger.params;
+    res.setHeader('content-type', 'application/json');
+    res.end(JSON.stringify({'operation': 'POST'}, null, 2));
+  };
 
   module.exports.put = function (req, res, next) {
-    var params = req.swagger.params
-    res.setHeader('content-type', 'application/json')
-    res.end(JSON.stringify({'operation': 'PUT'}, null, 2))
-  }
+    var params = req.swagger.params;
+    res.setHeader('content-type', 'application/json');
+    res.end(JSON.stringify({'operation': 'PUT'}, null, 2));
+  };
   module.exports.delete = function (req, res, next) {
-    var params = req.swagger.params
-    res.setHeader('content-type', 'application/json')
-    res.end(JSON.stringify({'operation': 'DELETE'}, null, 2))
-  }
-}())
+    var params = req.swagger.params;
+    res.setHeader('content-type', 'application/json');
+    res.end(JSON.stringify({'operation': 'DELETE'}, null, 2));
+  };
+}());
