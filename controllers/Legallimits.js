@@ -9,7 +9,7 @@
   var observation = require('../models/Observation.js');
   var Uom = require('../models/Uom.js').schema;
   var Code = require('../models/Code.js').schema;
-  module.exports.get = function (req, res, next) {
+  module.exports.getlimits = function (req, res, next) {
     var params = req.swagger.params;
     var mgl = new Uom.model({
       value: 'mg/L',
@@ -81,18 +81,18 @@
     res.end(JSON.stringify(output, null, 2));
   };
 
-  module.exports.post = function (req, res, next) {
+  module.exports.postlimits = function (req, res, next) {
     var params = req.swagger.params;
     res.setHeader('content-type', 'application/json');
     res.end(JSON.stringify({ 'operation': 'POST' }, null, 2));
   };
 
-  module.exports.put = function (req, res, next) {
+  module.exports.putlimits = function (req, res, next) {
     var params = req.swagger.params;
     res.setHeader('content-type', 'application/json');
     res.end(JSON.stringify({ 'operation': 'PUT' }, null, 2));
   };
-  module.exports.delete = function (req, res, next) {
+  module.exports.deletelimits = function (req, res, next) {
     var params = req.swagger.params;
     res.setHeader('content-type', 'application/json');
     res.end(JSON.stringify({ 'operation': 'DELETE' }, null, 2));

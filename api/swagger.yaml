@@ -17,7 +17,7 @@ paths:
   /pumpingstations:
     get:
       tags:
-      - "lists"
+      - "pumpingstations"
       summary: "Get a list of pumpingstation"
       description: "Multiple parameters can be provided"
       operationId: "getpumpingstations"

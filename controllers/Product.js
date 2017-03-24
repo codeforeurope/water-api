@@ -9,7 +9,7 @@ http://www.eupedia.com/europe/european_mineral_waters.shtml
   var observation = require('../models/Observation.js');
   var Uom = require('../models/Uom.js');
   var Code = require('../models/Code.js');
-  module.exports.get = function (req, res, next) {
+  module.exports.getproducts = function (req, res, next) {
     var params = req.swagger.params;
     var mgl = new Uom.model({
       value: 'mg/L',
@@ -130,16 +130,16 @@ http://www.eupedia.com/europe/european_mineral_waters.shtml
     res.end(JSON.stringify(output, null, 2));
   };
 
-  module.exports.post = function(req, res, next) {
+  module.exports.postproduct = function(req, res, next) {
       next(new Error('Not Implemented'),req,res,next);
   };
 
-  module.exports.put = function (req, res, next) {
+  module.exports.putproduct = function (req, res, next) {
     var params = req.swagger.params;
     res.setHeader('content-type', 'application/json');
     res.end(JSON.stringify({'operation': 'PUT'}, null, 2));
   };
-  module.exports.delete = function (req, res, next) {
+  module.exports.deleteproduct = function (req, res, next) {
     var params = req.swagger.params;
     res.setHeader('content-type', 'application/json');
     res.end(JSON.stringify({'operation': 'DELETE'}, null, 2));
