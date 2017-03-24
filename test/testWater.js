@@ -9,27 +9,25 @@ var app = require('../server');
 chai.use(chaiHttp);
 var should = chai.should();
 
-describe('testing /api/product', function() {
+describe('testing /api/water', function() {
   afterEach(function() {
     // runs after each test in this block
   });
-
   /*
-   * Test the /GET MineralWater route
+   * Test /PUT water
    */
-  describe('GET', function() {
-    it('it should return list of MineralWaters', function(done) {
+  describe('PUT', function() {
+    it('it should return Error, not Implemented', function(done) {
       chai.request(app)
-        .get('/api/products')
+        .put('/api/water')
+        .send({})
         .end(function(err, res) {
           var data = JSON.parse(res.text);
-          data.should.be.instanceof(Array);
-          data.should.have.lengthOf(4);
-          res.should.be.json; // jshint ignore:line
-          res.should.have.status(200);
+          should.equal(data.name, 'Error');
+          should.equal(data.message, 'Not Implemented');
+          res.should.have.status(400);
           done();
         });
     });
   });
-
 });

@@ -14,8 +14,7 @@
 
   module.exports.put = function(req, res, next) {
       var params = req.swagger.params;
-      res.setHeader('content-type', 'application/json');
-      res.end(JSON.stringify({"operation": "PUT"}, null, 2));
+      next(new Error('Not Implemented'),req,res,next);
   };
   module.exports.delete = function(req, res, next) {
       var params = req.swagger.params;

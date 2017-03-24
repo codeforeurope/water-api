@@ -37,6 +37,17 @@
         app.use(middleware.swaggerUi());
         // Serve the client
         //app.use(serveStatic(path.join(__dirname, 'client')));
+        app.use(function onerror(err, req, res, next) {
+          // an error occurred!
+          res.setHeader('content-type', 'application/json');
+          // result = {
+          //     "code": e.code || 400,
+          //     "message": e.name + " -- " + e.message,
+          //     "fields": e.fields || null
+          //   };
+          res.statusCode = err.code || 400;
+          res.end(JSON.stringify({"name": err.name, "message":err.message}, null, 2));
+        });
     });
     module.exports = app;
 }());

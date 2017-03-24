@@ -9,27 +9,22 @@ var app = require('../server');
 chai.use(chaiHttp);
 var should = chai.should();
 
-describe('testing /api/product', function() {
+describe('testing /docs', function() {
   afterEach(function() {
     // runs after each test in this block
   });
-
   /*
-   * Test the /GET MineralWater route
+   * Test the /GET docs route
    */
   describe('GET', function() {
-    it('it should return list of MineralWaters', function(done) {
+    it('it should GET default swaggger docs', function(done) {
       chai.request(app)
-        .get('/api/products')
+        .get('/docs')
         .end(function(err, res) {
-          var data = JSON.parse(res.text);
-          data.should.be.instanceof(Array);
-          data.should.have.lengthOf(4);
-          res.should.be.json; // jshint ignore:line
+          res.should.be.html; // jshint ignore:line
           res.should.have.status(200);
           done();
         });
     });
   });
-
 });
