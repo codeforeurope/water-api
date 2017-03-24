@@ -13,8 +13,7 @@
   };
 
   module.exports.put = function(req, res, next) {
-      var params = req.swagger.params;
-      next(new Error('Not Implemented'),req,res,next);
+      next(new Error('Not Implemented'));
   };
   module.exports.delete = function(req, res, next) {
       var params = req.swagger.params;

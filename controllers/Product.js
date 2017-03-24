@@ -59,54 +59,20 @@ http://www.eupedia.com/europe/european_mineral_waters.shtml
       url: 'www.nestle-waters.com/brands/vittel',
       country: ''
     });
-    /*	"salvus": {
-		"natrium": 19.9,
-		"kalium": 1.1,
-		"calcium": 76,
-		"magnesium": 4,
-		"chlorid": 50,
-		"nitrat": 0,
-		"sulfat": 40,
-		"sources": ["http://www.salvus.de/produkte/salvus-mineralwasser-naturell/"]
-	},
-	"apodis": {
-		"natrium": 19,
-		"kalium": 1.3,
-		"calcium": 110.2,
-		"magnesium": 5.9,
-		"chlorid": 42,
-		"nitrat": 0,
-		"sulfat": 73,
-		"sources": ["http://www.mineralwasser-genuss.de/apodis/"]
-	},
-	"sawell": {
-		"natrium": 22,
-		"kalium": 0.7,
-		"calcium": 76,
-		"magnesium": 3.8,
-		"chlorid": 52,
-		"nitrat": 0,
-		"sulfat": 52,
-		"sources": ["http://www.mineralwasser-genuss.de/sawell/"]
-	},
-
-  */
-    var volvicwater = new product.model({
-      name: 'Volvic',
+    var volvic_50cl = new product.model({
+      name: 'Volvic 50 cl',
       observations: [
         new observation.model({value: 11.6, uom: mgl, eqr: natrium}),
         new observation.model({value: 71, uom: mgl, eqr: bicarbonate}),
         new observation.model({value: 31.7, uom: mgl, eqr: silica}),
-        new observation.model({value: 6.2, uom: mgl, eqr: kalium}),
+        new observation.model({value: 11.7, uom: mgl, eqr: kalium}),
         new observation.model({value: 11.5, uom: mgl, eqr: calcium}),
         new observation.model({value: 8, uom: mgl, eqr: magnesium}),
-        new observation.model({value: null, uom: mgl, eqr: fluorid}),
         new observation.model({value: 13.5, uom: mgl, eqr: chlorid}),
         new observation.model({value: 8.1, uom: mgl, eqr: sulfat}),
-        new observation.model({value: null, uom: mgl, eqr: hydrogene}),
-        new observation.model({value: 6.9, uom: mgl, eqr: nitrat}) // 6.3 Wikipedia
+        new observation.model({value: 6.3, uom: mgl, eqr: nitrat})
       ],
-      sources: ['http://books.google.de/books?id=lzEoGWyqMBwC&pg=PA198&lpg=PA198&dq=volvic+nitratgehalt&source=bl&ots=pJEE0i9HwK&sig=OI_PeSr_QGBCfpeVCu70N4ohy8g&hl=de&ei=4-yvSuHrJ8jK_gbV0p3ZDA&sa=X&oi=book_result&ct=result&resnum=6#v=onepage&q&f=false'],
+      sources: ['https://world.openfoodfacts.org/product/3057640117008/volvic'],
       vendor: volvic
     });
     var vittelwater = new product.model({
@@ -158,16 +124,14 @@ http://www.eupedia.com/europe/european_mineral_waters.shtml
       vendor: teusser
     });
 
-    var output = [heiligenquelleclassic.toObject(), teussernaturell.toObject(), vittel.toObject(), volvicwater.toObject()];
+    var output = [heiligenquelleclassic.toObject(), teussernaturell.toObject(), vittelwater.toObject(), volvic_50cl.toObject()];
     res.setHeader('content-type', 'application/json');
     res.setHeader('charset', 'utf-8');
     res.end(JSON.stringify(output, null, 2));
   };
 
-  module.exports.post = function (req, res, next) {
-    var params = req.swagger.params;
-    res.setHeader('content-type', 'application/json');
-    res.end(JSON.stringify({'operation': 'POST'}, null, 2));
+  module.exports.post = function(req, res, next) {
+      next(new Error('Not Implemented'),req,res,next);
   };
 
   module.exports.put = function (req, res, next) {
