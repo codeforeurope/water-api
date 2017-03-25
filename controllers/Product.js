@@ -4,11 +4,18 @@ http://www.eupedia.com/europe/european_mineral_waters.shtml
 
 (function () {
   'use strict';
-  var company = require('../models/Company.js');
-  var product = require('../models/Product.js');
-  var observation = require('../models/Observation.js');
-  var Uom = require('../models/Uom.js');
-  var Code = require('../models/Code.js');
+  var models = require('../models');
+  var Code = models.Code;
+  var Company = models.Company;
+  var Product = models.Product;
+  var Observation = models.Observation;
+  var Uom = models.Uom;
+
+  //var company = require('../models/Company.js');
+  //var product = require('../models/Product.js');
+  //var observation = require('../models/Observation.js');
+  //var Uom = require('../models/Uom.js');
+  //var Code = require('../models/Code.js');
   module.exports.getproducts = function (req, res, next) {
     var params = req.swagger.params;
     var mgl = new Uom.model({
@@ -29,96 +36,96 @@ http://www.eupedia.com/europe/european_mineral_waters.shtml
     var trihalomethane = new Code.model({standard: 'CAS', value: '', label: 'Trihalomethanes (THMS)'});
     var microbacteria = new Code.model({standard: 'CAS', value: '', label: 'Microbacteria'});
 
-    var wueteria = new company.model({
+    var wueteria = new Company.model({
       code: 'wueteria',
       name: 'Wüteria Mineralquellen GmbH & Co. KG',
       url: 'http://wueteria.de',
       country: 'Germany'
     });
-    var teusser = new company.model({
+    var teusser = new Company.model({
       code: 'teuser',
       name: 'Teusser Mineralbrunnen Karl Rössle GmbH & Co KG',
       url: 'http://wueteria.de',
       country: 'Germany'
     });
-    var jointhepipe = new company.model({
+    var jointhepipe = new Company.model({
       code: 'jointhepipe',
       name: 'Join-The-Pipe',
       url: 'http://join-the-pipe.org/',
       country: 'Netherlands'
     });
-    var vittel = new company.model({
+    var vittel = new Company.model({
       code: 'vittel',
       name: 'Vittel',
       url: 'www.nestle-waters.com/brands/vittel',
       country: ''
     });
-    var volvic = new company.model({
+    var volvic = new Company.model({
       code: 'volvic',
       name: 'Volvic',
       url: 'www.nestle-waters.com/brands/vittel',
       country: ''
     });
-    var volvic_50cl = new product.model({
+    var volvic_50cl = new Product.model({
       name: 'Volvic 50 cl',
       observations: [
-        new observation.model({value: 11.6, uom: mgl, eqr: natrium}),
-        new observation.model({value: 71, uom: mgl, eqr: bicarbonate}),
-        new observation.model({value: 31.7, uom: mgl, eqr: silica}),
-        new observation.model({value: 11.7, uom: mgl, eqr: kalium}),
-        new observation.model({value: 11.5, uom: mgl, eqr: calcium}),
-        new observation.model({value: 8, uom: mgl, eqr: magnesium}),
-        new observation.model({value: 13.5, uom: mgl, eqr: chlorid}),
-        new observation.model({value: 8.1, uom: mgl, eqr: sulfat}),
-        new observation.model({value: 6.3, uom: mgl, eqr: nitrat})
+        new Observation.model({value: 11.6, uom: mgl, eqr: natrium}),
+        new Observation.model({value: 71, uom: mgl, eqr: bicarbonate}),
+        new Observation.model({value: 31.7, uom: mgl, eqr: silica}),
+        new Observation.model({value: 11.7, uom: mgl, eqr: kalium}),
+        new Observation.model({value: 11.5, uom: mgl, eqr: calcium}),
+        new Observation.model({value: 8, uom: mgl, eqr: magnesium}),
+        new Observation.model({value: 13.5, uom: mgl, eqr: chlorid}),
+        new Observation.model({value: 8.1, uom: mgl, eqr: sulfat}),
+        new Observation.model({value: 6.3, uom: mgl, eqr: nitrat})
       ],
       sources: ['https://world.openfoodfacts.org/product/3057640117008/volvic'],
       vendor: volvic
     });
-    var vittelwater = new product.model({
+    var vittelwater = new Product.model({
       name: 'Vittel',
       observations: [
-        new observation.model({value: 7.7, uom: mgl, eqr: natrium}),
-        new observation.model({value: 5.2, uom: mgl, eqr: kalium}),
-        new observation.model({value: 94, uom: mgl, eqr: calcium}),
-        new observation.model({value: 20, uom: mgl, eqr: magnesium}),
-        new observation.model({value: 0.22, uom: mgl, eqr: fluorid}),
-        new observation.model({value: 3.8, uom: mgl, eqr: chlorid}),
-        new observation.model({value: 120, uom: mgl, eqr: sulfat}),
-        new observation.model({value: 455, uom: mgl, eqr: hydrogene}),
-        new observation.model({value: 120, uom: mgl, eqr: nitrat})
+        new Observation.model({value: 7.7, uom: mgl, eqr: natrium}),
+        new Observation.model({value: 5.2, uom: mgl, eqr: kalium}),
+        new Observation.model({value: 94, uom: mgl, eqr: calcium}),
+        new Observation.model({value: 20, uom: mgl, eqr: magnesium}),
+        new Observation.model({value: 0.22, uom: mgl, eqr: fluorid}),
+        new Observation.model({value: 3.8, uom: mgl, eqr: chlorid}),
+        new Observation.model({value: 120, uom: mgl, eqr: sulfat}),
+        new Observation.model({value: 455, uom: mgl, eqr: hydrogene}),
+        new Observation.model({value: 120, uom: mgl, eqr: nitrat})
       ],
       sources: ['http://books.google.de/books?id=lzEoGWyqMBwC&pg=PA198&lpg=PA198&dq=volvic+nitratgehalt&source=bl&ots=pJEE0i9HwK&sig=OI_PeSr_QGBCfpeVCu70N4ohy8g&hl=de&ei=4-yvSuHrJ8jK_gbV0p3ZDA&sa=X&oi=book_result&ct=result&resnum=6#v=onepage&q&f=false"]'],
       vendor: vittel
     });
 
-    var heiligenquelleclassic = new product.model({
+    var heiligenquelleclassic = new Product.model({
       name: 'HEILIGENQUELLE CLASSIC',
       observations: [
-        new observation.model({value: 10.7, uom: mgl, eqr: natrium}),
-        new observation.model({value: 2.6, uom: mgl, eqr: kalium}),
-        new observation.model({value: 118, uom: mgl, eqr: calcium}),
-        new observation.model({value: 48, uom: mgl, eqr: magnesium}),
-        new observation.model({value: 0.22, uom: mgl, eqr: fluorid}),
-        new observation.model({value: 43, uom: mgl, eqr: chlorid}),
-        new observation.model({value: 68, uom: mgl, eqr: sulfat}),
-        new observation.model({value: 455, uom: mgl, eqr: hydrogene})
+        new Observation.model({value: 10.7, uom: mgl, eqr: natrium}),
+        new Observation.model({value: 2.6, uom: mgl, eqr: kalium}),
+        new Observation.model({value: 118, uom: mgl, eqr: calcium}),
+        new Observation.model({value: 48, uom: mgl, eqr: magnesium}),
+        new Observation.model({value: 0.22, uom: mgl, eqr: fluorid}),
+        new Observation.model({value: 43, uom: mgl, eqr: chlorid}),
+        new Observation.model({value: 68, uom: mgl, eqr: sulfat}),
+        new Observation.model({value: 455, uom: mgl, eqr: hydrogene})
       ],
       sources: ['http://wueteria.de/unser-wasser/unsere-mineralwasserquellen/'],
       vendor: wueteria
     });
-    var teussernaturell = new product.model({
+    var teussernaturell = new Product.model({
       name: 'Teusser Naturell',
       observations: [
-        new observation.model({value: 53, uom: mgl, eqr: natrium}),
-        new observation.model({value: 7, uom: mgl, eqr: kalium}),
-        new observation.model({value: 537, uom: mgl, eqr: calcium}),
-        new observation.model({value: 0.5, uom: mgl, eqr: nitrat}),
-        new observation.model({value: 92, uom: mgl, eqr: magnesium}),
-        new observation.model({value: 0.21, uom: mgl, eqr: fluorid}),
-        new observation.model({value: 27, uom: mgl, eqr: chlorid}),
-        new observation.model({value: 1467, uom: mgl, eqr: sulfat}),
-        new observation.model({value: 357, uom: mgl, eqr: hydrogene})
+        new Observation.model({value: 53, uom: mgl, eqr: natrium}),
+        new Observation.model({value: 7, uom: mgl, eqr: kalium}),
+        new Observation.model({value: 537, uom: mgl, eqr: calcium}),
+        new Observation.model({value: 0.5, uom: mgl, eqr: nitrat}),
+        new Observation.model({value: 92, uom: mgl, eqr: magnesium}),
+        new Observation.model({value: 0.21, uom: mgl, eqr: fluorid}),
+        new Observation.model({value: 27, uom: mgl, eqr: chlorid}),
+        new Observation.model({value: 1467, uom: mgl, eqr: sulfat}),
+        new Observation.model({value: 357, uom: mgl, eqr: hydrogene})
       ],
       sources: ['http://www.teusser.de/index.php?id=225'],
       vendor: teusser

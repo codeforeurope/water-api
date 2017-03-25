@@ -16,5 +16,5 @@
         entered_at: {type: Date, required: true, default: Date}
     });
     exports.schema = schema;
-    exports.model = mongoose.model('Uom', schema);
+    exports.model = mongoose.model('Country', schema);
 }());
