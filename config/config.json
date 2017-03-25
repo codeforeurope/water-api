@@ -1,0 +1,11 @@
+{
+  "development": {
+    "db": "mongodb://localhost/water_development"
+  },
+  "test": {
+    "db": "mongodb://localhost/water_test"
+  },
+  "production": {
+    "db": "mongodb://localhost/water_production"
+  }
+}

@@ -138,7 +138,8 @@ http://www.eupedia.com/europe/european_mineral_waters.shtml
   };
 
   module.exports.postproduct = function(req, res, next) {
-      next(new Error('Not Implemented'),req,res,next);
+    //todo Save the posted product to the database.
+    next(new Error('Not Implemented'),req,res,next);
   };
 
   module.exports.putproduct = function (req, res, next) {

@@ -17,7 +17,7 @@ describe('testing /api/pumping station ', function() {
   /*
    * Test the /GET Pumping Stations route
    */
-  describe('GET', function() {
+  describe('GET Pumpingstations', function() {
     it('it should return list of pumpingstations', function(done) {
       chai.request(app)
         .get('/api/pumpingstations')
@@ -34,7 +34,7 @@ describe('testing /api/pumping station ', function() {
     /*
    * Test the /GET Pumping Station route
    */
-  describe('GET', function() {
+  describe('GET Pumpingstation', function() {
     it('it should return a valid response', function(done) {
       chai.request(app)
         .get('/api/pumpingstation')

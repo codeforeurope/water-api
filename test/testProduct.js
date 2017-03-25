@@ -36,7 +36,7 @@ describe('testing /api/product and products', function() {
    * Test the /POST MineralWater route
    */
   describe('POST', function() {
-    it('it should return a valid response', function(done) {
+    it('it should return Error, not Implemented', function(done) {
       chai.request(app)
         .post('/api/product')
         .send({
