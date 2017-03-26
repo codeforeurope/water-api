@@ -17,7 +17,7 @@ describe('testing /api/product and products', function() {
   /*
    * Test the /GET MineralWater route
    */
-  describe('GET', function() {
+  describe('GET Products', function() {
     it('it should return list of products', function(done) {
       chai.request(app)
         .get('/api/products')
@@ -35,8 +35,8 @@ describe('testing /api/product and products', function() {
     /*
    * Test the /POST MineralWater route
    */
-  describe('POST', function() {
-    it('it should return Error, not Implemented', function(done) {
+  describe('POST Product without token', function() {
+    it('it should return AuthenticationError, No token provided', function(done) {
       chai.request(app)
         .post('/api/product')
         .send({
@@ -58,7 +58,7 @@ describe('testing /api/product and products', function() {
         .end(function(err, res) {
           var data = JSON.parse(res.text);
           res.should.be.json; // jshint ignore:line
-          res.should.have.status(400);
+          res.should.have.status(402);
           done();
         });
     });

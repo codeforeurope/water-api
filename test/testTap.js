@@ -16,16 +16,16 @@ describe('testing /api/tap', function() {
   /*
    * Test /PUT water
    */
-  describe('PUT', function() {
-    it('it should return Error, not Implemented', function(done) {
+  describe('PUT Tap without token', function() {
+    it('it should return AuthenticationError, No token provided', function(done) {
       chai.request(app)
         .put('/api/tap')
         .send({})
         .end(function(err, res) {
           var data = JSON.parse(res.text);
-          should.equal(data.name, 'Error');
-          should.equal(data.message, 'Not Implemented');
-          res.should.have.status(400);
+          should.equal(data.name, 'AuthenticationError');
+          should.equal(data.message, 'No token provided');
+          res.should.have.status(402);
           done();
         });
     });

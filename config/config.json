@@ -1,11 +1,14 @@
 {
   "development": {
-    "db": "mongodb://localhost/water_development"
+    "db": "mongodb://localhost/water_development",
+    "secret": "developmentrocks"
   },
   "test": {
-    "db": "mongodb://localhost/water_test"
+    "db": "mongodb://localhost/water_test",
+    "secret": "testingisgood"
   },
   "production": {
-    "db": "mongodb://localhost/water_production"
+    "db": "mongodb://localhost/water_production",
+    "secret": "changemebeforedeploying!"
   }
 }

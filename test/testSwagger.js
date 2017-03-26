@@ -16,7 +16,7 @@ describe('testing /docs', function() {
   /*
    * Test the /GET docs route
    */
-  describe('GET', function() {
+  describe('GET swagger UI', function() {
     it('it should GET default swaggger docs', function(done) {
       chai.request(app)
         .get('/docs')

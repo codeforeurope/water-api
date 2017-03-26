@@ -14,13 +14,31 @@ describe('testing /api/company', function() {
     // runs after each test in this block
   });
 
-    /*
+  /*
    * Test the /POST Company route
    */
-  describe('POST', function() {
+  describe('POST Company without token', function() {
+    it('it should return AuthenticationError, No token provided', function(done) {
+      chai.request(app)
+        .post('/api/company')
+        .send({})
+        .end(function(err, res) {
+          var data = JSON.parse(res.text);
+          should.equal(data.name, 'AuthenticationError');
+          should.equal(data.message, 'No token provided');
+          res.should.have.status(402);
+          done();
+        });
+    });
+  });
+  /*
+   * Test the /POST Company route
+   */
+  describe('POST Company with token', function() {
     it('it should return the newly created company', function(done) {
       chai.request(app)
         .post('/api/company')
+        .set('x-access-token', 'foobar')
         .send({
             code: 'wueteria',
             name: 'Wüteria Mineralquellen GmbH & Co. KG',

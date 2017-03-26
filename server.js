@@ -7,6 +7,7 @@
     var jsyaml = require('js-yaml');
     var fs = require('fs');
     var cors = require('cors');
+    //var passport = require('passport');
 
     //var serveStatic = require('serve-static');
     // swaggerRouter configuration
@@ -25,6 +26,27 @@
     // Initialize the Swagger middleware
     swaggerTools.initializeMiddleware(swaggerDoc, function(middleware) {
         // Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
+        app.use(function(req, res, next){
+          if(['POST','PUT','DELETE'].indexOf(req.method) > -1){
+            res.setHeader('content-type', 'application/json');
+            // check header or url parameters or post parameters for token
+            var token = req.headers['x-access-token'];
+            // decode token
+            if (token) {
+              console.log("Real tokens will come later, for now we accept!");
+              req.decoded = decoded;
+              next();
+            } else {
+              // if there is no token
+              // return an error
+              res.statusCode = 402;
+              res.end(JSON.stringify({"name": "AuthenticationError", "message": "No token provided"}, null, 2));
+            }
+          } else {
+            next();
+          }
+        });
+
         app.use(middleware.swaggerMetadata());
 
         // Validate Swagger requests
@@ -35,8 +57,6 @@
 
         // Serve the Swagger documents and Swagger UI
         app.use(middleware.swaggerUi());
-        // Serve the client
-        //app.use(serveStatic(path.join(__dirname, 'client')));
         app.use(function onerror(err, req, res, next) {
           // an error occurred!
           res.setHeader('content-type', 'application/json');
