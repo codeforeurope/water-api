@@ -34,7 +34,7 @@
             // decode token
             if (token) {
               console.log("Real tokens will come later, for now we accept!");
-              req.decoded = decoded;
+              req.decoded = true;
               next();
             } else {
               // if there is no token
