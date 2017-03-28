@@ -6,16 +6,18 @@
 
 (function() {
     var mongoose = require('mongoose');
-    var Schema = mongoose.Schema;
-    var ObjectId = Schema.ObjectId;
+    var ObjectId = mongoose.Schema.ObjectId;
     var Uom = require('./Uom.js').schema;
     var Code = require('./Code.js').schema;
-    var schema = new mongoose.Schema({
+    var User = require('./User.js').schema;
+
+    var Schema = new mongoose.Schema({
         value: Number,
-        uom: {type: Schema.ObjectId, ref: 'Uom'},
-        code: {type: Schema.ObjectId, ref: 'Code'},
-        entered_at: {type: Date, required: true, default: Date}
+        uom: {type: ObjectId, ref: 'Uom'},
+        code: {type: ObjectId, ref: 'Code'},
+        entered_at: {type: Date, required: true, default: Date},
+        entered_by: {type: ObjectId, ref: 'User', required: true}
     });
-    exports.schema = schema;
-    exports.model = mongoose.model('Observation', schema);
+    exports.schema = Schema;
+    exports.model = mongoose.model('Observation', Schema);
 }());

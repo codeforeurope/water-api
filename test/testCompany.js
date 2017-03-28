@@ -6,10 +6,32 @@ var moment = require('moment-timezone');
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var app = require('../server');
+var models = require('../models');
+
 chai.use(chaiHttp);
 var should = chai.should();
 
 describe('testing /api/company', function() {
+  var token = "myawesomedummytoken";
+
+  var testcompany = {
+    code: 'wueteria',
+    name: 'Wüteria Mineralquellen GmbH & Co. KG',
+    url: 'http://wueteria.de',
+    country: 'Germany'
+  };
+
+  var testuser = {
+    name: "testUser",
+    email: "test@email.com",
+    token: token
+  };
+  var user = new models.User.model(testuser);
+
+  user.save(function (err, user, count) {
+    user = user;
+  });
+
   afterEach(function() {
     // runs after each test in this block
   });
@@ -38,13 +60,8 @@ describe('testing /api/company', function() {
     it('it should return the newly created company', function(done) {
       chai.request(app)
         .post('/api/company')
-        .set('x-access-token', 'foobar')
-        .send({
-            code: 'wueteria',
-            name: 'Wüteria Mineralquellen GmbH & Co. KG',
-            url: 'http://wueteria.de',
-            country: 'Germany'
-        })
+        .set('x-access-token', token)
+        .send(testcompany)
         .end(function(err, res) {
           var data = JSON.parse(res.text);
           res.should.be.json; // jshint ignore:line

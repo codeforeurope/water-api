@@ -11,11 +11,6 @@ http://www.eupedia.com/europe/european_mineral_waters.shtml
   var Observation = models.Observation;
   var Uom = models.Uom;
 
-  //var company = require('../models/Company.js');
-  //var product = require('../models/Product.js');
-  //var observation = require('../models/Observation.js');
-  //var Uom = require('../models/Uom.js');
-  //var Code = require('../models/Code.js');
   module.exports.getproducts = function (req, res, next) {
     var params = req.swagger.params;
     var mgl = new Uom.model({
@@ -139,6 +134,9 @@ http://www.eupedia.com/europe/european_mineral_waters.shtml
 
   module.exports.postproduct = function(req, res, next) {
     //todo Save the posted product to the database.
+    //lookup uom
+    //lookup vendor
+    
     next(new Error('Not Implemented'),req,res,next);
   };
 

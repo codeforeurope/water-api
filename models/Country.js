@@ -7,14 +7,15 @@
 
 (function() {
     var mongoose = require('mongoose');
-    var Schema = mongoose.Schema;
-    var ObjectId = Schema.ObjectId;
-    var schema = new mongoose.Schema({
+    var User = require('./User.js').schema;
+    var ObjectId = mongoose.Schema.ObjectId;
+    var Schema = new mongoose.Schema({
         value: String,
         label: String,
         definition: String,
-        entered_at: {type: Date, required: true, default: Date}
+        entered_at: {type: Date, required: true, default: Date},
+        entered_by: {type: ObjectId, ref: 'User', required: true}
     });
-    exports.schema = schema;
-    exports.model = mongoose.model('Country', schema);
+    exports.schema = Schema;
+    exports.model = mongoose.model('Country', Schema);
 }());

@@ -33,8 +33,8 @@
             var token = req.headers['x-access-token'];
             // decode token
             if (token) {
-              console.log("Real tokens will come later, for now we accept!");
-              req.decoded = true;
+              //console.log("Real tokens will come later, for now we accept!");
+              req.token = token;
               next();
             } else {
               // if there is no token

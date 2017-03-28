@@ -1,10 +1,11 @@
 (function() {
     var mongoose = require('mongoose');
-    var Schema = mongoose.Schema;
-    var ObjectId = Schema.ObjectId;
+    var ObjectId = mongoose.Schema.ObjectId;
     var Operator = require('./Company.js').schema;
-    var schema = new mongoose.Schema({
-        operator: {type: Schema.ObjectId, ref: 'Operator'},
+    var User = require('./User.js').schema;
+
+    var Schema = new mongoose.Schema({
+        operator: {type: ObjectId, ref: 'Operator'},
         name: String,
         location: {type: [Number], index: '2d'},
         type: {
@@ -15,8 +16,9 @@
           type: String,
           enum: ['Free', 'Commercial'],
         },
-        entered_at: {type: Date, required: true, default: Date}
+        entered_at: {type: Date, required: true, default: Date},
+        entered_by: {type: ObjectId, ref: 'User', required: true}
     });
-    exports.schema = schema;
-    exports.model = mongoose.model('Tap', schema);
+    exports.schema = Schema;
+    exports.model = mongoose.model('Tap', Schema);
 }());
