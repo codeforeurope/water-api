@@ -9,70 +9,39 @@ info:
   license:
     name: "GPL-3.0"
     url: "https://raw.githubusercontent.com/codeforeurope/water-api/master/LICENSE"
-    x-security:
-      auth0_jwk: 
-        audiences: ["oJBRAlMyWJRRdeCK9MifuLS0boYDIaMT","oA69flPntgsEPmWaFkPT8LrETTs6lDK8"]
-securityDefinitions:
-  api_key: 
-    type: "apiKey"
-    name: "key"
-    in: "query"
-  auth0_jwk:
-    authorizationUrl: "https://watertransparency.auth0.com/authorize"
-    flow: "implicit"
+security:
+  auth0:
     type: "oauth2"
-    x-issuer: "https://watertransparency.auth0.com/"
-    x-jwks_uri: "https://watertransparency.auth0.com/.well-known/jwks.json"
-    scopes:
-  oauth:
-    type: "oauth2"
-    authorizationUrl: "/authenticate"
     flow: "implicit"
+    authorizationUrl: "https://water.eu.auth0.com/authorize"
+    tokenUrl: "https://water.eu.auth0.com/userinfo"
+    x-token-validation-url: https://water.eu.auth0.com/userinfo
     scopes:
-      post:company:"post company data"
+      user: Read all
+      admin:org: Manage all
+      admin:public: Manage public data
 basePath: "/api"
 schemes:
 #- "https"
 - "http"
 paths:
-  /authenticate:
-    post:
-      summary: Authenticates with the API
-      description: ""
-      operationId: postAuth
-      produces:
-        - application/json
-        - application/xml
-      parameters:
-        - in: query
-          name: apikey
-          description: apikey to use the api
-          required: true
-          type: string
-      responses:
-        "200":
-          description: Authenticated
-          schema:
-            type: string
-        "400":
-          description: AuthenticationError
   /company:
     post:
       tags:
-      - "company"
+        "company"
       summary: "Add a company"
       description: ""
       security: 
-        oauth: "post:company"
+        auth0: "admin:org"
       operationId: "postcompany"
       consumes:
-      - "application/json"
-      - "application/xml"
+       "application/json"
+       "application/xml"
       produces:
-      - "application/json"
-      - "application/xml"
+       "application/json"
+       "application/xml"
       parameters:
-      - in: "body"
+       in: "body"
         name: "body"
         description: "Company object that needs to be added to the database"
         required: false
@@ -141,6 +110,8 @@ paths:
       - "pumpingstation"
       summary: "Add a pumpingstation"
       description: ""
+      security: 
+        auth0: "admin:org"      
       operationId: "postpumpingstation"
       consumes:
       - "application/json"
@@ -165,6 +136,8 @@ paths:
       summary: "Update a pumpingstation"
       description: ""
       operationId: "putpumpingstation"
+      security:
+        auth0: "admin:org"
       consumes:
       - "application/json"
       produces:
@@ -189,6 +162,8 @@ paths:
       - "pumpingstation"
       summary: "Delete a pumpingstation"
       description: ""
+      security:
+        auth0: "admin:org"
       operationId: "deletepumpingstation"
       consumes:
       - "application/json"
@@ -241,6 +216,8 @@ paths:
       summary: "Add a tap"
       description: ""
       operationId: "posttap"
+      security: 
+        auth0: "admin:org"
       consumes:
       - "application/json"
       - "application/xml"
@@ -287,6 +264,8 @@ paths:
       summary: "Delete a tap"
       description: ""
       operationId: "deletetap"
+      security:
+        auth0: "admin:org"
       consumes:
       - "application/json"
       produces:
@@ -396,6 +375,8 @@ paths:
       summary: "Add a product"
       description: ""
       operationId: "postproduct"
+      security: 
+        auth0: "admin:org"      
       consumes:
       - "application/json"
       - "application/xml"
@@ -442,6 +423,8 @@ paths:
       summary: "Delete a product"
       description: ""
       operationId: "delete"
+      security:
+        auth0: "admin:org"
       consumes:
       - "application/json"
       - "application/xml"
@@ -460,6 +443,14 @@ paths:
           description: "Invalid input"
       x-swagger-router-controller: "Product"
 definitions:
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
   Company:
     type: "object"
     properties:

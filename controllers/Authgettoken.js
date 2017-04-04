@@ -1,7 +1,9 @@
 var request = require('request')
 require('dotenv-safe').config({
+
 }
 )
+
 var options = { method: 'POST',
   url: process.env.TOKEN_URL,
   headers: { 'content-type': 'application/json' },
@@ -11,10 +13,9 @@ var options = { method: 'POST',
     client_secret: process.env.CLIENT_SECRET,
     audience: process.env.AUDIENCE },
   json: true }
-// TODO ERROR uri: options.url + '/get'
-// request.uri = options.url + '/get'
+
 request(options, function (error, response, body) {
-  // if (error) throw new Error(error)
+  if (error) throw new Error(error)
 
   console.log(body)
 })
