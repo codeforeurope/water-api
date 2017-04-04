@@ -30,7 +30,6 @@
       // get the relation, skip the nodes.
       result = result[0];
     }
-
     if (typeof(result) === "object") {
       out = result.address;
       if (result.osm_type && result.osm_id) {
@@ -48,11 +47,20 @@
       if (out.road) delete out.road;
       if (out.postcode) delete out.postcode;
       if (["ie", "nl"].indexOf(out.country_code) !== -1) {
+        result.address.osm = osm;
         return {
           "jurisdiction": out.town || out.city,
           "type": "local government",
           "country": out.country_code,
-          "osm": osm
+          "osm": osm,
+          "feature": {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [result.lon, result.lat]
+            },
+            "properties": result.address
+          }
         };
       } else {
         return out;
@@ -79,7 +87,6 @@
   };
 
   var reverse = function(options, callback) {
-    console.log("reverse");
     // See if we can find a municipality in the database
     // No municipality found? Try nominatim!
     options.featuretype = "city";
