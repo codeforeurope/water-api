@@ -164,7 +164,7 @@ describe('testing /api/jurisdiction', function() {
       chai.request(app)
         .get('/api/jurisdiction')
         .query({
-          "q": "dublin"
+          "q": "donnybrook close"
         })
         .set('x-access-token', token)
         .end(function(err, res) {
