@@ -436,6 +436,39 @@ paths:
         405:
           description: "Invalid input"
       x-swagger-router-controller: "Product"
+  /jurisdiction:
+    get:
+      tags:
+      - "jurisdiction"
+      summary: "Get jurisdiction for a given area"
+      description: ""
+      operationId: "getjurisdiction"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "query"
+        name: "q"
+        description: "Search query"
+        required: false
+        type: "string"
+      - in: "query"
+        name: "lat"
+        description: "Latitude"
+        required: false
+        type: "number"
+        format: "float"
+      - in: "query"
+        name: "lon"
+        description: "Longitude"
+        required: false
+        type: "number"
+        format: "float"
+      responses:
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "Jurisdiction"
 definitions:
   Company:
     type: "object"
