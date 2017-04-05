@@ -40,6 +40,12 @@ Basic flow is User sends user and pwd or other credentials to auth0, auth0 sends
 
 Saves Auth JWT token to localstorage (emulated on node) auth/id_token
 
+# Travis 
+To encrypt variables for travis use (assuming you have travis installed)
+```shell 
+travis encrypt-file .env --add
+```
+
 # Issues
 
 Please report any issues at the [Transparent-Water](https://github.com/codeforeurope/Transparent-Water/issues) repository.

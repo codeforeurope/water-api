@@ -13,7 +13,7 @@
         ? this.getProfile()
         : Promise.reject(new Error('User is not authenticated'))
     }
-    async getProfile () {
+    getProfile () { // async
       const profile = await axios.post(config.domain + '/tokeninfo', {
         id_token: this
           .auth
