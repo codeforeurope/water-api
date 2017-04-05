@@ -13,6 +13,16 @@ basePath: "/api"
 schemes:
 #- "https"
 - "http"
+consumes:
+  - application/json
+produces:
+  - application/json
+  - application/xml
+security:
+  - auth0:
+    - user
+    - admin
+  - internalApiKey: []
 paths:
   /authenticate:
     post:
@@ -35,6 +45,8 @@ paths:
             type: string
         "400":
           description: AuthenticationError
+        default: 
+          description: AuthenicationError
   /company:
     post:
       tags:
@@ -59,6 +71,10 @@ paths:
         405:
           description: "Invalid input"
       x-swagger-router-controller: "Company"
+      security:
+        - auth0:
+          - admin
+        - internalApiKey: []
   /pumpingstations:
     get:
       tags:
@@ -136,6 +152,10 @@ paths:
         405:
           description: "Invalid input"
       x-swagger-router-controller: "Pumpingstation"
+      security:
+        - auth0:
+          - admin
+        - internalApiKey: []
     put:
       tags:
       - "pumpingstation"
@@ -161,6 +181,10 @@ paths:
         405:
           description: "Validation exception"
       x-swagger-router-controller: "Pumpingstation"
+      security:
+        - auth0:
+          - admin
+        - internalApiKey: []
     delete:
       tags:
       - "pumpingstation"
@@ -186,6 +210,10 @@ paths:
         405:
           description: "Validation exception"
       x-swagger-router-controller: "Pumpingstation"
+      security:
+        - auth0:
+          - admin
+        - internalApiKey: []
   /tap:
     get:
       tags:
@@ -235,6 +263,10 @@ paths:
         405:
           description: "Invalid input"
       x-swagger-router-controller: "Tap"
+      security:
+        - auth0:
+          - admin
+        - internalApiKey: []
     put:
       tags:
       - "tap"
@@ -258,6 +290,10 @@ paths:
         405:
           description: "Validation exception"
       x-swagger-router-controller: "Tap"
+      security:
+        - auth0:
+          - admin
+        - internalApiKey: []
     delete:
       tags:
       - "tap"
@@ -283,6 +319,10 @@ paths:
         405:
           description: "Validation exception"
       x-swagger-router-controller: "Tap"
+      security:
+        - auth0:
+          - admin
+        - internalApiKey: []
   /taps:
     get:
       tags:
@@ -390,6 +430,10 @@ paths:
         405:
           description: "Invalid input"
       x-swagger-router-controller: "Product"
+      security:
+        - auth0:
+          - admin
+        - internalApiKey: []
     put:
       tags:
       - "product"
@@ -413,6 +457,10 @@ paths:
         405:
           description: "Invalid input"
       x-swagger-router-controller: "Product"
+      security:
+        - auth0:
+          - admin
+        - internalApiKey: []
     delete:
       tags:
       - "product"
@@ -436,6 +484,10 @@ paths:
         405:
           description: "Invalid input"
       x-swagger-router-controller: "Product"
+      security:
+        - auth0:
+          - admin
+        - internalApiKey: []
   /jurisdiction:
     get:
       tags:
@@ -469,6 +521,20 @@ paths:
         405:
           description: "Invalid input"
       x-swagger-router-controller: "Jurisdiction"
+securityDefinitions:
+  auth0:
+    type: oauth2
+    scopes:
+      user: read only
+      admin: post, put, delete permission
+    flow: implicit
+    authorizationUrl: "https://water.eu.auth0.com/authorize"
+    x-token-validation-url: https://water.eu.auth0.com/userinfo    
+  internalApiKey:
+    type: apiKey
+    description: api key
+    in: header
+    name: api_key
 definitions:
   Company:
     type: "object"
@@ -574,3 +640,14 @@ definitions:
         format: "int64"
       result:
         type: "string"
+  Error:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string

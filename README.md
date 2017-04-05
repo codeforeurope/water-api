@@ -18,6 +18,28 @@ npm start
 npm test
 ```
 
+
+# Auth
+
+https://auth0.com/docs/api-auth
+-[] swagger definition
+
+## Generate token via https://jwt.io/#libraries
+-[x] Done via https://github.com/auth0/node-jsonwebtoken
+
+## Cors http://apprize.info/javascript/cors/8.html
+-[] refreshtoken, accesstoken
+
+## send to endpoint per domain - AU, EU, US
+
+https://water.au.auth0.com/api/v2/
+https://water.eu.auth0.com/api/v2/
+https://watertransparency.auth0.com/api/v2/
+
+Basic flow is User sends user and pwd or other credentials to auth0, auth0 sends webtoken, we use webtoken to auth against api
+
+Saves Auth JWT token to localstorage (emulated on node) auth/id_token
+
 # Issues
 
 Please report any issues at the [Transparent-Water](https://github.com/codeforeurope/Transparent-Water/issues) repository.

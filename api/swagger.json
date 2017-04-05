@@ -1,0 +1,993 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a the API for The Code For Europe Transparent Water Initiative",
+        "version": "1.0.0",
+        "title": "Water-api",
+        "contact": {
+            "name": "info@codefor.eu"
+        },
+        "license": {
+            "name": "GPL-3.0",
+            "url": "https://raw.githubusercontent.com/codeforeurope/water-api/master/LICENSE"
+        }
+    },
+    "basePath": "/api",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "security": [
+        {
+            "auth0": [
+                "user",
+                "admin"
+            ]
+        },
+        {
+            "internalApiKey": []
+        }
+    ],
+    "paths": {
+        "/authenticate": {
+            "post": {
+                "summary": "Authenticates with the API",
+                "description": "",
+                "operationId": "postAuth",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "apikey",
+                        "description": "apikey to use the api",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Authenticated",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "AuthenticationError"
+                    },
+                    "default": {
+                        "description": "AuthenicationError"
+                    }
+                }
+            }
+        },
+        "/company": {
+            "post": {
+                "tags": [
+                    "company"
+                ],
+                "summary": "Add a company",
+                "description": "",
+                "operationId": "postcompany",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Company object that needs to be added to the database",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Company"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "x-swagger-router-controller": "Company",
+                "security": [
+                    {
+                        "auth0": [
+                            "admin"
+                        ]
+                    },
+                    {
+                        "internalApiKey": []
+                    }
+                ]
+            }
+        },
+        "/pumpingstations": {
+            "get": {
+                "tags": [
+                    "pumpingstations"
+                ],
+                "summary": "Get a list of pumpingstation",
+                "description": "Multiple parameters can be provided",
+                "operationId": "getpumpingstations",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status values that need to be considered for filter",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Pumpingstation"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "x-swagger-router-controller": "Pumpingstation"
+            }
+        },
+        "/pumpingstation": {
+            "get": {
+                "tags": [
+                    "pumpingstation"
+                ],
+                "summary": "Get details of a pumpingstation",
+                "description": "Multiple parameters can be provided",
+                "operationId": "getpumpingstation",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status values that need to be considered for filter",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Pumpingstation"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "x-swagger-router-controller": "Pumpingstation"
+            },
+            "post": {
+                "tags": [
+                    "pumpingstation"
+                ],
+                "summary": "Add a pumpingstation",
+                "description": "",
+                "operationId": "postpumpingstation",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Pumpingstation object that needs to be added to the database",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Pumpingstation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "x-swagger-router-controller": "Pumpingstation",
+                "security": [
+                    {
+                        "auth0": [
+                            "admin"
+                        ]
+                    },
+                    {
+                        "internalApiKey": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "pumpingstation"
+                ],
+                "summary": "Update a pumpingstation",
+                "description": "",
+                "operationId": "putpumpingstation",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Pet object that needs to be added to the store",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Pumpingstation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Pet not found"
+                    },
+                    "405": {
+                        "description": "Validation exception"
+                    }
+                },
+                "x-swagger-router-controller": "Pumpingstation",
+                "security": [
+                    {
+                        "auth0": [
+                            "admin"
+                        ]
+                    },
+                    {
+                        "internalApiKey": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "pumpingstation"
+                ],
+                "summary": "Delete a pumpingstation",
+                "description": "",
+                "operationId": "deletepumpingstation",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Pet object that needs to be added to the store",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Pumpingstation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Pet not found"
+                    },
+                    "405": {
+                        "description": "Validation exception"
+                    }
+                },
+                "x-swagger-router-controller": "Pumpingstation",
+                "security": [
+                    {
+                        "auth0": [
+                            "admin"
+                        ]
+                    },
+                    {
+                        "internalApiKey": []
+                    }
+                ]
+            }
+        },
+        "/tap": {
+            "get": {
+                "tags": [
+                    "tap"
+                ],
+                "summary": "Get details of a tap",
+                "description": "Multiple parameters can be provided",
+                "operationId": "gettap",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status values that need to be considered for filter",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Tap"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "x-swagger-router-controller": "Tap"
+            },
+            "post": {
+                "tags": [
+                    "tap"
+                ],
+                "summary": "Add a tap",
+                "description": "",
+                "operationId": "posttap",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Tap object that needs to be added to the database",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Tap"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "x-swagger-router-controller": "Tap",
+                "security": [
+                    {
+                        "auth0": [
+                            "admin"
+                        ]
+                    },
+                    {
+                        "internalApiKey": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "tap"
+                ],
+                "summary": "Update a tap",
+                "description": "",
+                "operationId": "puttap",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Tap object that needs to be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Update"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Invalid operation"
+                    },
+                    "405": {
+                        "description": "Validation exception"
+                    }
+                },
+                "x-swagger-router-controller": "Tap",
+                "security": [
+                    {
+                        "auth0": [
+                            "admin"
+                        ]
+                    },
+                    {
+                        "internalApiKey": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "tap"
+                ],
+                "summary": "Delete a tap",
+                "description": "",
+                "operationId": "deletetap",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Pet object that needs to be added to the store",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Tap"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Pet not found"
+                    },
+                    "405": {
+                        "description": "Validation exception"
+                    }
+                },
+                "x-swagger-router-controller": "Tap",
+                "security": [
+                    {
+                        "auth0": [
+                            "admin"
+                        ]
+                    },
+                    {
+                        "internalApiKey": []
+                    }
+                ]
+            }
+        },
+        "/taps": {
+            "get": {
+                "tags": [
+                    "taps"
+                ],
+                "summary": "Get a list of taps",
+                "description": "Multiple parameters can be provided",
+                "operationId": "gettaps",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status values that need to be considered for filter",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Tap"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "x-swagger-router-controller": "Tap"
+            }
+        },
+        "/products": {
+            "get": {
+                "tags": [
+                    "products"
+                ],
+                "summary": "Get a list of products",
+                "description": "Multiple parameters can be provided",
+                "operationId": "getproducts",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status values that need to be considered for filter",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "x-swagger-router-controller": "Product"
+            }
+        },
+        "/product": {
+            "get": {
+                "tags": [
+                    "product"
+                ],
+                "summary": "Get details of a product",
+                "description": "Multiple parameters can be provided",
+                "operationId": "getproduct",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status values that need to be considered for filter",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "x-swagger-router-controller": "Product"
+            },
+            "post": {
+                "tags": [
+                    "product"
+                ],
+                "summary": "Add a product",
+                "description": "",
+                "operationId": "postproduct",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Product object with observations that needs to be added to the database",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "x-swagger-router-controller": "Product",
+                "security": [
+                    {
+                        "auth0": [
+                            "admin"
+                        ]
+                    },
+                    {
+                        "internalApiKey": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "product"
+                ],
+                "summary": "Update a product",
+                "description": "",
+                "operationId": "putproduct",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Product that needs to be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "x-swagger-router-controller": "Product",
+                "security": [
+                    {
+                        "auth0": [
+                            "admin"
+                        ]
+                    },
+                    {
+                        "internalApiKey": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "product"
+                ],
+                "summary": "Delete a product",
+                "description": "",
+                "operationId": "delete",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Product that needs to be deleted",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "x-swagger-router-controller": "Product",
+                "security": [
+                    {
+                        "auth0": [
+                            "admin"
+                        ]
+                    },
+                    {
+                        "internalApiKey": []
+                    }
+                ]
+            }
+        },
+        "/jurisdiction": {
+            "get": {
+                "tags": [
+                    "jurisdiction"
+                ],
+                "summary": "Get jurisdiction for a given area",
+                "description": "",
+                "operationId": "getjurisdiction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "description": "Search query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "lat",
+                        "description": "Latitude",
+                        "required": false,
+                        "type": "number",
+                        "format": "float"
+                    },
+                    {
+                        "in": "query",
+                        "name": "lon",
+                        "description": "Longitude",
+                        "required": false,
+                        "type": "number",
+                        "format": "float"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "x-swagger-router-controller": "Jurisdiction"
+            }
+        }
+    },
+    "securityDefinitions": {
+        "auth0": {
+            "type": "oauth2",
+            "scopes": {
+                "user": "read only",
+                "admin": "post, put, delete permission"
+            },
+            "flow": "implicit",
+            "authorizationUrl": "https://water.eu.auth0.com/authorize",
+            "x-token-validation-url": "https://water.eu.auth0.com/userinfo"
+        },
+        "internalApiKey": {
+            "type": "apiKey",
+            "description": "api key",
+            "in": "header",
+            "name": "api_key"
+        }
+    },
+    "definitions": {
+        "Company": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                }
+            }
+        },
+        "Category": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "Tap": {
+            "type": "object",
+            "required": [
+                "name",
+                "location"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "category": {
+                    "$ref": "#/definitions/Category"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "doggie"
+                },
+                "location": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                }
+            }
+        },
+        "Pumpingstation": {
+            "type": "object",
+            "required": [
+                "name",
+                "photoUrls"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "category": {
+                    "$ref": "#/definitions/Category"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "doggie"
+                },
+                "photoUrls": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Tag"
+                    }
+                },
+                "status": {
+                    "type": "string",
+                    "description": "pet status in the store"
+                }
+            }
+        },
+        "Product": {
+            "type": "object",
+            "required": [
+                "name",
+                "country"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "category": {
+                    "$ref": "#/definitions/Category"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "doggie"
+                },
+                "country": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "products": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Product"
+                    }
+                }
+            }
+        },
+        "Tag": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "Update": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "result": {
+                    "type": "string"
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "required": [
+                "code",
+                "message"
+            ],
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

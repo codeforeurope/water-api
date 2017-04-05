@@ -8,3 +8,4 @@ Thumbs.db
 .rvmrc
 *.log
 node_modules
+.env
