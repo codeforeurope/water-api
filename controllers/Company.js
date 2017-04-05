@@ -28,10 +28,6 @@
           res.end(JSON.stringify(company, null, 2))
         }
       })
-      if (err) {
-        res.send('404', 'ERROR:Company not found')
-        // next(err)
-      }
     })
   }
 

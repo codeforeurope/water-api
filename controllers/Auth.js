@@ -1,12 +1,12 @@
 (function () {
   'use strict'
   var axios = require('axios')
-
+  var Authlogin = require('./Authlogin')
   var config = require('../config/auth0')
 
   class Api {
     constructor (callback) {
-      this.auth = new Auth(config.clientid, config.domain, callback)
+      this.auth = new Authlogin(config.clientid, config.domain, callback)
     }
     getRepos () {
       return this.isLoggedIn()
