@@ -1,5 +1,7 @@
 (function () {
   'use strict'
+  var token = ''
+
   module.exports.gettap = function (req, res, next) {
     var params = req.swagger.params
     res.setHeader('content-type', 'application/json')
@@ -9,6 +11,7 @@
   module.exports.posttap = function (req, res, next) {
     var params = req.swagger.params
     res.setHeader('content-type', 'application/json')
+    res.setHeader('authorization', 'Bearer ' + token + '\'')
     res.end(JSON.stringify({'operation': 'POST'}, null, 2))
   }
 

@@ -1,4 +1,4 @@
-FROM node:6
+FROM node:7
 
 # Create sentimeter directory
 RUN mkdir /water-api
@@ -15,3 +15,10 @@ RUN npm install .
 
 EXPOSE 8080
 CMD ["node", "index.js"]
+
+# build travis.sh using travis-build
+#FROM quay.io/travisci/travis-ruby
+#COPY travis.sh /home/travis/travis.sh
+#RUN chmod a+rx /home/travis/travis.sh
+#USER travis
+#RUN (cd ~; bash ./travis.sh)

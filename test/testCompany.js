@@ -12,7 +12,7 @@ chai.use(chaiHttp)
 var should = chai.should()
 
 describe('testing /api/company', function () {
-  var token = 'myawesomedummytoken'
+  var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik4wUTROamxHTlRCR01EVXhNems1TWpVNFF6WkVOemd3Tnprd1EwVkRRall5UXpoRU9EazVSZyJ9.eyJpc3MiOiJodHRwczovL3dhdGVyLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJJQ3FNQkZpOXJYWFZjSzBMcVVLRUxBZGpDVXcxNWUwZkBjbGllbnRzIiwiYXVkIjoiL2F1dGgiLCJleHAiOjE0OTE1NTgxMDEsImlhdCI6MTQ5MTQ3MTcwMSwic2NvcGUiOiIifQ.ZpJYNgc7PI4Wb8pBj4TVGbcYsZtP45_ajsGblxoTR5myw7plG6UsqcWpWsqAEPH1L5s69-GiOw3RffdOPaCmsoInWl2DcdCEI3kEvn1QFRsVPtNtAKwL1ZfQ0RW8taz0aWFXMuS03-szP3SdhrWp-ghlMnfk1LeKfxszmq3DTDU877-a72EAhWm4U0ldzYMHfWhbEwhubbOxqQl9lJj8-H-jyeq85P3d_4WwJzRVCNUHKcvqXfBeRbXez9KQqHT25LR-2UsyZIRMv1vCw5EWKlOa4iLiWVu5e43wzrMs4Vl8ks4OePMySUbg344aiH-H3hgCNbJGmxF2CP_NHFNeNw'
 
   var testcompany = {
     code: 'wueteria',
@@ -56,7 +56,8 @@ describe('testing /api/company', function () {
   /*
    * Test the /POST Company route
    */
-/* // broken TODO 
+ // broken TODO 
+ /*
   describe('POST Company with token', function () {
     it('it should return the newly created company', function (done) {
       chai.request(app)
@@ -64,6 +65,8 @@ describe('testing /api/company', function () {
         .set('x-access-token', token)
         .send(testcompany)
         .end(function (err, res) {
+          console.log('error:' + err)
+          console.log('res:' + res.text)
           var data = JSON.parse(res.text)
           res.should.be.json // jshint ignore:line
           should.equal(data.code, 'wueteria')
@@ -72,6 +75,6 @@ describe('testing /api/company', function () {
         })
     })
   })
-*/  
+  */
 })
 

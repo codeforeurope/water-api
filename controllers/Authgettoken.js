@@ -11,10 +11,10 @@ var options = { method: 'POST',
     audience: config.audience },
   json: true
 }
-console.log('URL ' + options.url)
+// console.log('URL ' + options.url)
 request(options, function (error, response, body) {
   if (error) throw new Error(error)
 
-  console.log(body)
+  // console.log(body)
   module.exports = body
 })

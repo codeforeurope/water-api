@@ -24,7 +24,7 @@ security:
     - admin
   - internalApiKey: []
 paths:
-  /authenticate:
+  /auth:
     post:
       summary: Authenticates with the API
       description: ""
