@@ -7,6 +7,7 @@
 
 (function() {
     var mongoose = require('mongoose');
+    var i18ngoose = require('i18ngoose');
     var ObjectId = mongoose.Schema.ObjectId;
 
     var Schema = new mongoose.Schema({
@@ -15,11 +16,20 @@
           enum: ['CAS', 'EC', 'ICSC', 'RTECS', 'UN', 'UNII', 'EEA'],
         },
         value: String,
-        label: String,
-        definition: String,
-        entered_at: {type: Date, required: true, default: Date},
-        entered_by: {type: ObjectId, ref: 'User', required: true}
+        label: {
+            type: String,
+            i18n:true
+        },
+        definition: {
+            type: String,
+            i18n:true
+        },
+        entered_at: {type: Date, required: true, default: Date}
+    });
+    // Load plugin to schema and define languages 
+    Schema.plugin(i18ngoose, {
+        languages: ['de', 'en', 'nl', 'fr']
     });
     exports.schema = Schema;
-    exports.model = mongoose.model('EQR', Schema);
+    exports.model = mongoose.model('Code', Schema);
 }());

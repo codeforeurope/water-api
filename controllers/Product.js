@@ -133,11 +133,12 @@ http://www.eupedia.com/europe/european_mineral_waters.shtml
   };
 
   module.exports.postproduct = function(req, res, next) {
-    //todo Save the posted product to the database.
-    //lookup uom
-    //lookup vendor
-    
-    next(new Error('Not Implemented'),req,res,next);
+    // TODO
+    next({
+      code: 502,
+      name: "NotImplementedError",
+      message: 'Not Implemented'
+    });
   };
 
   module.exports.putproduct = function (req, res, next) {

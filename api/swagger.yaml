@@ -287,6 +287,25 @@ paths:
         400:
           description: "Invalid status value"
       x-swagger-router-controller: "Tap"
+  /limits:
+    get:
+      tags:
+      - "limits"
+      summary: "Get legal limits"
+      description: "Get an array of legal limits (US, EU)"
+      operationId: "getlimits"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Product"
+        400:
+          description: "Invalid status value"
+      x-swagger-router-controller: "Legallimits"
   /products:
     get:
       tags:
