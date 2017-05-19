@@ -79,7 +79,6 @@
   };
 
   var reverse = function(options, callback) {
-    console.log("reverse");
     // See if we can find a municipality in the database
     // No municipality found? Try nominatim!
     options.featuretype = "city";

@@ -2,7 +2,7 @@
 process.env.NODE_ENV = 'test';
 
 //Require the dev-dependencies
-var moment = require('moment-timezone');
+var moment = require('tz-business-time');
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var app = require('../server');
