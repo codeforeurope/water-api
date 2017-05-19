@@ -23,9 +23,9 @@ describe('testing /api/pumping station ', function() {
         .get('/api/pumpingstations')
         .end(function(err, res) {
           var data = JSON.parse(res.text);
-          should.equal(data.name, 'Error');
+          should.equal(data.name, 'NotImplementedError');
           should.equal(data.message, 'Not Implemented');
-          res.should.have.status(400);
+          res.should.have.status(502);
           done();
         });
     });

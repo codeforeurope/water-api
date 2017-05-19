@@ -8,7 +8,11 @@
 
     module.exports.getpumpingstations = function(req, res, next) {
       // TODO
-      next(new Error('Not Implemented'));
+      next({
+        code: 502,
+        name: "NotImplementedError",
+        message: 'Not Implemented'
+      });
     };
 
     module.exports.postpumpingstation = function(req, res, next) {
