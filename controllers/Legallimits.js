@@ -12,8 +12,7 @@
       label: {en: 'mg/L'},
       definition: {en: 'Milligram per liter, Mass concentration unit. Conversion to SI unit: 1 kg/m3 = 10^3 mg/L'}
     });
-
-    var natrium = models.Code.model.i18nInit('en', { standard: 'CAS', value: '7440-23-5', label: 'Sodium' });
+    var natrium = models.Code.model({ standard: 'CAS', value: '7440-23-5', label: {en:'Sodium'} });
     var kalium = models.Code.model({ standard: 'CAS', value: '7440-09-7', label: {en: 'Potassium'} });
     var calcium = models.Code.model({ standard: 'CAS', value: '7440-70-2', label: {en:'Calcium' }});
     var nitrat = models.Code.model({ standard: 'CAS', value: '14797-55-8', label: {en:'Nitrate' }});
@@ -70,7 +69,7 @@
       authority: null
     });
 
-    var output = [uslimit.toObjectTranslated({translation: 'en'}), eulimit.toObject()];
+    var output = [uslimit.toJSONLocalizedOnly('en','en'), eulimit.toJSONLocalizedOnly('en','en')];
     res.setHeader('content-type', 'application/json');
     res.setHeader('charset', 'utf-8');
     res.end(JSON.stringify(output, null, 2));

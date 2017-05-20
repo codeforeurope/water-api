@@ -1,6 +1,6 @@
 var fs = require('fs');
 var mongoose = require('mongoose');
-var i18ngoose = require('../plugins/i18ngoose');
+var i18ngoose = require('mongoose-i18n-localize');
 
 var env = process.env.NODE_ENV || 'development';
 var config = require('../config/config.json')[env];
@@ -25,7 +25,7 @@ fs.readdirSync(__dirname).forEach(function(file) {
 
     // Attach i18n plugin to all models
     temp.plugin(i18ngoose, {
-        languages: ['de', 'en', 'nl', 'fr']
+        locales: ['de', 'en', 'nl', 'fr']
     });
 
     exports[moduleName] = {

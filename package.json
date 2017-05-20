@@ -20,6 +20,7 @@
     "cors": "^2.8.1",
     "js-yaml": "^3.3.0",
     "mongoose": "^4.9.0",
+    "mongoose-i18n-localize": "^0.3.0",
     "node-nominatim2": "^0.1.0",
     "obj-parse": "^0.3.0",
     "swagger-tools": "0.10.1",
