@@ -3,13 +3,8 @@
  * This is basically a set of observation from labels on the bottle
  */
 
-(function() {
-    var mongoose = require('mongoose');
-    var i18ngoose = require('i18ngoose');
+module.exports = function(mongoose) {
     var ObjectId = mongoose.Schema.ObjectId;
-    var Company = require('./Company.js').schema;
-    var Observation = require('./Observation.js').schema; // We can use the Observation model for this
-    var User = require('./User.js').schema;
 
     var Schema = new mongoose.Schema({
         name: String,
@@ -18,10 +13,6 @@
         sources: Array, //url references to sources for this information
         entered_at: {type: Date, required: true, default: Date}
     });
-    // Load plugin to schema and define languages 
-    Schema.plugin(i18ngoose, {
-        languages: ['de', 'en', 'nl', 'fr']
-    });
-    exports.schema = Schema;
-    exports.model = mongoose.model('Limit', Schema);
-}());
+
+    return Schema;
+};

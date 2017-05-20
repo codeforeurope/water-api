@@ -18,10 +18,10 @@
   "dependencies": {
     "connect": "^3.2.0",
     "cors": "^2.8.1",
-    "i18ngoose": "0.0.5",
     "js-yaml": "^3.3.0",
     "mongoose": "^4.9.0",
     "node-nominatim2": "^0.1.0",
+    "obj-parse": "^0.3.0",
     "swagger-tools": "0.10.1",
     "tz-business-time": "^0.6.3"
   },

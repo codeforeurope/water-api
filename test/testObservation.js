@@ -25,7 +25,6 @@ describe('testing inserting i18n codes into the database', function() {
         //console.log(mgl.toJSONTranslated({translation: 'nl'}));
         //console.log(potassium.toObjectTranslated({translation: 'nl'}));
         var out = testObservation.toObjectTranslated({ translation: 'nl' });
-        //console.log(out);
         should.equal(out.label, undefined);
       done();
     });

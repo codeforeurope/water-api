@@ -1,8 +1,5 @@
-(function() {
-    var mongoose = require('mongoose');
+module.exports = function(mongoose) {
     var ObjectId = mongoose.Schema.ObjectId;
-    var Operator = require('./Company.js').schema;
-    var User = require('./User.js').schema;
 
     var Schema = new mongoose.Schema({
         operator: {type: ObjectId, ref: 'Operator'},
@@ -19,6 +16,6 @@
         entered_at: {type: Date, required: true, default: Date},
         entered_by: {type: ObjectId, ref: 'User', required: true}
     });
-    exports.schema = Schema;
-    exports.model = mongoose.model('Tap', Schema);
-}());
+    return Schema;
+};
+

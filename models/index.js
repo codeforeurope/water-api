@@ -1,10 +1,14 @@
 var fs = require('fs');
 var mongoose = require('mongoose');
+var i18ngoose = require('../plugins/i18ngoose');
+
 var env = process.env.NODE_ENV || 'development';
 var config = require('../config/config.json')[env];
 var db;
+
 mongoose.Promise = require('bluebird');
-// Connect to mongo
+
+// Connect to mongodb
 if (config.use_env_variable) {
   db = mongoose.connect(process.env[config.use_env_variable]);
 } else {
@@ -17,6 +21,16 @@ if (config.use_env_variable) {
 fs.readdirSync(__dirname).forEach(function(file) {
   if (file !== 'index.js') {
     var moduleName = file.split('.')[0];
-    exports[moduleName] = require('./' + moduleName);
+    var temp = require('./' + moduleName)(mongoose);
+
+    // Attach i18n plugin to all models
+    temp.plugin(i18ngoose, {
+        languages: ['de', 'en', 'nl', 'fr']
+    });
+
+    exports[moduleName] = {
+      schema: temp,
+      model: mongoose.model(moduleName, temp)
+    };
   }
 });

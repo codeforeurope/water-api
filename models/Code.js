@@ -5,9 +5,7 @@
  * Code list FieldName: observedPropertyDeterminandCode
  */
 
-(function() {
-    var mongoose = require('mongoose');
-    var i18ngoose = require('i18ngoose');
+module.exports = function(mongoose) {
     var ObjectId = mongoose.Schema.ObjectId;
 
     var Schema = new mongoose.Schema({
@@ -26,10 +24,6 @@
         },
         entered_at: {type: Date, required: true, default: Date}
     });
-    // Load plugin to schema and define languages 
-    Schema.plugin(i18ngoose, {
-        languages: ['de', 'en', 'nl', 'fr']
-    });
-    exports.schema = Schema;
-    exports.model = mongoose.model('Code', Schema);
-}());
+
+    return Schema;
+};
