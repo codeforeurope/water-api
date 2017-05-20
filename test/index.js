@@ -6,3 +6,4 @@ require("./testCompany");
 require("./testProduct");
 require("./testTap");
 require("./testPumpingstation");
+require("./testObservation");

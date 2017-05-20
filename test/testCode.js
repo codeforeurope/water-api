@@ -20,7 +20,8 @@ describe('testing inserting i18n codes into the database', function() {
     label: 'Natrium'
   });
   // Create with i18n
-  models.Code.model.create({ standard: 'CAS', value: '7440-09-7', label: {en: 'Potassium', nl: 'Kalium', de: 'Kalium'} });
+  var potassium = models.Code.model({ standard: 'CAS', value: '7440-09-7', label: {en: 'Potassium', nl: 'Kalium', de: 'Kalium'} });
+  potassium.save();
   models.Code.model.create({ standard: 'CAS', value: '7440-70-2', label: {en: 'Calcium'} });
   models.Code.model.create({ standard: 'CAS', value: '14797-55-8', label: {en:'Nitrate'} });
   models.Code.model.create({ standard: 'CAS', value: '7439-95-4', label: {en:'Magnesium'} });
@@ -34,8 +35,19 @@ describe('testing inserting i18n codes into the database', function() {
   models.Code.model.create({ standard: 'CAS', value: '', label: {en:'Trihalomethanes (THMS)'} });
   describe('Calcium should not have a nl label', function() {
     it('it should be undefined', function(done) {
-        var calcium = models.Code.model.i18nInit('en', { standard: 'CAS', value: '7440-70-2', label: {en: 'Calcium'} });
-        should.equal(calcium.toObjectTranslated({ translation: 'nl' }).label, undefined);
+        var calcium = models.Code.model.i18nInit('en', { standard: 'CAS', value: '7440-70-2', label: 'Calcium' });
+        calcium.i18nSet('de', {
+            label: 'Test'
+        });
+        var out = calcium.toObjectTranslated({ translation: 'nl' });
+        should.equal(out.label, undefined);
+      done();
+    });
+  });
+  describe('Potassium should return Kalium for de', function() {
+    it('it should be Kalium', function(done) {
+        var out = potassium.toObjectTranslated({ translation: 'de' });
+        should.equal(out.label, 'Kalium');
       done();
     });
   });

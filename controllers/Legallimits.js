@@ -70,7 +70,7 @@
       authority: null
     });
 
-    var output = [uslimit.toObject(), eulimit.toObject()];
+    var output = [uslimit.toObjectTranslated({translation: 'en'}), eulimit.toObject()];
     res.setHeader('content-type', 'application/json');
     res.setHeader('charset', 'utf-8');
     res.end(JSON.stringify(output, null, 2));
