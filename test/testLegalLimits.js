@@ -26,4 +26,18 @@ describe('testing /api/limits', function() {
         });
     });
   });
+  describe('GET limit', function() {
+    it('it should return EU limit', function(done) {
+      chai.request(app)
+        .get('/api/limit')
+        .query({code: 'EU'})
+        .end(function(err, res) {
+          var data = JSON.parse(res.text);
+          res.should.be.json; // jshint ignore:line
+          should.equal(data.name, 'EU');
+          res.should.have.status(200);
+          done();
+        });
+    });
+  });
 });
