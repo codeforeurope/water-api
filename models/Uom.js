@@ -9,6 +9,7 @@ module.exports = function(mongoose) {
     var ObjectId = mongoose.Schema.ObjectId;
 
     var Schema = new mongoose.Schema({
+        code: {type: String, unique: true},
         value: {
             type: String,
             i18n:true

@@ -8,9 +8,9 @@ module.exports = function(mongoose) {
     var ObjectId = mongoose.Schema.ObjectId;
 
     var Schema = new mongoose.Schema({
-        value: Number,
-        uom: {type: ObjectId, ref: 'Uom'},
-        code: {type: ObjectId, ref: 'Code'},
+        value: {type: Number, required: true},
+        uom: {type: ObjectId, ref: 'Uom', required: true},
+        code: {type: ObjectId, ref: 'Code', required: true},
         entered_at: {type: Date, required: true, default: Date},
         entered_by: {type: ObjectId, ref: 'User', required: true}
     });

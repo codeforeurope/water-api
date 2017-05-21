@@ -9,9 +9,13 @@ module.exports = function(mongoose) {
     var ObjectId = mongoose.Schema.ObjectId;
 
     var Schema = new mongoose.Schema({
+        code: {
+          type: String,
+          unique: true
+        },
         standard: {
           type: String,
-          enum: ['CAS', 'EC', 'ICSC', 'RTECS', 'UN', 'UNII', 'EEA'],
+          enum: ['CAS', 'EC', 'ICSC', 'RTECS', 'UN', 'UNII', 'EEA', 'NA'],
         },
         value: String,
         label: {
@@ -24,6 +28,6 @@ module.exports = function(mongoose) {
         },
         entered_at: {type: Date, required: true, default: Date}
     });
-
+    Schema.index({standard: 1, value:1},{unique: true});
     return Schema;
 };
