@@ -26,6 +26,7 @@ describe('testing /api/limits', function() {
         });
     });
   });
+
   describe('GET limit', function() {
     it('it should return EU limit', function(done) {
       chai.request(app)
@@ -34,10 +35,27 @@ describe('testing /api/limits', function() {
         .end(function(err, res) {
           var data = JSON.parse(res.text);
           res.should.be.json; // jshint ignore:line
-          should.equal(data.name, 'EU');
+          data.should.be.instanceof(Array);
+          data.should.have.lengthOf(8);
           res.should.have.status(200);
           done();
         });
     });
   });
+
+  describe('POST limit', function() {
+    it('it should return new limit', function(done) {
+      chai.request(app)
+        .post('/api/limit')
+        .query({code: 'EU'})
+        .end(function(err, res) {
+          var data = JSON.parse(res.text);
+          should.equal(data.name, 'AuthenticationError');
+          should.equal(data.message, 'No token provided');
+          res.should.have.status(402);
+          done();
+        });
+    });
+  });
+
 });

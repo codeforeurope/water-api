@@ -9,11 +9,7 @@ var db;
 mongoose.Promise = require('bluebird');
 
 // Connect to mongodb
-if (config.use_env_variable) {
-  db = mongoose.connect(process.env[config.use_env_variable]);
-} else {
-  db = mongoose.connect(config.db);
-}
+db = mongoose.connect(config.db);
 
 /**
  * initializes all models and sources them as .model-name
@@ -25,7 +21,7 @@ fs.readdirSync(__dirname).forEach(function(file) {
 
     // Attach i18n plugin to all models
     temp.plugin(i18ngoose, {
-        locales: ['de', 'en', 'nl', 'fr']
+        locales: config.locales
     });
 
     exports[moduleName] = {

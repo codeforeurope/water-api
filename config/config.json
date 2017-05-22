@@ -1,14 +1,17 @@
 {
   "development": {
     "db": "mongodb://localhost/water_development",
-    "secret": "developmentrocks"
+    "secret": "developmentrocks",
+    "locales": ["de", "en", "nl", "fr"]
   },
   "test": {
     "db": "mongodb://localhost/water_test",
-    "secret": "testingisgood"
+    "secret": "testingisgood",
+    "locales": ["de", "en", "nl", "fr"]
   },
   "production": {
     "db": "mongodb://localhost/water_production",
-    "secret": "changemebeforedeploying!"
+    "secret": "changemebeforedeploying!",
+    "locales": ["de", "en", "nl", "fr"]
   }
 }

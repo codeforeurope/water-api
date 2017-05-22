@@ -21,8 +21,8 @@
     }]
   };
 
-  var cleanLimit = function(source){
-    var output = source.toJSONLocalizedOnly('en','en');
+  var cleanLimit = function(source, locale){
+    var output = source.toJSONLocalizedOnly(locale, 'en');
     output = utils.clean(output);
     var newlimits = [];
 
@@ -50,7 +50,7 @@
       }
 
       for (var limit in limits) {
-        var output = cleanLimit(limits[limit]);
+        var output = cleanLimit(limits[limit], req.locale);
         final.push(output);
       }
 
@@ -72,7 +72,7 @@
       if(limit){
         res.setHeader('content-type', 'application/json');
         res.setHeader('charset', 'utf-8');
-        res.end(JSON.stringify(cleanLimit(limit), null, 2));
+        res.end(JSON.stringify(cleanLimit(limit, req.locale).limits, null, 2));
       } else {
         err = {
           code: 402,

@@ -317,6 +317,9 @@ paths:
         description: "code value that needs to be considered for filter"
         required: true
         type: "string"
+      - name: "lang"
+        in: "query"
+        type: "string"
       produces:
       - "application/json"
       responses:
