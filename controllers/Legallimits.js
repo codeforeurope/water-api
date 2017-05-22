@@ -46,6 +46,7 @@
           value: jsonObject.value,
           uom: uom,
           code: code,
+          type: 'Limit',
           entered_by: user
         }, function(err,result){
             if (err) callback(err);

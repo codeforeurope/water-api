@@ -54,30 +54,35 @@ describe('testing inserting limit', function() {
           value: 200,
           uom: mgl,
           code: codes.natrium,
+          type: 'Limit',
           entered_by: user
         }),
         models.Observation.model({
           value: 50,
           uom: mgl,
           code: codes.nitrate,
+          type: 'Limit',
           entered_by: user
         }),
         models.Observation.model({
           value: 0,
           uom: mgl,
           code: codes.fluoride,
+          type: 'Limit',
           entered_by: user
         }),
         models.Observation.model({
           value: 250,
           uom: mgl,
           code: codes.chloride,
+          type: 'Limit',
           entered_by: user
         }),
         models.Observation.model({
           value: 250,
           uom: mgl,
           code: codes.sulfate,
+          type: 'Limit',
           entered_by: user
         }),
       ];
@@ -109,48 +114,56 @@ describe('testing inserting limit', function() {
           value: 200,
           uom: mgl,
           code: codes.natrium,
+          type: 'Limit',
           entered_by: user
         }),
         models.Observation.model({
           value: 12,
           uom: mgl,
           code: codes.kalium,
+          type: 'Limit',
           entered_by: user
         }),
         models.Observation.model({
           value: 400,
           uom: mgl,
           code: codes.calcium,
+          type: 'Limit',
           entered_by: user
         }),
         models.Observation.model({
           value: 60,
           uom: mgl,
           code: codes.nitrate,
+          type: 'Limit',
           entered_by: user
         }),
         models.Observation.model({
           value: 60,
           uom: mgl,
           code: codes.magnesium,
+          type: 'Limit',
           entered_by: user
         }),
         models.Observation.model({
           value: 0,
           uom: mgl,
           code: codes.fluoride,
+          type: 'Limit',
           entered_by: user
         }),
         models.Observation.model({
           value: 240,
           uom: mgl,
           code: codes.chloride,
+          type: 'Limit',
           entered_by: user
         }),
         models.Observation.model({
           value: 240,
           uom: mgl,
           code: codes.sulfate,
+          type: 'Limit',
           entered_by: user
         }),
       ];

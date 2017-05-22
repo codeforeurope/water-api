@@ -11,6 +11,12 @@ module.exports = function(mongoose) {
         value: {type: Number, required: true},
         uom: {type: ObjectId, ref: 'Uom', required: true},
         code: {type: ObjectId, ref: 'Code', required: true},
+        type: {
+          type: String,
+          enum: ['Report', 'Limit', 'Location', 'Zone', 'Unknown'],
+          default: 'Unknown',
+          required: true
+        },
         entered_at: {type: Date, required: true, default: Date},
         entered_by: {type: ObjectId, ref: 'User', required: true}
     });
