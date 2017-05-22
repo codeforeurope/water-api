@@ -13,7 +13,7 @@ module.exports = function(mongoose) {
         code: {type: ObjectId, ref: 'Code', required: true},
         type: {
           type: String,
-          enum: ['Report', 'Limit', 'Location', 'Zone', 'Unknown'],
+          enum: ['Report', 'Limit', 'Location', 'Zone', 'Unknown', 'Label'],
           default: 'Unknown',
           required: true
         },

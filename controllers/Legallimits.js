@@ -24,60 +24,6 @@
     }]
   };
 
-  /**
-   * Try to create an observation from the json object
-   *
-   * Requires a json object with 3 fields in the form of:
-   * { "value": 10, "uom": "mg_l", "code": "natrium" }
-   */
-  var createObservation = function(jsonObject, user, callback){
-    //get mgl
-    var uom;
-    var code;
-    models.Uom.model.findOne({
-      "code": jsonObject.uom
-    }, function(err, _uom) {
-      if(err) callback(err, null);
-      uom = _uom;
-      models.Code.model.findOne({code: jsonObject.code}, function(err, _code) {
-        if (err) callback(err, null);
-        code = _code;
-        var _observation = models.Observation.model.create({
-          value: jsonObject.value,
-          uom: uom,
-          code: code,
-          type: 'Limit',
-          entered_by: user
-        }, function(err,result){
-            if (err) callback(err);
-            callback(null, result);
-        });
-      });
-    });
-  };
-
-  /**
-   * Transforms a limit from mongodb to a
-   * Representation that can be sent as
-   * a response.
-   */
-  var cleanLimit = function(source, locale){
-    var output = source.toJSONLocalizedOnly(locale, 'en');
-    output = utils.clean(output);
-    var newlimits = [];
-
-    for (var x in output.limits) {
-      var cleanLimit = {
-        uom: output.limits[x].uom.label,
-        code: output.limits[x].code.label,
-        value: output.limits[x].value
-      };
-      newlimits.push(cleanLimit);
-    }
-    output.limits = newlimits;
-    return output;
-  };
-
   module.exports.getlimits = function (req, res, next) {
     var params = req.swagger.params;
     //find a limit from the database
@@ -90,7 +36,7 @@
       }
 
       for (var limit in limits) {
-        var output = cleanLimit(limits[limit], req.locale);
+        var output = utils.cleanObservations(limits[limit], req.locale);
         final.push(output);
       }
 
@@ -112,7 +58,7 @@
       if(limit){
         res.setHeader('content-type', 'application/json');
         res.setHeader('charset', 'utf-8');
-        res.end(JSON.stringify(cleanLimit(limit, req.locale).limits, null, 2));
+        res.end(JSON.stringify(utils.cleanObservations(limit, req.locale).limits, null, 2));
       } else {
         err = {
           code: 402,
@@ -125,19 +71,20 @@
   };
   module.exports.postlimit = function(req, res, next) {
     var input = req.swagger.params.body.value;
-    var _limits = [];
+    var _observations = [];
     async.each(input.limits,
       function(limit, callback){
-        createObservation(limit, req.user, function(err, output){
-          if(err) next(err);
-          _limits.push(output);
+        utils.createObservation(limit, req.user, 'Limit', function(err, output){
+          if (!err){
+            _observations.push(output);
+          }
           callback();
         });
       }, function(err){
         if(err) next(err);
         var _final = models.Limit.model({
           name: input.name,
-          limits: _limits,
+          limits: _observations,
           sources: input.sources,
           authority: input.authority || null
         });

@@ -11,7 +11,49 @@ info:
     url: "https://raw.githubusercontent.com/codeforeurope/water-api/master/LICENSE"
 basePath: "/api"
 paths:
+  /companies:
+    get:
+      tags:
+      - "companies"
+      summary: "Get companies"
+      description: "Get companies"
+      operationId: "getcompanies"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      - "application/xml"
+      responses:
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "Company"
   /company:
+    get:
+      tags:
+      - "company"
+      summary: "Get company"
+      description: "Get company"
+      operationId: "getcompany"
+      parameters:
+      - name: "code"
+        in: "query"
+        description: "code value that needs to be considered for filter"
+        required: true
+        type: "string"
+      - name: "lang"
+        in: "query"
+        type: "string"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      - "application/xml"
+      responses:
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "Company"
     post:
       tags:
       - "company"
@@ -600,26 +642,22 @@ definitions:
         example: "natrium"
   Product:
     type: "object"
-    required:
-    - "name"
-    - "country"
     properties:
-      id:
-        type: "integer"
-        format: "int64"
-      category:
-        $ref: "#/definitions/Category"
       name:
         type: "string"
-        example: "doggie"
-      country:
+      vendor:
+        type: "string"
+      volume:
+          type: "number"
+          format: "float"
+      observations:
+        type: "array"
+        items:
+          $ref: "#/definitions/Observation"
+      sources:
         type: "array"
         items:
           type: "string"
-      products:
-        type: "array"
-        items:
-          $ref: "#/definitions/Product"
   Tag:
     type: "object"
     properties:

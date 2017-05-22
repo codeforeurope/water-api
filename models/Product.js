@@ -7,6 +7,7 @@ module.exports = function(mongoose) {
     var ObjectId = mongoose.Schema.ObjectId;
 
     var Schema = new mongoose.Schema({
+        name: {type: String, required: true},
         vendor: {type: ObjectId, ref: 'Company'}, //Company/Vendor that produces this bottled water
         observations: [{type: ObjectId, ref: 'Observation'}], //Array of water quality indicators from the bottle label
         volume: Number, //The content volume in liters of the bottle
