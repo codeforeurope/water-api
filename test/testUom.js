@@ -4,13 +4,15 @@ process.env.NODE_ENV = 'test';
 //Require the dev-dependencies
 var chai = require('chai');
 var chaiHttp = require('chai-http');
+chai.use(chaiHttp);
+var should = chai.should();
+
 var app = require('../server');
 var models = require('../models');
 var Chance = require('chance');
-
-chai.use(chaiHttp);
-var should = chai.should();
 var chance = new Chance();
+
+
 
 describe('testing inserting units of measure', function() {
 

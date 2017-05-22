@@ -332,6 +332,31 @@ paths:
         400:
           description: "Invalid status value"
       x-swagger-router-controller: "Legallimits"
+    post:
+      tags:
+      - "limit"
+      summary: "Post new legal limit"
+      description: "Post a new legal limit"
+      operationId: "postlimit"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Limit set that needs to be added to the database"
+        required: true
+        schema:
+          $ref: "#/definitions/Limit"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Product"
+        400:
+          description: "Invalid status value"
+      x-swagger-router-controller: "Legallimits"
   /products:
     get:
       tags:
@@ -557,6 +582,22 @@ definitions:
       status:
         type: "string"
         description: "pet status in the store"
+  Observation:
+    type: "object"
+    required:
+    - "code"
+    - "uom"
+    - "value"
+    properties:
+      value:
+        type: "number"
+        format: "float"
+      uom:
+        type: "string"
+        example: "mg_l"
+      code:
+        type: "string"
+        example: "natrium"
   Product:
     type: "object"
     required:
@@ -595,3 +636,18 @@ definitions:
         format: "int64"
       result:
         type: "string"
+  Limit:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      authority:
+        type: "string"
+      limits:
+        type: "array"
+        items:
+          $ref: "#/definitions/Observation"
+      sources:
+        type: "array"
+        items:
+          type: "string"

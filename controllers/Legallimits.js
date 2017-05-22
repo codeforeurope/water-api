@@ -4,8 +4,11 @@
  */
 (function () {
   'use strict';
+  var async = require("async");
   var models = require('../models');
   var utils = require('../helpers/util.js');
+
+  // Options for the mongoose query
   var populateoptions = {
     path: 'limits',
     select: 'value uom code -_id',
@@ -21,6 +24,42 @@
     }]
   };
 
+  /**
+   * Try to create an observation from the json object
+   *
+   * Requires a json object with 3 fields in the form of:
+   * { "value": 10, "uom": "mg_l", "code": "natrium" }
+   */
+  var createObservation = function(jsonObject, user, callback){
+    //get mgl
+    var uom;
+    var code;
+    models.Uom.model.findOne({
+      "code": jsonObject.uom
+    }, function(err, _uom) {
+      if(err) callback(err, null);
+      uom = _uom;
+      models.Code.model.findOne({code: jsonObject.code}, function(err, _code) {
+        if (err) callback(err, null);
+        code = _code;
+        var _observation = models.Observation.model.create({
+          value: jsonObject.value,
+          uom: uom,
+          code: code,
+          entered_by: user
+        }, function(err,result){
+            if (err) callback(err);
+            callback(null, result);
+        });
+      });
+    });
+  };
+
+  /**
+   * Transforms a limit from mongodb to a
+   * Representation that can be sent as
+   * a response.
+   */
   var cleanLimit = function(source, locale){
     var output = source.toJSONLocalizedOnly(locale, 'en');
     output = utils.clean(output);
@@ -84,11 +123,33 @@
     });
   };
   module.exports.postlimit = function(req, res, next) {
-    // TODO
-    next({
-      code: 502,
-      name: "NotImplementedError",
-      message: 'Not Implemented'
-    });
+    var input = req.swagger.params.body.value;
+    var _limits = [];
+    async.each(input.limits,
+      function(limit, callback){
+        createObservation(limit, req.user, function(err, output){
+          if(err) next(err);
+          _limits.push(output);
+          callback();
+        });
+      }, function(err){
+        if(err) next(err);
+        var _final = models.Limit.model({
+          name: input.name,
+          limits: _limits,
+          sources: input.sources,
+          authority: input.authority || null
+        });
+
+        _final.save(function(err, result, count) {
+          if (err) next(err);
+          res.setHeader('content-type', 'application/json');
+          res.setHeader('charset', 'utf-8');
+          res.end(JSON.stringify({
+            name: result.name
+          }, null, 2));
+        });
+      }
+    );
   };
 }());

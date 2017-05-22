@@ -8,6 +8,7 @@
     var jsyaml = require('js-yaml');
     var fs = require('fs');
     var cors = require('cors');
+    var models = require('./models');
 
 
     var options = {
@@ -35,8 +36,20 @@
           res.setHeader('content-type', 'application/json');
           var token = req.headers['x-access-token'];
           if (token) {
-            req.token = token;
-            next();
+            // See if we can find a valid user for this token.
+            var user = models.User;
+            user.model.findOne({token: token}, function(err, _user){
+              if (err){
+                next({
+                  code: 402,
+                  name: "AuthenticationError",
+                  message: "No token provided"
+                });
+              } else {
+                req.user = _user;
+                next();
+              }
+            });
           } else {
             next({
               code: 402,

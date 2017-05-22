@@ -7,6 +7,8 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var app = require('../server');
 var models = require('../models');
+var Chance = require('chance');
+var chance = new Chance();
 
 chai.use(chaiHttp);
 var should = chai.should();
@@ -45,14 +47,34 @@ describe('testing /api/limits', function() {
 
   describe('POST limit', function() {
     it('it should return new limit', function(done) {
+      var token = chance.guid();
+      var testuser = {
+        name: chance.name(),
+        email: chance.email(),
+        token: token
+      };
+      var user = new models.User.model(testuser);
+
+      user.save(function (err, user, count) {
+        user = user;
+      });
+
       chai.request(app)
         .post('/api/limit')
-        .query({code: 'EU'})
+        .set('x-access-token', token)
+        .send({
+          "name":"dummy limit standard",
+          "sources": ["http://www.google.com"],
+          "limits": [{
+            "value": 10,
+            "uom": "mg_l",
+            "code": "natrium"
+          }]
+        })
         .end(function(err, res) {
           var data = JSON.parse(res.text);
-          should.equal(data.name, 'AuthenticationError');
-          should.equal(data.message, 'No token provided');
-          res.should.have.status(402);
+          should.equal(data.name, 'dummy limit standard');
+          res.should.have.status(200);
           done();
         });
     });
