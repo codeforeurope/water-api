@@ -9,7 +9,10 @@
   var utils = require('../helpers/util.js');
 
   // Options for the mongoose query
-  var populateoptions = {
+  var populateoptions = [{
+    path: 'vendor',
+    select: 'name'
+  },{
     path: 'observations',
     select: 'value uom code -_id',
     match: { value: { $ne: null }},
@@ -22,24 +25,23 @@
       model: 'Code',
       select: 'label -_id'
     }]
-  };
+  }];
 
   module.exports.getproducts = function (req, res, next) {
     var params = req.swagger.params;
     //find a limit from the database
     models.Product.model.find().
-    select('name vendor sources observations -_id').
-    populate(populateoptions).exec(function(err, products){
+    select('name vendor volume').
+    populate(populateoptions).
+    exec(function(err, products){
       var final = [];
       if(err){
         next(err);
       }
-
       for (var x in products) {
         var output = utils.cleanObservations(products[x], req.locale);
         final.push(output);
       }
-
       res.setHeader('content-type', 'application/json');
       res.setHeader('charset', 'utf-8');
       res.end(JSON.stringify(final, null, 2));
@@ -49,8 +51,8 @@
   module.exports.getproduct = function (req, res, next) {
     var params = req.swagger.params;
     //find a limit from the database
-    models.Product.model.findOne({name: params.code.value}).
-    select('name vendor sources observations -_id').
+    models.Product.model.findById(params.id.value).
+    select('name vendor volume sources observations').
     populate(populateoptions).exec(function(err, product){
       if(err){
         next(err);
@@ -96,7 +98,8 @@
           res.setHeader('content-type', 'application/json');
           res.setHeader('charset', 'utf-8');
           res.end(JSON.stringify({
-            name: result.name
+            name: result.name,
+            id: result._id
           }, null, 2));
         });
       });

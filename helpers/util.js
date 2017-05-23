@@ -17,10 +17,13 @@ function trim_nulls(data) {
  * @param {json} data
  * @returns data with nulls removed.
  */
-clean = function(data) {
+clean = function(data, keep) {
   var obj2 = JSON.parse(JSON.stringify(data));
   delete obj2.entered_at;
   delete obj2.__v;
+  if(keep){
+    obj2.id = obj2._id;
+  }
   delete obj2._id;
   return trim_nulls(obj2);
 };
@@ -72,7 +75,11 @@ exports.createObservation = function(jsonObject, user, type, cb){
  */
 exports.cleanObservations = function(source, locale){
   var output = source.toJSONLocalizedOnly(locale, 'en');
-  output = clean(output);
+  output = clean(output, true);
+  if(output.vendor){
+    output.vendor = clean(output.vendor, true);
+  }
+
   if(output.limits){
     _outputArrayName = "limits";
     _outputobservations = output.limits;

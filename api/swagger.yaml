@@ -427,7 +427,7 @@ paths:
         400:
           description: "Invalid status value"
       x-swagger-router-controller: "Product"
-  /product:
+  /product/{id}:
     get:
       tags:
       - "product"
@@ -437,14 +437,11 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "status"
-        in: "query"
-        description: "Status values that need to be considered for filter"
-        required: false
-        type: "array"
-        items:
-          type: "string"
-        collectionFormat: "multi"
+      - name: "id"
+        in: "path"
+        description: "id that need to be considered for filter"
+        required: true
+        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -455,6 +452,7 @@ paths:
         400:
           description: "Invalid status value"
       x-swagger-router-controller: "Product"
+  /product:
     post:
       tags:
       - "product"

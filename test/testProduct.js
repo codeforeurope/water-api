@@ -12,6 +12,7 @@ var should = chai.should();
 
 var Chance = require('chance');
 var chance = new Chance();
+var testproduct_id;
 
 describe('testing /api/product and products', function() {
   var token = chance.guid();
@@ -25,6 +26,7 @@ describe('testing /api/product and products', function() {
   user.save(function (err, user, count) {
     user = user;
   });
+
 
   var volvic_50cl = {
     name: 'Volvic 50 cl',
@@ -148,6 +150,7 @@ describe('testing /api/product and products', function() {
         .send(volvic_50cl)
         .end(function(err, res) {
           var data = JSON.parse(res.text);
+          testproduct_id = data.id;
           res.should.be.json; // jshint ignore:line
           res.should.have.status(200);
           done();
@@ -172,5 +175,21 @@ describe('testing /api/product and products', function() {
     });
   });
 
+  /*
+   * Test the /GET MineralWater route
+   */
+  describe('GET Product', function() {
+    it('it should return a product', function(done) {
+      chai.request(app)
+        .get('/api/product/' + testproduct_id)
+        .end(function(err, res) {
+          var data = JSON.parse(res.text);
+          res.should.be.json; // jshint ignore:line
+          should.equal(data.name, 'Volvic 50 cl');
+          res.should.have.status(200);
+          done();
+        });
+    });
+  });
 
 });
