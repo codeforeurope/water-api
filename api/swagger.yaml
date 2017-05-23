@@ -77,133 +77,6 @@ paths:
         405:
           description: "Invalid input"
       x-swagger-router-controller: "Company"
-  /pumpingstations:
-    get:
-      tags:
-      - "pumpingstations"
-      summary: "Get a list of pumpingstation"
-      description: "Multiple parameters can be provided"
-      operationId: "getpumpingstations"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "status"
-        in: "query"
-        description: "Status values that need to be considered for filter"
-        required: false
-        type: "array"
-        items:
-          type: "string"
-        collectionFormat: "multi"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Pumpingstation"
-        400:
-          description: "Invalid status value"
-      x-swagger-router-controller: "Pumpingstation"
-  /pumpingstation:
-    get:
-      tags:
-      - "pumpingstation"
-      summary: "Get details of a pumpingstation"
-      description: "Multiple parameters can be provided"
-      operationId: "getpumpingstation"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "status"
-        in: "query"
-        description: "Status values that need to be considered for filter"
-        required: false
-        type: "array"
-        items:
-          type: "string"
-        collectionFormat: "multi"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/Pumpingstation"
-        400:
-          description: "Invalid status value"
-      x-swagger-router-controller: "Pumpingstation"
-    post:
-      tags:
-      - "pumpingstation"
-      summary: "Add a pumpingstation"
-      description: ""
-      operationId: "postpumpingstation"
-      consumes:
-      - "application/json"
-      - "application/xml"
-      produces:
-      - "application/json"
-      - "application/xml"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pumpingstation object that needs to be added to the database"
-        required: false
-        schema:
-          $ref: "#/definitions/Pumpingstation"
-      responses:
-        405:
-          description: "Invalid input"
-      x-swagger-router-controller: "Pumpingstation"
-    put:
-      tags:
-      - "pumpingstation"
-      summary: "Update a pumpingstation"
-      description: ""
-      operationId: "putpumpingstation"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: false
-        schema:
-          $ref: "#/definitions/Pumpingstation"
-      responses:
-        400:
-          description: "Invalid ID supplied"
-        404:
-          description: "Pet not found"
-        405:
-          description: "Validation exception"
-      x-swagger-router-controller: "Pumpingstation"
-    delete:
-      tags:
-      - "pumpingstation"
-      summary: "Delete a pumpingstation"
-      description: ""
-      operationId: "deletepumpingstation"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: false
-        schema:
-          $ref: "#/definitions/Pumpingstation"
-      responses:
-        400:
-          description: "Invalid ID supplied"
-        404:
-          description: "Pet not found"
-        405:
-          description: "Validation exception"
-      x-swagger-router-controller: "Pumpingstation"
   /tap:
     get:
       tags:
@@ -399,6 +272,61 @@ paths:
         400:
           description: "Invalid status value"
       x-swagger-router-controller: "Legallimits"
+  /zone:
+    get:
+      tags:
+      - "zone"
+      summary: "Get zone at coordinates"
+      description: "Get a zone at the given coordinates"
+      operationId: "getzone"
+      parameters:
+      - in: "query"
+        name: "lat"
+        description: "Latitude"
+        required: true
+        type: "number"
+        format: "float"
+      - in: "query"
+        name: "lon"
+        description: "Longitude"
+        required: true
+        type: "number"
+        format: "float"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Zone"
+        400:
+          description: "Invalid status value"
+      x-swagger-router-controller: "Zone"
+    post:
+      tags:
+      - "zone"
+      summary: "Post new zone"
+      description: "Post a new zone"
+      operationId: "postzone"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Limit set that needs to be added to the database"
+        required: true
+        schema:
+          $ref: "#/definitions/Zone"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Zone"
+        400:
+          description: "Invalid status value"
+      x-swagger-router-controller: "Zone"
   /products:
     get:
       tags:
@@ -597,31 +525,6 @@ definitions:
         items:
           type: "integer"
           format: "int64"
-  Pumpingstation:
-    type: "object"
-    required:
-    - "name"
-    - "photoUrls"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      category:
-        $ref: "#/definitions/Category"
-      name:
-        type: "string"
-        example: "doggie"
-      photoUrls:
-        type: "array"
-        items:
-          type: "string"
-      tags:
-        type: "array"
-        items:
-          $ref: "#/definitions/Tag"
-      status:
-        type: "string"
-        description: "pet status in the store"
   Observation:
     type: "object"
     required:
@@ -646,8 +549,8 @@ definitions:
       vendor:
         type: "string"
       volume:
-          type: "number"
-          format: "float"
+        type: "number"
+        format: "float"
       observations:
         type: "array"
         items:
@@ -656,6 +559,46 @@ definitions:
         type: "array"
         items:
           type: "string"
+  Report:
+    type: "object"
+    required:
+      - "zone"
+    properties:
+      name:
+        type: "string"
+      authority:
+        type: "string"
+      zone:
+        type: "string"
+      observations:
+        type: "array"
+        items:
+          $ref: "#/definitions/Observation"
+      sources:
+        type: "array"
+        items:
+          type: "string"
+  Zone:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      geometry:
+        $ref: "#/definitions/Polygon"
+  Polygon:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+      coordinates:
+        type: "array"
+        items:
+          type: "array"
+          items:
+            type: "array"
+            items:
+              type: "number"
+              format: "float"
   Tag:
     type: "object"
     properties:
