@@ -65,15 +65,21 @@
     // See if we can find a municipality in the database
     // No municipality found? Try nominatim!
     nominatim.search(options, function(err, res, data) {
+      if(err) callback(err, null);
       var result;
-      if (data.error) {
-        err = new Error(data.error);
-        callback(err,null);
+      if(data){
+        if (data.error) {
+          err = new Error(data.error);
+          callback(err,null);
+        } else {
+          result = getLatLon(data);
+          reverse(result, function(err, data){
+            callback(err, data || null);
+          });
+        }
       } else {
-        result = getLatLon(data);
-        reverse(result, function(err, data){
-          callback(err, data || null);
-        });
+        err = new Error("Geocoder unavailable");
+        callback(err,null);
       }
     });
   };
@@ -85,13 +91,19 @@
     options.osm_type = "R";
     options.zoom = 10;
     nominatim.reverse(options, function(err, res, data) {
+      if(err) callback(err, null);
       var result;
-      if (data.error) {
-        err = new Error(data.error);
+      if(data){
+        if (data.error) {
+          err = new Error(data.error);
+        } else {
+          result = clean(data);
+        }
+        callback(err, result || null);
       } else {
-        result = clean(data);
+        err = new Error("Geocoder unavailable");
+        callback(err,null);
       }
-      callback(err, result || null);
     });
   };
 
