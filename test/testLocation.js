@@ -9,17 +9,17 @@ var app = require('../server');
 chai.use(chaiHttp);
 var should = chai.should();
 
-describe('testing /api/tap', function() {
+describe('testing /api/location', function() {
   afterEach(function() {
     // runs after each test in this block
   });
   /*
    * Test /PUT water
    */
-  describe('PUT Tap without token', function() {
+  describe('PUT Location without token', function() {
     it('it should return AuthenticationError, No token provided', function(done) {
       chai.request(app)
-        .put('/api/tap')
+        .put('/api/location')
         .send({})
         .end(function(err, res) {
           var data = JSON.parse(res.text);

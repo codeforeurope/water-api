@@ -77,13 +77,13 @@ paths:
         405:
           description: "Invalid input"
       x-swagger-router-controller: "Company"
-  /tap:
+  /location:
     get:
       tags:
-      - "tap"
-      summary: "Get details of a tap"
+      - "location"
+      summary: "Get details of a tap, pump, facility or measurement location"
       description: "Multiple parameters can be provided"
-      operationId: "gettap"
+      operationId: "getlocation"
       produces:
       - "application/json"
       parameters:
@@ -99,16 +99,16 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Tap"
+            $ref: "#/definitions/Location"
         400:
           description: "Invalid status value"
-      x-swagger-router-controller: "Tap"
+      x-swagger-router-controller: "Location"
     post:
       tags:
-      - "tap"
-      summary: "Add a tap"
+      - "location"
+      summary: "Add a tap, pump, facility or measurement location"
       description: ""
-      operationId: "posttap"
+      operationId: "postlocation"
       consumes:
       - "application/json"
       - "application/xml"
@@ -118,20 +118,20 @@ paths:
       parameters:
       - in: "body"
         name: "body"
-        description: "Tap object that needs to be added to the database"
+        description: "Location object that needs to be added to the database"
         required: false
         schema:
-          $ref: "#/definitions/Tap"
+          $ref: "#/definitions/Location"
       responses:
         405:
           description: "Invalid input"
-      x-swagger-router-controller: "Tap"
+      x-swagger-router-controller: "Location"
     put:
       tags:
-      - "tap"
-      summary: "Update a tap"
+      - "location"
+      summary: "Update a location"
       description: ""
-      operationId: "puttap"
+      operationId: "putlocation"
       consumes:
       - "application/json"
       produces:
@@ -139,7 +139,7 @@ paths:
       parameters:
       - in: "body"
         name: "body"
-        description: "Tap object that needs to be updated"
+        description: "Location object that needs to be updated"
         required: false
         schema:
           $ref: "#/definitions/Update"
@@ -148,13 +148,13 @@ paths:
           description: "Invalid operation"
         405:
           description: "Validation exception"
-      x-swagger-router-controller: "Tap"
+      x-swagger-router-controller: "Location"
     delete:
       tags:
-      - "tap"
-      summary: "Delete a tap"
+      - "location"
+      summary: "Delete a location"
       description: ""
-      operationId: "deletetap"
+      operationId: "deletelocation"
       consumes:
       - "application/json"
       produces:
@@ -165,7 +165,7 @@ paths:
         description: "Pet object that needs to be added to the store"
         required: false
         schema:
-          $ref: "#/definitions/Tap"
+          $ref: "#/definitions/Location"
       responses:
         400:
           description: "Invalid ID supplied"
@@ -173,14 +173,14 @@ paths:
           description: "Pet not found"
         405:
           description: "Validation exception"
-      x-swagger-router-controller: "Tap"
-  /taps:
+      x-swagger-router-controller: "Location"
+  /locations:
     get:
       tags:
-      - "taps"
-      summary: "Get a list of taps"
+      - "locations"
+      summary: "Get a list of locations"
       description: "Multiple parameters can be provided"
-      operationId: "gettaps"
+      operationId: "getlocations"
       produces:
       - "application/json"
       parameters:
@@ -198,10 +198,10 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Tap"
+              $ref: "#/definitions/Location"
         400:
           description: "Invalid status value"
-      x-swagger-router-controller: "Tap"
+      x-swagger-router-controller: "Location"
   /limits:
     get:
       tags:
@@ -450,6 +450,30 @@ paths:
         405:
           description: "Invalid input"
       x-swagger-router-controller: "Product"
+  /report:
+    post:
+      tags:
+      - "report"
+      summary: "Add a report"
+      description: "A report is a defined set of observations belonging to a zone"
+      operationId: "postreport"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Report object with observations that needs to be added to the database"
+        required: true
+        schema:
+          $ref: "#/definitions/Report"
+      responses:
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "Report"
   /jurisdiction:
     get:
       tags:
@@ -506,25 +530,20 @@ definitions:
         format: "int64"
       name:
         type: "string"
-  Tap:
+  Location:
     type: "object"
     required:
     - "name"
-    - "location"
+    - "geometry"
     properties:
-      id:
-        type: "integer"
-        format: "int64"
-      category:
-        $ref: "#/definitions/Category"
       name:
         type: "string"
         example: "doggie"
-      location:
+      geometry:
         type: "array"
         items:
-          type: "integer"
-          format: "int64"
+          type: "number"
+          format: "float"
   Observation:
     type: "object"
     required:

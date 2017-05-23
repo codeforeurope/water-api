@@ -12,5 +12,5 @@ require("./testLegalLimits");
 require("./testJurisdiction");
 require("./testCompany");
 require("./testProduct");
-// require("./testTap");
+require("./testLocation");
 require("./testZone");
