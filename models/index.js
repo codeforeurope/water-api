@@ -10,6 +10,9 @@ mongoose.Promise = require('bluebird');
 
 // Connect to mongodb
 db = mongoose.connect(config.db);
+if(env !== 'production'){
+  console.log("connected to mongodb version " + db.version);
+}
 
 /**
  * initializes all models and sources them as .model-name
