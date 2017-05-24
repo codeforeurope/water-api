@@ -89,7 +89,7 @@
         models.Product.model.create({
           name: input.name,
           observations: _observations,
-          sources: input.sources,
+          sources: input.sources || null,
           vendor: _vendor || null,
           volume: input.volume || null,
           entered_by: req.user

@@ -41,6 +41,10 @@
         }
         next(err);
       } else {
+        zone = {
+          "name": zone.name,
+          "id": zone._id
+        }
         res.end(JSON.stringify(zone, null, 2));
       }
     });

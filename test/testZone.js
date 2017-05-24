@@ -7,6 +7,8 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var app = require('../server');
 var models = require('../models');
+require('it-each')({ testPerIteration: true });
+var fs = require('fs');
 chai.use(chaiHttp);
 var should = chai.should();
 
@@ -24,6 +26,37 @@ describe('testing /api/zone', function() {
 
   user.save(function (err, user, count) {
     user = user;
+  });
+
+
+  /*
+   * Test the /POST Zone route
+   */
+  var zones;
+  //read zones.geojson
+  fs.readFile('./test/assets/zones.geojson', 'utf8', function (err, data) {
+    if (err) done(err);
+    zones = JSON.parse(data).features;
+    describe('POST 5 real zones from Heilbron', function() {
+      it.each(zones, 'it should return %s', ['properties.name'], function(zone, done) {
+        // Do the magic!
+        //Try upload
+        chai.request(app)
+          .post('/api/zone')
+          .set('x-access-token', token)
+          .send({
+            "name" : zone.properties.name,
+            "geometry" : zone.geometry
+          })
+          .end(function(err, res) {
+            var data = JSON.parse(res.text);
+            res.should.be.json; // jshint ignore:line
+            res.should.have.status(200);
+            should.equal(data.name, zone.properties.name);
+            done();
+          });
+      });
+    });
   });
 
 
@@ -86,6 +119,4 @@ describe('testing /api/zone', function() {
         });
     });
   });
-
-
 });

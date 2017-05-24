@@ -1,0 +1,77 @@
+{
+  "reports":
+  [{
+    "zone": "biberach",
+    "authority": "",
+    "year": "2013",
+    "observations": [
+      { "code": "natrium", "value": 12, "uom": "mg_l"},
+      { "code": "kalium", "value": 3, "uom": "mg_l"},
+      { "code": "calcium", "value": 92, "uom": "mg_l"},
+      { "code": "magnesium", "value": 20, "uom": "mg_l"},
+      { "code": "chloride", "value": 25, "uom": "mg_l"},
+      { "code": "nitrate", "value": 22, "uom": "mg_l"},
+      { "code": "sulfate", "value": 57, "uom": "mg_l"},
+      { "code": "hardness", "value": 18, "uom": "mg_l"}
+    ]
+  },
+  {
+    "zone": "frankenbach",
+    "authority": "",
+    "year": "2013",
+    "observations": [
+      { "code": "natrium", "value": 7, "uom": "mg_l"},
+      { "code": "kalium", "value": 2, "uom": "mg_l"},
+      { "code": "calcium", "value": 70, "uom": "mg_l"},
+      { "code": "magnesium", "value": 17, "uom": "mg_l"},
+      { "code": "chloride", "value": 16, "uom": "mg_l"},
+      { "code": "nitrate", "value": 13, "uom": "mg_l"},
+      { "code": "sulfate", "value": 35, "uom": "mg_l"},
+      { "code": "hardness", "value": 14, "uom": "mg_l"}
+    ]
+  },
+  {
+    "zone": "bokingen",
+    "authority": "",
+    "year": "2013",
+    "observations": [
+      { "code": "natrium", "value": 7, "uom": "mg_l"},
+      { "code": "kalium", "value": 2, "uom": "mg_l"},
+      { "code": "calcium", "value": 70, "uom": "mg_l"},
+      { "code": "magnesium", "value": 17, "uom": "mg_l"},
+      { "code": "chloride", "value": 16, "uom": "mg_l"},
+      { "code": "nitrate", "value": 13, "uom": "mg_l"},
+      { "code": "sulfate", "value": 35, "uom": "mg_l"},
+      { "code": "hardness", "value": 14, "uom": "mg_l"}
+    ]
+  },
+  {
+    "zone": "kirchhausen",
+    "authority": "",
+    "year": "2013",
+    "observations": [
+      { "code": "natrium", "value": 7, "uom": "mg_l"},
+      { "code": "kalium", "value": 2, "uom": "mg_l"},
+      { "code": "calcium", "value": 60, "uom": "mg_l"},
+      { "code": "magnesium", "value": 12, "uom": "mg_l"},
+      { "code": "chloride", "value": 10, "uom": "mg_l"},
+      { "code": "nitrate", "value": 9, "uom": "mg_l"},
+      { "code": "sulfate", "value": 92, "uom": "mg_l"},
+      { "code": "hardness", "value": 10, "uom": "mg_l"}
+    ]
+  },
+  {
+    "zone": "neckarsulm",
+    "authority": "",
+    "year": "2013",
+    "observations": [
+      { "code": "natrium", "value": 6.7, "uom": "mg_l"},
+      { "code": "kalium", "value": 1.3, "uom": "mg_l"},
+      { "code": "calcium", "value": 68.7, "uom": "mg_l"},
+      { "code": "magnesium", "value": 14.2, "uom": "mg_l"},
+      { "code": "nitrate", "value": 7, "uom": "mg_l"},
+      { "code": "sulfate", "value": 53, "uom": "mg_l"},
+      { "code": "hardness", "value": 12.9, "uom": "mg_l"}
+    ]
+  }]
+}

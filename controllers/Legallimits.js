@@ -85,7 +85,7 @@
         var _final = models.Limit.model({
           name: input.name,
           limits: _observations,
-          sources: input.sources,
+          sources: input.sources || null,
           authority: input.authority || null
         });
 
