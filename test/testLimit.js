@@ -46,142 +46,139 @@ describe('testing inserting limit', function() {
     });
   });
 
-  describe('US limits', function() {
-    it('it should produce US limits', function(done) {
-      mgl = uom;
-      var arr = [
-        models.Observation.model({
-          value: 200,
-          uom: mgl,
-          code: codes.natrium,
-          type: 'Limit',
-          entered_by: user
-        }),
-        models.Observation.model({
-          value: 50,
-          uom: mgl,
-          code: codes.nitrate,
-          type: 'Limit',
-          entered_by: user
-        }),
-        models.Observation.model({
-          value: 0,
-          uom: mgl,
-          code: codes.fluoride,
-          type: 'Limit',
-          entered_by: user
-        }),
-        models.Observation.model({
-          value: 250,
-          uom: mgl,
-          code: codes.chloride,
-          type: 'Limit',
-          entered_by: user
-        }),
-        models.Observation.model({
-          value: 250,
-          uom: mgl,
-          code: codes.sulfate,
-          type: 'Limit',
-          entered_by: user
-        })
-      ];
-      models.Observation.model.insertMany(arr, function(error, docs) {
-        var uslimit = models.Limit.model({
-          name: 'US-test',
-          limits: docs,
-          sources: ['https://www.epa.gov/dwstandardsregulations/secondary-drinking-water-standards-guidance-nuisance-chemicals',
-            'http://www.waterboards.ca.gov/drinking_water/certlic/drinkingwater/Chemicalcontaminants.shtml',
-            'http://www.waterboards.ca.gov/drinking_water/certlic/drinkingwater/Documents/EDTlibrary/storlist.xls'
-          ],
-          authority: null
-        });
+  it('It should produce US-test', function(done) {
+    mgl = uom;
+    var arr = [
+      models.Observation.model({
+        value: 200,
+        uom: mgl,
+        code: codes.natrium,
+        type: 'Limit',
+        entered_by: user
+      }),
+      models.Observation.model({
+        value: 50,
+        uom: mgl,
+        code: codes.nitrate,
+        type: 'Limit',
+        entered_by: user
+      }),
+      models.Observation.model({
+        value: 0,
+        uom: mgl,
+        code: codes.fluoride,
+        type: 'Limit',
+        entered_by: user
+      }),
+      models.Observation.model({
+        value: 250,
+        uom: mgl,
+        code: codes.chloride,
+        type: 'Limit',
+        entered_by: user
+      }),
+      models.Observation.model({
+        value: 250,
+        uom: mgl,
+        code: codes.sulfate,
+        type: 'Limit',
+        entered_by: user
+      })
+    ];
+    models.Observation.model.insertMany(arr, function(error, docs) {
+      var uslimit = models.Limit.model({
+        name: 'US-test',
+        limits: docs,
+        sources: ['https://www.epa.gov/dwstandardsregulations/secondary-drinking-water-standards-guidance-nuisance-chemicals',
+          'http://www.waterboards.ca.gov/drinking_water/certlic/drinkingwater/Chemicalcontaminants.shtml',
+          'http://www.waterboards.ca.gov/drinking_water/certlic/drinkingwater/Documents/EDTlibrary/storlist.xls'
+        ],
+        authority: null
+      });
 
-        uslimit.save(function(err, result, count) {
-          var out = result.toJSONLocalizedOnly('nl', 'en');
-          should.equal(out.name, 'US-test');
-          should.equal(out.sources.length, 3);
-          done();
-        });
+      uslimit.save(function(err, result, count) {
+        var out = result.toJSONLocalizedOnly('nl', 'en');
+        should.equal(out.name, 'US-test');
+        should.equal(out.sources.length, 3);
+        done();
       });
     });
   });
-  describe('EU limits', function() {
-    it('it should produce EU limits', function(done) {
-      mgl = uom;
-      var arr = [
-        models.Observation.model({
-          value: 200,
-          uom: mgl,
-          code: codes.natrium,
-          type: 'Limit',
-          entered_by: user
-        }),
-        models.Observation.model({
-          value: 12,
-          uom: mgl,
-          code: codes.kalium,
-          type: 'Limit',
-          entered_by: user
-        }),
-        models.Observation.model({
-          value: 400,
-          uom: mgl,
-          code: codes.calcium,
-          type: 'Limit',
-          entered_by: user
-        }),
-        models.Observation.model({
-          value: 60,
-          uom: mgl,
-          code: codes.nitrate,
-          type: 'Limit',
-          entered_by: user
-        }),
-        models.Observation.model({
-          value: 60,
-          uom: mgl,
-          code: codes.magnesium,
-          type: 'Limit',
-          entered_by: user
-        }),
-        models.Observation.model({
-          value: 0,
-          uom: mgl,
-          code: codes.fluoride,
-          type: 'Limit',
-          entered_by: user
-        }),
-        models.Observation.model({
-          value: 240,
-          uom: mgl,
-          code: codes.chloride,
-          type: 'Limit',
-          entered_by: user
-        }),
-        models.Observation.model({
-          value: 240,
-          uom: mgl,
-          code: codes.sulfate,
-          type: 'Limit',
-          entered_by: user
-        }),
-      ];
 
-      models.Observation.model.insertMany(arr, function(error, docs) {
-        var test = models.Limit.model({
-          name: 'EU-test',
-          limits: docs,
-          sources: ['url-needed'],
-          authority: null
-        });
+  it('it should produce EU-test', function(done) {
+    mgl = uom;
+    var arr = [
+      models.Observation.model({
+        value: 200,
+        uom: mgl,
+        code: codes.natrium,
+        type: 'Limit',
+        entered_by: user
+      }),
+      models.Observation.model({
+        value: 12,
+        uom: mgl,
+        code: codes.kalium,
+        type: 'Limit',
+        entered_by: user
+      }),
+      models.Observation.model({
+        value: 400,
+        uom: mgl,
+        code: codes.calcium,
+        type: 'Limit',
+        entered_by: user
+      }),
+      models.Observation.model({
+        value: 60,
+        uom: mgl,
+        code: codes.nitrate,
+        type: 'Limit',
+        entered_by: user
+      }),
+      models.Observation.model({
+        value: 60,
+        uom: mgl,
+        code: codes.magnesium,
+        type: 'Limit',
+        entered_by: user
+      }),
+      models.Observation.model({
+        value: 0,
+        uom: mgl,
+        code: codes.fluoride,
+        type: 'Limit',
+        entered_by: user
+      }),
+      models.Observation.model({
+        value: 240,
+        uom: mgl,
+        code: codes.chloride,
+        type: 'Limit',
+        entered_by: user
+      }),
+      models.Observation.model({
+        value: 240,
+        uom: mgl,
+        code: codes.sulfate,
+        type: 'Limit',
+        entered_by: user
+      }),
+    ];
 
-        test.save(function(err, result, count) {
-          var out = result.toJSONLocalizedOnly('nl', 'en');
-          should.equal(out.name, 'EU-test');
-          should.equal(out.sources.length, 1);
-          done();
-        });
+    models.Observation.model.insertMany(arr, function(error, docs) {
+      var test = models.Limit.model({
+        name: 'EU-test',
+        limits: docs,
+        sources: ['url-needed'],
+        authority: null
+      });
+
+      test.save(function(err, result, count) {
+        var out = result.toJSONLocalizedOnly('nl', 'en');
+        should.equal(out.name, 'EU-test');
+        should.equal(out.sources.length, 1);
+        done();
       });
     });
   });

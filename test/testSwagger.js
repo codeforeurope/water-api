@@ -10,21 +10,15 @@ chai.use(chaiHttp);
 var should = chai.should();
 
 describe('testing /docs', function() {
-  afterEach(function() {
-    // runs after each test in this block
+
+  it('GET swagger UI should GET default swagger docs', function(done) {
+    chai.request(app)
+      .get('/docs')
+      .end(function(err, res) {
+        res.should.be.html; // jshint ignore:line
+        res.should.have.status(200);
+        done();
+      });
   });
-  /*
-   * Test the /GET docs route
-   */
-  describe('GET swagger UI', function() {
-    it('it should GET default swaggger docs', function(done) {
-      chai.request(app)
-        .get('/docs')
-        .end(function(err, res) {
-          res.should.be.html; // jshint ignore:line
-          res.should.have.status(200);
-          done();
-        });
-    });
-  });
+
 });
