@@ -9,25 +9,20 @@ var app = require('../server');
 chai.use(chaiHttp);
 var should = chai.should();
 
+/*
+ * Test /PUT water
+ */
 describe('testing /api/location', function() {
-  afterEach(function() {
-    // runs after each test in this block
-  });
-  /*
-   * Test /PUT water
-   */
-  describe('PUT Location without token', function() {
-    it('it should return AuthenticationError, No token provided', function(done) {
-      chai.request(app)
-        .put('/api/location')
-        .send({})
-        .end(function(err, res) {
-          var data = JSON.parse(res.text);
-          should.equal(data.name, 'AuthenticationError');
-          should.equal(data.message, 'No token provided');
-          res.should.have.status(402);
-          done();
-        });
-    });
+  it('PUT Location without token should return AuthenticationError, No token provided', function(done) {
+    chai.request(app)
+      .put('/api/location')
+      .send({})
+      .end(function(err, res) {
+        var data = JSON.parse(res.text);
+        should.equal(data.name, 'AuthenticationError');
+        should.equal(data.message, 'No token provided');
+        res.should.have.status(402);
+        done();
+      });
   });
 });

@@ -1,0 +1,32 @@
+{
+  "limits":[
+    {
+      "name": "US",
+      "limits": [
+        {"value": 200, "uom": "mg_l", "code": "natrium" },
+        {"value": 50, "uom": "mg_l", "code": "nitrate" },
+        {"value": 0, "uom": "mg_l", "code": "fluoride" },
+        {"value": 250, "uom": "mg_l", "code": "chloride" },
+        {"value": 250, "uom": "mg_l", "code": "sulfate" }
+      ],
+      "sources":[
+        "https://www.epa.gov/dwstandardsregulations/secondary-drinking-water-standards-guidance-nuisance-chemicals",
+        "http://www.waterboards.ca.gov/drinking_water/certlic/drinkingwater/Chemicalcontaminants.shtml",
+        "http://www.waterboards.ca.gov/drinking_water/certlic/drinkingwater/Documents/EDTlibrary/storlist.xls"
+      ]
+    },
+    {
+      "name": "EU",
+      "limits":[
+        {"value": 200, "uom": "mg_l", "code": "natrium" },
+        {"value": 12, "uom": "mg_l", "code": "kalium" },
+        {"value": 400, "uom": "mg_l", "code": "calcium" },
+        {"value": 60, "uom": "mg_l", "code": "nitrate" },
+        {"value": 60, "uom": "mg_l", "code": "magnesium" },
+        {"value": 0, "uom": "mg_l", "code": "fluoride" },
+        {"value": 240, "uom": "mg_l", "code": "chloride" },
+        {"value": 240, "uom": "mg_l", "code": "sulfate" }
+      ]
+    }
+  ]
+}

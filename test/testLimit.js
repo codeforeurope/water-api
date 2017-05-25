@@ -84,11 +84,11 @@ describe('testing inserting limit', function() {
           code: codes.sulfate,
           type: 'Limit',
           entered_by: user
-        }),
+        })
       ];
       models.Observation.model.insertMany(arr, function(error, docs) {
         var uslimit = models.Limit.model({
-          name: 'US',
+          name: 'US-test',
           limits: docs,
           sources: ['https://www.epa.gov/dwstandardsregulations/secondary-drinking-water-standards-guidance-nuisance-chemicals',
             'http://www.waterboards.ca.gov/drinking_water/certlic/drinkingwater/Chemicalcontaminants.shtml',
@@ -99,7 +99,7 @@ describe('testing inserting limit', function() {
 
         uslimit.save(function(err, result, count) {
           var out = result.toJSONLocalizedOnly('nl', 'en');
-          should.equal(out.name, 'US');
+          should.equal(out.name, 'US-test');
           should.equal(out.sources.length, 3);
           done();
         });
@@ -170,7 +170,7 @@ describe('testing inserting limit', function() {
 
       models.Observation.model.insertMany(arr, function(error, docs) {
         var test = models.Limit.model({
-          name: 'EU',
+          name: 'EU-test',
           limits: docs,
           sources: ['url-needed'],
           authority: null
@@ -178,7 +178,7 @@ describe('testing inserting limit', function() {
 
         test.save(function(err, result, count) {
           var out = result.toJSONLocalizedOnly('nl', 'en');
-          should.equal(out.name, 'EU');
+          should.equal(out.name, 'EU-test');
           should.equal(out.sources.length, 1);
           done();
         });
