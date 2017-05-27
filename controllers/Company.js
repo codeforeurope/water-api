@@ -31,9 +31,18 @@
         if(err){
           next(err);
         }
-        res.setHeader('content-type', 'application/json');
-        res.setHeader('charset', 'utf-8');
-        res.end(JSON.stringify(company.toJSONLocalizedOnly(req.locale, 'en'), null, 2));
+        if(company){
+          res.setHeader('content-type', 'application/json');
+          res.setHeader('charset', 'utf-8');
+          res.end(JSON.stringify(company.toJSONLocalizedOnly(req.locale, 'en'), null, 2));
+        } else {
+          err = {
+            code: 404,
+            name: "notFound",
+            message: "Company not found"
+          };
+          next(err);
+        }
       });
     };
     module.exports.postcompany = function(req, res, next) {
@@ -47,17 +56,18 @@
         entered_by: req.user
       });
       tempcompany.save(function (err, company, count) {
-        res.setHeader('content-type', 'application/json');
         if (err) {
           if (err.code === 11000) {
             err = {
-              code: 404,
+              code: 405,
               name: "duplicateError",
               message: "Company exists"
             };
           }
           next(err);
         } else {
+          res.setHeader('content-type', 'application/json');
+          res.setHeader('charset', 'utf-8');
           res.end(JSON.stringify(company, null, 2));
         }
       });
@@ -66,11 +76,13 @@
     module.exports.putcompany = function(req, res, next) {
         var params = req.swagger.params;
         res.setHeader('content-type', 'application/json');
+        res.setHeader('charset', 'utf-8');
         res.end(JSON.stringify({"operation": "PUT"}, null, 2));
     };
     module.exports.deletecompany = function(req, res, next) {
         var params = req.swagger.params;
         res.setHeader('content-type', 'application/json');
+        res.setHeader('charset', 'utf-8');
         res.end(JSON.stringify({"operation": "DELETE"}, null, 2));
     };
 }());

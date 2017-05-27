@@ -25,8 +25,8 @@ paths:
       - "application/json"
       - "application/xml"
       responses:
-        405:
-          description: "Invalid input"
+        500:
+          description: "Server error"
       x-swagger-router-controller: "Company"
   /company:
     get:
@@ -50,9 +50,10 @@ paths:
       produces:
       - "application/json"
       - "application/xml"
+
       responses:
-        405:
-          description: "Invalid input"
+        404:
+          description: "Not found"
       x-swagger-router-controller: "Company"
     post:
       tags:
@@ -75,7 +76,7 @@ paths:
           $ref: "#/definitions/Company"
       responses:
         405:
-          description: "Invalid input"
+          description: "Company exists"
       x-swagger-router-controller: "Company"
   /location:
     get:
@@ -142,7 +143,7 @@ paths:
         description: "Location object that needs to be updated"
         required: false
         schema:
-          $ref: "#/definitions/Update"
+          $ref: "#/definitions/Location"
       responses:
         400:
           description: "Invalid operation"
@@ -506,9 +507,12 @@ paths:
       responses:
         405:
           description: "Invalid input"
+        502:
+          description: "Geocoder unavailable"
       x-swagger-router-controller: "Jurisdiction"
 definitions:
   Company:
+    description: "A business involved in producing and/or distributing water and/or involved in drinking water in any sense of the word (for instance, providing taps or generating water quality reports)"
     type: "object"
     properties:
       id:
@@ -522,15 +526,24 @@ definitions:
         type: "string"
       country:
         type: "string"
-  Category:
+  Limit:
+    description: "A given standard for the maximum allowed quantity of observations of a certain type. There are different limits for instance for Europe and the US. Other limits can be added."
     type: "object"
     properties:
-      id:
-        type: "integer"
-        format: "int64"
       name:
         type: "string"
+      authority:
+        type: "string"
+      limits:
+        type: "array"
+        items:
+          $ref: "#/definitions/Observation"
+      sources:
+        type: "array"
+        items:
+          type: "string"
   Location:
+    description: "A location relevant to the system. Can be a Tap, Pump, Facility or Measurement location. Has information about access (public, restricted, commercial)"
     type: "object"
     required:
     - "name"
@@ -538,13 +551,11 @@ definitions:
     properties:
       name:
         type: "string"
-        example: "doggie"
+        example: "Measurement location"
       geometry:
-        type: "array"
-        items:
-          type: "number"
-          format: "float"
+        $ref: "#/definitions/Point"
   Observation:
+    description: "An observation of quantities of a certain entity, given in unit of measure. Observations can be part of limits, reports and products."
     type: "object"
     required:
     - "code"
@@ -554,13 +565,45 @@ definitions:
       value:
         type: "number"
         format: "float"
+        example: 1.5
       uom:
         type: "string"
         example: "mg_l"
       code:
         type: "string"
         example: "natrium"
+  Point:
+    description: "geojson [Point](http://geojson.org/geojson-spec.html#id2)"
+    type: "object"
+    properties:
+      type:
+        type: "string"
+        example: "Point"
+      coordinates:
+        example: "[100.0, 0.0]"
+        type: "array"
+        items:
+          type: "number"
+          format: "float"
+  Polygon:
+    description: "geojson [Polygon](http://geojson.org/geojson-spec.html#id2)"
+    type: "object"
+    properties:
+      type:
+        type: "string"
+        example: "Polygon"
+      coordinates:
+        example: "[[[100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0]]]"
+        type: "array"
+        items:
+          type: "array"
+          items:
+            type: "array"
+            items:
+              type: "number"
+              format: "float"
   Product:
+    description: "A bottled water product. Observations on a product are what people can read from labels or measure themselves with a device."
     type: "object"
     properties:
       name:
@@ -579,6 +622,7 @@ definitions:
         items:
           type: "string"
   Report:
+    description: "An (official) report regarding water quality in a certain zone or on a location."
     type: "object"
     required:
       - "zone"
@@ -598,54 +642,10 @@ definitions:
         items:
           type: "string"
   Zone:
+    description: "An area that is serviced by a single Drinkwater-facility. Should be a polygon that encloses all the piping running from the given facility."
     type: "object"
     properties:
       name:
         type: "string"
       geometry:
         $ref: "#/definitions/Polygon"
-  Polygon:
-    type: "object"
-    properties:
-      type:
-        type: "string"
-      coordinates:
-        type: "array"
-        items:
-          type: "array"
-          items:
-            type: "array"
-            items:
-              type: "number"
-              format: "float"
-  Tag:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      name:
-        type: "string"
-  Update:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      result:
-        type: "string"
-  Limit:
-    type: "object"
-    properties:
-      name:
-        type: "string"
-      authority:
-        type: "string"
-      limits:
-        type: "array"
-        items:
-          $ref: "#/definitions/Observation"
-      sources:
-        type: "array"
-        items:
-          type: "string"

@@ -78,7 +78,11 @@
           });
         }
       } else {
-        err = new Error("Geocoder unavailable");
+        err = {
+          code: 502,
+          name: "geocoderUnavailable",
+          message: "Geocoder unavailable"
+        };
         callback(err,null);
       }
     });
@@ -101,7 +105,11 @@
         }
         callback(err, result || null);
       } else {
-        err = new Error("Geocoder unavailable");
+        err = {
+          code: 502,
+          name: "geocoderUnavailable",
+          message: "Geocoder unavailable"
+        };
         callback(err,null);
       }
     });
@@ -109,22 +117,37 @@
 
   module.exports.getjurisdiction = function(req, res, next) {
     var params = req.swagger.params;
-    res.setHeader('content-type', 'application/json');
+
     if (params.q.value) {
       search({q: params.q.value}, function(err, data) {
-        if (err) next(err);
-        res.end(JSON.stringify(data, null, 2));
+        if (err) {
+          next(err);
+        } else {
+          res.setHeader('content-type', 'application/json');
+          res.setHeader('charset', 'utf-8');
+          res.end(JSON.stringify(data, null, 2));
+        }
       });
     } else if (params.lat.value && params.lon.value) {
       reverse({
         lat: params.lat.value,
         lon: params.lon.value
       }, function(err, data) {
-        if (err) next(err);
-        res.end(JSON.stringify(data, null, 2));
+        if (err) {
+          next(err);
+        } else {
+          res.setHeader('content-type', 'application/json');
+          res.setHeader('charset', 'utf-8');
+          res.end(JSON.stringify(data, null, 2));
+        }
       });
     } else {
-      next(new Error('Please add q= or a lat= and lon= to the get request'));
+      err = {
+        code: 405,
+        name: "invalidInput",
+        message: "Please add q= or a lat= and lon= to the get request"
+      };
+      next(err);
     }
   };
 }());
