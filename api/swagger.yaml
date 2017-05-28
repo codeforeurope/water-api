@@ -68,6 +68,11 @@ paths:
       - "application/json"
       - "application/xml"
       parameters:
+      - in: "header"
+        name: x-access-token
+        required: true
+        type: string
+        description: "access-token as provided by issuer"
       - in: "body"
         name: "body"
         description: "Company object that needs to be added to the database"
@@ -117,6 +122,11 @@ paths:
       - "application/json"
       - "application/xml"
       parameters:
+      - in: "header"
+        name: x-access-token
+        required: true
+        type: string
+        description: "access-token as provided by issuer"
       - in: "body"
         name: "body"
         description: "Location object that needs to be added to the database"
@@ -138,6 +148,11 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: "header"
+        name: x-access-token
+        required: true
+        type: string
+        description: "access-token as provided by issuer"
       - in: "body"
         name: "body"
         description: "Location object that needs to be updated"
@@ -161,6 +176,11 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: "header"
+        name: x-access-token
+        required: true
+        type: string
+        description: "access-token as provided by issuer"
       - in: "body"
         name: "body"
         description: "Pet object that needs to be added to the store"
@@ -255,6 +275,11 @@ paths:
       description: "Post a new legal limit"
       operationId: "postlimit"
       parameters:
+      - in: "header"
+        name: x-access-token
+        required: true
+        type: string
+        description: "access-token as provided by issuer"
       - in: "body"
         name: "body"
         description: "Limit set that needs to be added to the database"
@@ -310,6 +335,11 @@ paths:
       description: "Post a new zone"
       operationId: "postzone"
       parameters:
+      - in: "header"
+        name: x-access-token
+        required: true
+        type: string
+        description: "access-token as provided by issuer"
       - in: "body"
         name: "body"
         description: "Limit set that needs to be added to the database"
@@ -395,6 +425,11 @@ paths:
       - "application/json"
       - "application/xml"
       parameters:
+      - in: "header"
+        name: x-access-token
+        required: true
+        type: string
+        description: "access-token as provided by issuer"
       - in: "body"
         name: "body"
         description: "Product object with observations that needs to be added to the database"
@@ -418,6 +453,11 @@ paths:
       - "application/json"
       - "application/xml"
       parameters:
+      - in: "header"
+        name: x-access-token
+        required: true
+        type: string
+        description: "access-token as provided by issuer"
       - in: "body"
         name: "body"
         description: "Product that needs to be updated"
@@ -441,6 +481,11 @@ paths:
       - "application/json"
       - "application/xml"
       parameters:
+      - in: "header"
+        name: x-access-token
+        required: true
+        type: string
+        description: "access-token as provided by issuer"
       - in: "body"
         name: "body"
         description: "Product that needs to be deleted"
@@ -465,6 +510,11 @@ paths:
       - "application/json"
       - "application/xml"
       parameters:
+      - in: "header"
+        name: x-access-token
+        required: true
+        type: string
+        description: "access-token as provided by issuer"
       - in: "body"
         name: "body"
         description: "Report object with observations that needs to be added to the database"
