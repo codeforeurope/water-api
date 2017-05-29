@@ -25,8 +25,43 @@ paths:
       - "application/json"
       - "application/xml"
       responses:
+        200:
+          description: "Array of companies"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Company"
         500:
           description: "Server error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Company"
+  /company/{id}:
+    get:
+      tags:
+      - "company"
+      summary: "Get company"
+      description: "Get company"
+      operationId: "getcompanybyid"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id of the company"
+        required: true
+        type: "string"
+      - name: "lang"
+        in: "query"
+        type: "string"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      - "application/xml"
+
+      responses:
+        404:
+          description: "Not found"
       x-swagger-router-controller: "Company"
   /company:
     get:
@@ -561,6 +596,13 @@ paths:
           description: "Geocoder unavailable"
       x-swagger-router-controller: "Jurisdiction"
 definitions:
+  Error:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      message:
+        type: "string"
   Company:
     description: "A business involved in producing and/or distributing water and/or involved in drinking water in any sense of the word (for instance, providing taps or generating water quality reports)"
     type: "object"

@@ -14,3 +14,4 @@ require("./testCompany");
 require("./testProduct");
 require("./testLocation");
 require("./testZone");
+require("./testReport");
