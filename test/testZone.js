@@ -32,7 +32,7 @@ var chance = new Chance();
    * Test the /POST Zone route
    */
   var zones;
-  var zonejson = {};
+
   //read zones.geojson
   fs.readFile('./test/assets/zones.geojson', 'utf8', function (err, data) {
     if (err) done(err);
@@ -53,7 +53,6 @@ var chance = new Chance();
             res.should.be.json; // jshint ignore:line
             res.should.have.status(200);
             should.equal(data.name, zone.properties.name);
-            zonejson[data.name] = data.id;
             done();
           });
       });
@@ -77,7 +76,6 @@ var chance = new Chance();
             var data = JSON.parse(res.text);
             res.should.be.json; // jshint ignore:line
             res.should.have.status(200);
-            zonejson[data.name] = data.id;
             done();
           });
       });
@@ -104,11 +102,6 @@ var chance = new Chance();
             res.should.have.status(200);
             done();
           });
-      });
-      after(function() {
-        fs.writeFile('./test/assets/zone.json', JSON.stringify(zonejson), 'utf8', function (err) {
-          if (err) { return console.log(err); }
-        });
       });
     });
   });

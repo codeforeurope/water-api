@@ -8,6 +8,7 @@ module.exports = function(mongoose) {
 
     var Schema = new mongoose.Schema({
         name: {type: String, required: true},
+        year: {type: Date, required: true, default: Date},
         authority: {type: ObjectId, ref: 'Company'}, //Authority responsible for the report
         zone: {type: ObjectId, ref: 'Zone'}, //Zone for which the report is valid
         observations: [{type: ObjectId, ref: 'Observation'}], //Array of water quality indicators in the report

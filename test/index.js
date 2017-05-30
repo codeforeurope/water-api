@@ -15,3 +15,4 @@ require("./testProduct");
 require("./testLocation");
 require("./testZone");
 require("./testReport");
+require("./testObservationAverage");

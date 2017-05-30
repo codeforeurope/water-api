@@ -393,6 +393,29 @@ paths:
         400:
           description: "Invalid status value"
       x-swagger-router-controller: "Zone"
+  /observations/average:
+    get:
+      tags:
+      - "observations"
+      summary: "Get the average of observations in the db"
+      description: "Get the average of observations in the db"
+      operationId: "getobservationsavg"
+      parameters:
+        - name: "lang"
+          in: "query"
+          type: "string"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Observation"
+        400:
+          description: "Invalid status value"
+      x-swagger-router-controller: "Observation"
   /products:
     get:
       tags:
@@ -532,6 +555,35 @@ paths:
           description: "Invalid input"
       x-swagger-router-controller: "Product"
   /report:
+    get:
+      tags:
+      - "report"
+      summary: "Get latest report at coordinates"
+      description: "Get the latest report at the given coordinates"
+      operationId: "getreport"
+      parameters:
+      - in: "query"
+        name: "lat"
+        description: "Latitude"
+        required: true
+        type: "number"
+        format: "float"
+      - in: "query"
+        name: "lon"
+        description: "Longitude"
+        required: true
+        type: "number"
+        format: "float"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Report"
+        400:
+          description: "Invalid status value"
+      x-swagger-router-controller: "Report"
     post:
       tags:
       - "report"
@@ -724,6 +776,8 @@ definitions:
       authority:
         type: "string"
       zone:
+        type: "string"
+      year:
         type: "string"
       observations:
         type: "array"

@@ -31,31 +31,37 @@ var chance = new Chance();
   /*
    * Test the /POST Zone route
    */
-  var zones;
+  var zones = {};
   var reports;
   //read zones.geojson
-  fs.readFile('./test/assets/zone.json', 'utf8', function (err, data) {
-    if (err) done(err);
-    zones = JSON.parse(data);
-    fs.readFile('./test/assets/reports.json', 'utf8', function (err, data) {
-      if (err) done(err);
-      reports = JSON.parse(data);
-      describe('testing /api/report', function() {
-        it.each(reports, 'POST should return %s', ['name'], function(report, done) {
-          //Try upload
-          //report.zone = zones[report.name].id;
-          chai.request(app)
-            .post('/api/report')
-            .set('x-access-token', token)
-            .send(report)
-            .end(function(err, res) {
-              var data = JSON.parse(res.text);
-              res.should.be.json; // jshint ignore:line
-              res.should.have.status(200);
-              should.equal(data.name, report.name);
-              done();
-            });
+  fs.readFile('./test/assets/reports.json', 'utf8', function (err, data) {
+    if (err) console.log(err);
+    reports = JSON.parse(data);
+    describe('testing /api/report', function() {
+      before(function(done){
+        models.Zone.model.find().
+        select('name code _id').
+        exec(function(err, _zones){
+          for (var zone in _zones) {
+            zones[_zones[zone].name] = _zones[zone]._id;
+          }
+          done();
         });
+      });
+      it.each(reports, 'POST should return %s', ['name'], function(report, done) {
+        //Try upload
+        report.zone = zones[report.zone] || null;
+        chai.request(app)
+          .post('/api/report')
+          .set('x-access-token', token)
+          .send(report)
+          .end(function(err, res) {
+            var data = JSON.parse(res.text);
+            res.should.be.json; // jshint ignore:line
+            res.should.have.status(200);
+            should.equal(data.name, report.name);
+            done();
+          });
       });
     });
   });
