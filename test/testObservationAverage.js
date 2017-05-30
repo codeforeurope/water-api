@@ -6,15 +6,9 @@ var moment = require('moment-timezone');
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var app = require('../server');
-var models = require('../models');
-var Chance = require('chance');
 
 chai.use(chaiHttp);
 var should = chai.should();
-var chance = new Chance();
-var uom;
-var codes = [];
-var user;
 
 describe('testing /observation/average', function() {
   it('GET /observation/average should return an array', function(done) {

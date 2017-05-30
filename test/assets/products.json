@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Volvic 50 cl",
+    "volume": 0.5,
+    "observations": [
+      { "value": 11.6, "uom": "mg_l", "code": "natrium" },
+      { "value": 71, "uom": "mg_l", "code": "bicarbonate" },
+      { "value": 31.7, "uom": "mg_l", "code": "silica" },
+      { "value": 6.2, "uom": "mg_l", "code": "kalium" },
+      { "value": 11.5, "uom": "mg_l", "code": "calcium" },
+      { "value": 8, "uom": "mg_l", "code": "magnesium" },
+      { "value": 13.5, "uom": "mg_l", "code": "chloride" },
+      { "value": 8.1, "uom": "mg_l", "code": "sulfate" },
+      { "value": 6.3, "uom": "mg_l", "code": "nitrate" }
+    ],
+    "sources": ["https://world.openfoodfacts.org/product/3057640117008/volvic"],
+    "vendor": "volvic"
+  }, {
+    "name": "Vittel",
+    "volume": 1,
+    "observations": [
+      { "value": 5, "uom": "mg_l", "code": "natrium" },
+      { "value": 203.8, "uom": "mg_l", "code": "calcium" },
+      { "value": 43.1, "uom": "mg_l", "code": "magnesium" },
+      { "value": 328.9, "uom": "mg_l", "code": "sulfate" },
+      { "value": 4.3, "uom": "mg_l", "code": "nitrate" }
+    ],
+    "sources": ["https://world.openfoodfacts.org/product/3179732333919/vittel-eau-mineral-naturel-1l"],
+    "vendor": "vittel"
+  },
+  {
+    "name": "Heiligenquelle Classic",
+    "observations": [
+      { "value": 10.7, "uom": "mg_l", "code": "natrium" },
+      { "value": 2.6, "uom": "mg_l", "code": "kalium" },
+      { "value": 118, "uom": "mg_l", "code": "calcium" },
+      { "value": 48, "uom": "mg_l", "code": "magnesium" },
+      { "value": 0.22, "uom": "mg_l", "code": "fluorid" },
+      { "value": 43, "uom": "mg_l", "code": "chlorid" },
+      { "value": 68, "uom": "mg_l", "code": "sulfat" },
+      { "value": 455, "uom": "mg_l", "code": "hydrogene" }
+    ],
+    "sources": ["http://wueteria.de/unser-wasser/unsere-mineralwasserquellen"],
+    "vendor": "wueteria"
+  },
+  {
+    "name": "Teusser Naturell",
+    "observations": [
+      { "value": 53, "uom": "mg_l", "code": "natrium" },
+      { "value": 7, "uom": "mg_l", "code": "kalium" },
+      { "value": 537, "uom": "mg_l", "code": "calcium" },
+      { "value": 0.5, "uom": "mg_l", "code": "nitrate" },
+      { "value": 92, "uom": "mg_l", "code": "magnesium" },
+      { "value": 0.21, "uom": "mg_l", "code": "fluoride" },
+      { "value": 27, "uom": "mg_l", "code": "chloride" },
+      { "value": 1467, "uom": "mg_l", "code": "sulfate" },
+      { "value": 357, "uom": "mg_l", "code": "hydrogene" }
+    ],
+    "sources": ["http://www.teusser.de/index.php?id=225"],
+    "vendor": "teusser"
+  }
+]

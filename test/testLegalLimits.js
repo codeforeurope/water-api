@@ -36,7 +36,7 @@ var limits;
 //read zones.geojson
 fs.readFile('./test/assets/limits.json', 'utf8', function(err, data) {
   if (err) done(err);
-  limits = JSON.parse(data).limits;
+  limits = JSON.parse(data);
   describe('testing /api/limits', function() {
     it.each(limits, 'POST limit, it should return %s', ['name'], function(limit, done) {
       // Do the magic!
