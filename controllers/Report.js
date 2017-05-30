@@ -39,7 +39,7 @@
         next(err);
       }
       var out = {};
-      if(result){
+      if(result) {
         models.Report.model.findOne().where({'zone': result._id }).
         select('name authority zone observations year').
         populate(populateoptions).exec(function(err, report){
@@ -60,9 +60,12 @@
           }
         });
         //get the report for this zone
-
+      } else {
+        //return empty for now
+        res.setHeader('content-type', 'application/json');
+        res.setHeader('charset', 'utf-8');
+        res.end(JSON.stringify({}, null, 2));
       }
-
     });
   };
 
