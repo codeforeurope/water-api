@@ -9,6 +9,8 @@ module.exports = function(mongoose) {
 
     var Schema = new mongoose.Schema({
         value: {type: Number, required: true},
+        min: Number,
+        max: Number,
         uom: {type: ObjectId, ref: 'Uom', required: true},
         code: {type: ObjectId, ref: 'Code', required: true},
         type: {

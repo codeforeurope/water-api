@@ -275,6 +275,33 @@ paths:
         400:
           description: "Invalid status value"
       x-swagger-router-controller: "Legallimits"
+  /unit:
+    post:
+      tags:
+      - "unit"
+      summary: "Post new unit of measure"
+      description: "Post a new unit of measure"
+      operationId: "postuom"
+      parameters:
+      - in: "header"
+        name: x-access-token
+        required: true
+        type: string
+        description: "access-token as provided by issuer"
+      - in: "body"
+        name: "body"
+        description: "Unit of measure"
+        required: true
+        schema:
+          $ref: "#/definitions/Uom"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Invalid status value"
+      x-swagger-router-controller: "Uom"
   /limit:
     get:
       tags:
@@ -470,6 +497,30 @@ paths:
           description: "Invalid status value"
       x-swagger-router-controller: "Product"
   /product:
+    get:
+      tags:
+      - "product"
+      summary: "Get details of a product"
+      description: "Multiple parameters can be provided"
+      operationId: "getproductbycode"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "code"
+        in: "query"
+        description: "id that need to be considered for filter"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Product"
+        400:
+          description: "Invalid status value"
+      x-swagger-router-controller: "Product"
     post:
       tags:
       - "product"
@@ -710,6 +761,14 @@ definitions:
         type: "number"
         format: "float"
         example: 1.5
+      min:
+        type: "number"
+        format: "float"
+        example: 0.5
+      max:
+        type: "number"
+        format: "float"
+        example: 2.0
       uom:
         type: "string"
         example: "mg_l"
@@ -746,6 +805,29 @@ definitions:
             items:
               type: "number"
               format: "float"
+  i18nString:
+    type: "object"
+    properties:
+      en:
+        type: "string"
+      fr:
+        type: "string"
+      de:
+        type: "string"
+      nl:
+        type: "string"
+  Uom:
+    description: "A unit of measure"
+    type: "object"
+    properties:
+      code:
+        type: "string"
+      value:
+        $ref: "#/definitions/i18nString"
+      label:
+        $ref: "#/definitions/i18nString"
+      definition:
+        $ref: "#/definitions/i18nString"
   Product:
     description: "A bottled water product. Observations on a product are what people can read from labels or measure themselves with a device."
     type: "object"
@@ -768,10 +850,10 @@ definitions:
   Report:
     description: "An (official) report regarding water quality in a certain zone or on a location."
     type: "object"
-    required:
-      - "zone"
     properties:
       name:
+        type: "string"
+      description:
         type: "string"
       authority:
         type: "string"

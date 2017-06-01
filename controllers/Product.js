@@ -48,6 +48,30 @@
     });
   };
 
+  module.exports.getproductbycode = function (req, res, next) {
+    var params = req.swagger.params;
+    //find a limit from the database
+    models.Product.model.findOne({code: params.code.value}).
+    select('name vendor volume sources observations').
+    populate(populateoptions).exec(function(err, product){
+      if(err){
+        next(err);
+      }
+      if(product){
+        res.setHeader('content-type', 'application/json');
+        res.setHeader('charset', 'utf-8');
+        res.end(JSON.stringify(utils.cleanObservations(product, req.locale), null, 2));
+      } else {
+        err = {
+          code: 402,
+          name: "codeInvalidError",
+          message: "Invalid code"
+        };
+        next(err);
+      }
+    });
+  };
+
   module.exports.getproduct = function (req, res, next) {
     var params = req.swagger.params;
     //find a limit from the database
@@ -85,8 +109,10 @@
       }, function(err) {
         // Get the vendor, it should be an existing company
         models.Company.model.findOne({code: input.vendor}, function(err, _vendor) {
-
+        var Chance = require('chance');
+        var chance = new Chance();
         models.Product.model.create({
+          code: input.code || chance.guid(),
           name: input.name,
           observations: _observations,
           sources: input.sources || null,

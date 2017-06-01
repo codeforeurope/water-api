@@ -1,0 +1,108 @@
+[
+  {
+    "code": "natrium",
+    "standard": "CAS",
+    "value": "7440-23-5",
+    "label": {
+      "en": "Sodium",
+      "de": "Natrium",
+      "nl": "Natrium"
+    }
+  }, {
+    "code": "nitrate",
+    "standard": "CAS",
+    "value": "14797-55-8",
+    "label": {
+      "en": "Nitrate",
+      "de": "Nitrat",
+      "nl": "Nitraat"
+    }
+  }, {
+    "code": "calcium",
+    "standard": "CAS",
+    "value": "7440-70-2",
+    "label": {
+      "en": "Calcium"
+    }
+  }, {
+    "code": "kalium",
+    "standard": "CAS",
+    "value": "7440-09-7",
+    "label": {
+      "en": "Potassium",
+      "nl": "Kalium",
+      "de": "Kalium"
+    }
+  }, {
+    "code": "magnesium",
+    "standard": "CAS",
+    "value": "7439-95-4",
+    "label": {
+      "en": "Magnesium"
+    }
+  }, {
+    "code": "fluoride",
+    "standard": "CAS",
+    "value": "16984-48-8",
+    "label": {
+      "en": "Fluoride",
+      "de": "Fluorid"
+    }
+  }, {
+    "code": "chloride",
+    "standard": "CAS",
+    "value": "16887-00-6",
+    "label": {
+      "en": "Chloride",
+      "de": "Chlorid"
+    }
+  }, {
+    "code": "sulfate",
+    "standard": "CAS",
+    "value": "14808-79-8",
+    "label": {
+      "en": "Sulfate",
+      "de": "Sulfat",
+      "nl": "Sulfaat"
+    }
+  }, {
+    "code": "hydrogen",
+    "standard": "CAS",
+    "value": "1333-74-0",
+    "label": {
+      "en": "Hydrogen",
+      "de": "Hydrogene",
+      "nl": "Hydrogeen"
+    }
+  }, {
+    "code": "mycobacteria",
+    "standard": "NA",
+    "value": "mycobacteria",
+    "label": {
+      "en": "Mycobacteria",
+      "nl": "Microbacteriën",
+      "de": "Microbacteria"
+    }
+  }, {
+    "code": "bicarbonate",
+    "standard": "NA",
+    "value": "bicarbonate",
+    "label": {
+      "en": "Bicarbonate (HC03)"
+    }
+  }, {
+    "code": "silicate",
+    "standard": "CAS",
+    "value": "3163-01-7",
+    "label": {
+      "en": "Silicate"
+    }
+  }, {
+    "code": "trihalomethanes",
+    "standard": "NA",
+    "value": "trihalomethanes",
+    "label": {
+      "en": "Trihalomethanes (THMS)"
+    }
+  }
+]

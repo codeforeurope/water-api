@@ -5,9 +5,9 @@ var request = require('supertest');
 var app = require('../server');
 var models = require('../models');
 
-var testdata = require('./assets/uom.json');
+var testdata = require('./assets/limits.json');
 
-describe('inserting units of measure', function() {
+describe('inserting limits', function() {
   var token;
   var user;
 
@@ -27,15 +27,15 @@ describe('inserting units of measure', function() {
     });
   });
   testdata.forEach(function(instance) {
-    it('should return ' + instance.code, function(done) {
+    it('should return ' + instance.name, function(done) {
       request(app).
-      post('/api/unit').
+      post('/api/limit').
       set('x-access-token', token).
       send(instance).
       expect(200).
       end(function(err, res) {
         var data = JSON.parse(res.text);
-        assert.equal(data.code, instance.code);
+        assert.equal(data.name, instance.name);
         done();
       });
     });

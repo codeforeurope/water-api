@@ -20,20 +20,19 @@
     "connect": "^3.2.0",
     "connect-locale": "^1.3.2",
     "cors": "^2.8.1",
-    "js-yaml": "^3.3.0",
+    "js-yaml": "^3.8.4",
     "mongoose": "^4.9.0",
     "mongoose-i18n-localize": "^0.3.0",
     "node-nominatim2": "^0.1.0",
     "obj-parse": "^0.3.0",
-    "swagger-tools": "0.10.1",
-    "tz-business-time": "^0.6.3"
+    "swagger-tools": "^0.10.1",
+    "tz-business-time": "^0.6.3",
+    "chance": "^1.0.8"
   },
   "devDependencies": {
-    "chai": "3.5.0",
-    "chai-http": "3.0.0",
-    "chance": "^1.0.8",
-    "it-each": "^0.3.1",
-    "mocha": "3.2.0"
+    "assert": "^1.4.1",
+    "mocha": "^3.2.0",
+    "supertest": "^3.0.0"
   },
   "scripts": {
     "start": "export PORT=8081 && node index.js",

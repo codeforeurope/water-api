@@ -1,0 +1,28 @@
+[
+  {
+    "code": "wueteria",
+    "name": "Wüteria Mineralquellen GmbH & Co. KG",
+    "url": "http://wueteria.de",
+    "country": "Germany"
+  }, {
+    "code": "teusser",
+    "name": "Teusser Mineralbrunnen Karl Rössle GmbH & Co KG",
+    "url": "http://wueteria.de",
+    "country": "Germany"
+  }, {
+    "code": "jointhepipe",
+    "name": "Join-The-Pipe",
+    "url": "http://join-the-pipe.org/",
+    "country": "Netherlands"
+  }, {
+    "code": "vittel",
+    "name": "Vittel",
+    "url": "www.nestle-waters.com/brands/vittel",
+    "country": ""
+  }, {
+    "code": "volvic",
+    "name": "Volvic",
+    "url": "www.nestle-waters.com/brands/vittel",
+    "country": ""
+  }
+]

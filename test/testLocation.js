@@ -1,28 +1,19 @@
-//During the test the env variable is set to test
 process.env.NODE_ENV = 'test';
 
-//Require the dev-dependencies
-var moment = require('moment-timezone');
-var chai = require('chai');
-var chaiHttp = require('chai-http');
+var assert = require('assert');
+var request = require('supertest');
 var app = require('../server');
-chai.use(chaiHttp);
-var should = chai.should();
+var models = require('../models');
 
-/*
- * Test /PUT water
- */
-describe('testing /api/location', function() {
-  it('PUT Location without token should return AuthenticationError, No token provided', function(done) {
-    chai.request(app)
-      .put('/api/location')
-      .send({})
-      .end(function(err, res) {
-        var data = JSON.parse(res.text);
-        should.equal(data.name, 'AuthenticationError');
-        should.equal(data.message, 'No token provided');
-        res.should.have.status(402);
-        done();
-      });
+it('PUT Location without token should return AuthenticationError, No token provided', function(done) {
+  request(app).
+  put('/api/location').
+  send({}).
+  expect(402).
+  end(function(err, res) {
+    var data = JSON.parse(res.text);
+    assert.equal(data.name, 'AuthenticationError');
+    assert.equal(data.message, 'No token provided');
+    done();
   });
 });

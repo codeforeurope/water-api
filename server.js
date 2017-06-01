@@ -68,12 +68,13 @@
       app.use(middleware.swaggerRouter(options));
       app.use(middleware.swaggerUi());
       app.use(function onerror(err, req, res, next) {
+        //console.log(err.results.errors);
         res.setHeader('content-type', 'application/json');
         res.statusCode = 400;
         if(err.code && err.code < 599 && err.code > 399){
           res.statusCode = err.code;
         }
-        res.end(JSON.stringify({"name": err.name, "message": err.message}, null, 2));
+        res.end(JSON.stringify({"name": err.name, "message": err.message, "verbose": err}, null, 2));
       });
     });
     module.exports = app;

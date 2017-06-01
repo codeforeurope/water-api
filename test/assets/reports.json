@@ -1,5 +1,5 @@
 [{
-  "name": "biberach-test",
+  "name": "Biberach 2013",
   "zone": "biberach",
   "authority": "",
   "year": "2013",
@@ -11,11 +11,11 @@
     { "code": "chloride", "value": 25, "uom": "mg_l"},
     { "code": "nitrate", "value": 22, "uom": "mg_l"},
     { "code": "sulfate", "value": 57, "uom": "mg_l"},
-    { "code": "hardness", "value": 18, "uom": "mg_l"}
+    { "code": "hardness", "value": 18, "uom": "dh"}
   ]
 },
 {
-  "name": "frankenbach-test",
+  "name": "Frankenbach 2013",
   "zone": "frankenbach",
   "authority": "",
   "year": "2013",
@@ -27,11 +27,11 @@
     { "code": "chloride", "value": 16, "uom": "mg_l"},
     { "code": "nitrate", "value": 13, "uom": "mg_l"},
     { "code": "sulfate", "value": 35, "uom": "mg_l"},
-    { "code": "hardness", "value": 14, "uom": "mg_l"}
+    { "code": "hardness", "value": 14, "uom": "dh"}
   ]
 },
 {
-  "name": "bockingen-test",
+  "name": "Böckingen 2013",
   "zone": "bockingen",
   "authority": "",
   "year": "2013",
@@ -43,11 +43,11 @@
     { "code": "chloride", "value": 16, "uom": "mg_l"},
     { "code": "nitrate", "value": 13, "uom": "mg_l"},
     { "code": "sulfate", "value": 35, "uom": "mg_l"},
-    { "code": "hardness", "value": 14, "uom": "mg_l"}
+    { "code": "hardness", "value": 14, "uom": "dh"}
   ]
 },
 {
-  "name": "kirchhausen-test",
+  "name": "Kirchhausen 2013",
   "zone": "kirchhausen",
   "authority": "",
   "year": "2013",
@@ -59,11 +59,11 @@
     { "code": "chloride", "value": 10, "uom": "mg_l"},
     { "code": "nitrate", "value": 9, "uom": "mg_l"},
     { "code": "sulfate", "value": 92, "uom": "mg_l"},
-    { "code": "hardness", "value": 10, "uom": "mg_l"}
+    { "code": "hardness", "value": 10, "uom": "dh"}
   ]
 },
 {
-  "name": "neckarsulm-test",
+  "name": "Neckarsulm 2013",
   "zone": "neckarsulm",
   "authority": "",
   "year": "2013",
@@ -74,6 +74,315 @@
     { "code": "magnesium", "value": 14.2, "uom": "mg_l"},
     { "code": "nitrate", "value": 7, "uom": "mg_l"},
     { "code": "sulfate", "value": 53, "uom": "mg_l"},
-    { "code": "hardness", "value": 12.9, "uom": "mg_l"}
+    { "code": "hardness", "value": 12.9, "uom": "dh"}
+  ]
+},
+{
+  "name": "Mannheim 2014",
+  "zone": "mannheim",
+  "year": "2014",
+  "observations": [
+    {"code": "natrium", "value": 13.3, "uom": "mg_l"},
+    {"code": "calcium", "value": 113, "uom": "mg_l"},
+    {"code": "magnesium", "value": 13.9, "uom": "mg_l"},
+    {"code": "chloride", "value": 19.6, "uom": "mg_l"},
+    {"code": "nitrate", "value": 1.3, "uom": "mg_l"},
+    {"code": "sulfate", "value": 60.4, "uom": "mg_l"},
+    {"code": "hardness", "value": 19, "uom": "dh"}
+  ]
+},
+{
+  "name": "Ludwigshafen Hemshof 2014",
+  "zone": "ludwigshafen_hemshof",
+  "year": "2014",
+  "description": "Wasserwerk I PARKINSEL",
+  "observations": [
+    {"code": "natrium", "value": 37.6, "uom": "mg_l"},
+    {"code": "kalium", "value": 2.6, "uom": "mg_l"},
+    {"code": "calcium", "value": 92.3, "uom": "mg_l"},
+    {"code": "magnesium", "value": 12.8, "uom": "mg_l"},
+    {"code": "chloride", "value": 35.2, "uom": "mg_l"},
+    {"code": "nitrate", "value": 1.6, "uom": "mg_l"},
+    {"code": "sulfate", "value": 11.7, "uom": "mg_l"},
+    {"code": "hardness", "value": 15.8, "uom": "dh"}
+  ]
+},
+{
+  "name": "Ludwigshafen Mitte 2014",
+  "zone": "ludwigshafen_mitte",
+  "year": "2014",
+  "description": "Wasserwerk I PARKINSEL",
+  "observations": [
+    {"code": "natrium", "value": 37.6, "uom": "mg_l"},
+    {"code": "kalium", "value": 2.6, "uom": "mg_l"},
+    {"code": "calcium", "value": 92.3, "uom": "mg_l"},
+    {"code": "magnesium", "value": 12.8, "uom": "mg_l"},
+    {"code": "chloride", "value": 35.2, "uom": "mg_l"},
+    {"code": "nitrate", "value": 1.6, "uom": "mg_l"},
+    {"code": "sulfate", "value": 11.7, "uom": "mg_l"},
+    {"code": "hardness", "value": 15.8, "uom": "dh"}
+  ]
+},
+{
+  "name": "Ludwigshafen West 2014",
+  "zone": "ludwigshafen_west",
+  "year": "2014",
+  "description": "Wasserwerk I PARKINSEL",
+  "observations": [
+    {"code": "natrium", "value": 37.6, "uom": "mg_l"},
+    {"code": "kalium", "value": 2.6, "uom": "mg_l"},
+    {"code": "calcium", "value": 92.3, "uom": "mg_l"},
+    {"code": "magnesium", "value": 12.8, "uom": "mg_l"},
+    {"code": "chloride", "value": 35.2, "uom": "mg_l"},
+    {"code": "nitrate", "value": 1.6, "uom": "mg_l"},
+    {"code": "sulfate", "value": 11.7, "uom": "mg_l"},
+    {"code": "hardness", "value": 15.8, "uom": "dh"}
+  ]
+},
+{
+  "name": "Ludwigshafen Süd 2014",
+  "zone": "ludwigshafen_sud",
+  "year": "2014",
+  "description": "Wasserwerk I PARKINSEL",
+  "observations": [
+    {"code": "natrium", "value": 37.6, "uom": "mg_l"},
+    {"code": "kalium", "value": 2.6, "uom": "mg_l"},
+    {"code": "calcium", "value": 92.3, "uom": "mg_l"},
+    {"code": "magnesium", "value": 12.8, "uom": "mg_l"},
+    {"code": "chloride", "value": 35.2, "uom": "mg_l"},
+    {"code": "nitrate", "value": 1.6, "uom": "mg_l"},
+    {"code": "sulfate", "value": 11.7, "uom": "mg_l"},
+    {"code": "hardness", "value": 15.8, "uom": "dh"}
+  ]
+},
+{
+  "name": "Ludwigshafen Gartenstadt 2014",
+  "zone": "ludwigshafen_gartenstadt",
+  "year": "2014",
+  "description": "Wasserwerk I PARKINSEL",
+  "observations": [
+    {"code": "natrium", "value": 37.6, "uom": "mg_l"},
+    {"code": "kalium", "value": 2.6, "uom": "mg_l"},
+    {"code": "calcium", "value": 92.3, "uom": "mg_l"},
+    {"code": "magnesium", "value": 12.8, "uom": "mg_l"},
+    {"code": "chloride", "value": 35.2, "uom": "mg_l"},
+    {"code": "nitrate", "value": 1.6, "uom": "mg_l"},
+    {"code": "sulfate", "value": 11.7, "uom": "mg_l"},
+    {"code": "hardness", "value": 15.8, "uom": "dh"}
+  ]
+},
+{
+  "name": "Ludwigshafen Mundenheim 2014",
+  "zone": "ludwigshafen_mundenheim",
+  "year": "2014",
+  "description": "Wasserwerk I PARKINSEL",
+  "observations": [
+    {"code": "natrium", "value": 37.6, "uom": "mg_l"},
+    {"code": "kalium", "value": 2.6, "uom": "mg_l"},
+    {"code": "calcium", "value": 92.3, "uom": "mg_l"},
+    {"code": "magnesium", "value": 12.8, "uom": "mg_l"},
+    {"code": "chloride", "value": 35.2, "uom": "mg_l"},
+    {"code": "nitrate", "value": 1.6, "uom": "mg_l"},
+    {"code": "sulfate", "value": 11.7, "uom": "mg_l"},
+    {"code": "hardness", "value": 15.8, "uom": "dh"}
+  ]
+},
+{
+  "name": "Ludwigshafen Rheingönheim 2014",
+  "zone": "ludwigshafen_rheingonheim",
+  "year": "2014",
+  "description": "Wasserwerk I PARKINSEL",
+  "observations": [
+    {"code": "natrium", "value": 37.6, "uom": "mg_l"},
+    {"code": "kalium", "value": 2.6, "uom": "mg_l"},
+    {"code": "calcium", "value": 92.3, "uom": "mg_l"},
+    {"code": "magnesium", "value": 12.8, "uom": "mg_l"},
+    {"code": "chloride", "value": 35.2, "uom": "mg_l"},
+    {"code": "nitrate", "value": 1.6, "uom": "mg_l"},
+    {"code": "sulfate", "value": 11.7, "uom": "mg_l"},
+    {"code": "hardness", "value": 15.8, "uom": "dh"}
+  ]
+},
+{
+  "name": "Ludwigshafen Altrip 2014",
+  "zone": "ludwigshafen_altrip",
+  "year": "2014",
+  "description": "Wasserwerk I PARKINSEL",
+  "observations": [
+    {"code": "natrium", "value": 37.6, "uom": "mg_l"},
+    {"code": "kalium", "value": 2.6, "uom": "mg_l"},
+    {"code": "calcium", "value": 92.3, "uom": "mg_l"},
+    {"code": "magnesium", "value": 12.8, "uom": "mg_l"},
+    {"code": "chloride", "value": 35.2, "uom": "mg_l"},
+    {"code": "nitrate", "value": 1.6, "uom": "mg_l"},
+    {"code": "sulfate", "value": 11.7, "uom": "mg_l"},
+    {"code": "hardness", "value": 15.8, "uom": "dh"}
+  ]
+},
+{
+  "name": "Ludwigshafen Pfingstweide 2014",
+  "zone": "ludwigshafen_pfingstweide",
+  "year": "2014",
+  "description": "Wasserwerk II Maudach-Oggersheim",
+  "observations": [
+    {"code": "natrium", "value": 29.9, "uom": "mg_l"},
+    {"code": "kalium", "value": 2.4, "uom": "mg_l"},
+    {"code": "calcium", "value": 62.8, "uom": "mg_l"},
+    {"code": "magnesium", "value": 8, "uom": "mg_l"},
+    {"code": "chloride", "value": 20.5, "uom": "mg_l"},
+    {"code": "nitrate", "value": 2.3, "uom": "mg_l"},
+    {"code": "sulfate", "value": 33.5, "uom": "mg_l"},
+    {"code": "hardness", "value": 10.6, "uom": "dh"}
+  ]
+},
+{
+  "name": "Ludwigshafen Edigheim 2014",
+  "zone": "ludwigshafen_edigheim",
+  "year": "2014",
+  "description": "Wasserwerk II Maudach-Oggersheim",
+  "observations": [
+    {"code": "natrium", "value": 29.9, "uom": "mg_l"},
+    {"code": "kalium", "value": 2.4, "uom": "mg_l"},
+    {"code": "calcium", "value": 62.8, "uom": "mg_l"},
+    {"code": "magnesium", "value": 8, "uom": "mg_l"},
+    {"code": "chloride", "value": 20.5, "uom": "mg_l"},
+    {"code": "nitrate", "value": 2.3, "uom": "mg_l"},
+    {"code": "sulfate", "value": 33.5, "uom": "mg_l"},
+    {"code": "hardness", "value": 10.6, "uom": "dh"}
+  ]
+},
+{
+  "name": "Ludwigshafen Oppau 2014",
+  "zone": "ludwigshafen_oppau",
+  "year": "2014",
+  "description": "Wasserwerk II Maudach-Oggersheim",
+  "observations": [
+    {"code": "natrium", "value": 29.9, "uom": "mg_l"},
+    {"code": "kalium", "value": 2.4, "uom": "mg_l"},
+    {"code": "calcium", "value": 62.8, "uom": "mg_l"},
+    {"code": "magnesium", "value": 8, "uom": "mg_l"},
+    {"code": "chloride", "value": 20.5, "uom": "mg_l"},
+    {"code": "nitrate", "value": 2.3, "uom": "mg_l"},
+    {"code": "sulfate", "value": 33.5, "uom": "mg_l"},
+    {"code": "hardness", "value": 10.6, "uom": "dh"}
+  ]
+},
+{
+  "name": "Ludwigshafen Oggersheim 2014",
+  "zone": "ludwigshafen_oggersheim",
+  "year": "2014",
+  "description": "Wasserwerk II Maudach-Oggersheim",
+  "observations": [
+    {"code": "natrium", "value": 29.9, "uom": "mg_l"},
+    {"code": "kalium", "value": 2.4, "uom": "mg_l"},
+    {"code": "calcium", "value": 62.8, "uom": "mg_l"},
+    {"code": "magnesium", "value": 8, "uom": "mg_l"},
+    {"code": "chloride", "value": 20.5, "uom": "mg_l"},
+    {"code": "nitrate", "value": 2.3, "uom": "mg_l"},
+    {"code": "sulfate", "value": 33.5, "uom": "mg_l"},
+    {"code": "hardness", "value": 10.6, "uom": "dh"}
+  ]
+},
+{
+  "name": "Ludwigshafen Friesenheim 2014",
+  "zone": "ludwigshafen_friesenheim",
+  "year": "2014",
+  "description": "Wasserwerk II Maudach-Oggersheim",
+  "observations": [
+    {"code": "natrium", "value": 29.9, "uom": "mg_l"},
+    {"code": "kalium", "value": 2.4, "uom": "mg_l"},
+    {"code": "calcium", "value": 62.8, "uom": "mg_l"},
+    {"code": "magnesium", "value": 8, "uom": "mg_l"},
+    {"code": "chloride", "value": 20.5, "uom": "mg_l"},
+    {"code": "nitrate", "value": 2.3, "uom": "mg_l"},
+    {"code": "sulfate", "value": 33.5, "uom": "mg_l"},
+    {"code": "hardness", "value": 10.6, "uom": "dh"}
+  ]
+},
+{
+  "name": "Ludwigshafen Ruchheim 2014",
+  "zone": "ludwigshafen_ruchheim",
+  "year": "2014",
+  "description": "Wasserwerk II Maudach-Oggersheim",
+  "observations": [
+    {"code": "natrium", "value": 29.9, "uom": "mg_l"},
+    {"code": "kalium", "value": 2.4, "uom": "mg_l"},
+    {"code": "calcium", "value": 62.8, "uom": "mg_l"},
+    {"code": "magnesium", "value": 8, "uom": "mg_l"},
+    {"code": "chloride", "value": 20.5, "uom": "mg_l"},
+    {"code": "nitrate", "value": 2.3, "uom": "mg_l"},
+    {"code": "sulfate", "value": 33.5, "uom": "mg_l"},
+    {"code": "hardness", "value": 10.6, "uom": "dh"}
+  ]
+},
+{
+  "name": "Ludwigshafen Maudach 2014",
+  "zone": "ludwigshafen_maudach",
+  "year": "2014",
+  "description": "Wasserwerk II Maudach-Oggersheim",
+  "observations": [
+    {"code": "natrium", "value": 29.9, "uom": "mg_l"},
+    {"code": "kalium", "value": 2.4, "uom": "mg_l"},
+    {"code": "calcium", "value": 62.8, "uom": "mg_l"},
+    {"code": "magnesium", "value": 8, "uom": "mg_l"},
+    {"code": "chloride", "value": 20.5, "uom": "mg_l"},
+    {"code": "nitrate", "value": 2.3, "uom": "mg_l"},
+    {"code": "sulfate", "value": 33.5, "uom": "mg_l"},
+    {"code": "hardness", "value": 10.6, "uom": "dh"}
+  ]
+},
+{
+  "name": "Heidelberg 2014",
+  "zone": "heidelberg",
+  "year": "2014",
+  "observations": [
+    {"code": "natrium", "value": 14.2, "uom": "mg_l"},
+    {"code": "calcium", "value": 43.8, "uom": "mg_l"},
+    {"code": "magnesium", "value": 7.7, "uom": "mg_l"},
+    {"code": "chloride", "value": 24.8, "uom": "mg_l"},
+    {"code": "nitrate", "value": 2.3, "uom": "mg_l"},
+    {"code": "sulfate", "value": 27.8, "uom": "mg_l"},
+    {"code": "hardness", "value": 5.7, "min": 3, "max": 8.4, "uom": "dh"}
+  ]
+},
+{
+  "name": "Worms 2014",
+  "zone": "worms",
+  "year": "2014",
+  "observations": [
+    {"code": "natrium", "value": 8.8, "uom": "mg_l"},
+    {"code": "kalium", "value": 1.2, "uom": "mg_l"},
+    {"code": "calcium", "value": 105, "uom": "mg_l"},
+    {"code": "magnesium", "value": 11.1, "uom": "mg_l"},
+    {"code": "chloride", "value": 17, "uom": "mg_l"},
+    {"code": "sulfate", "value": 50, "uom": "mg_l"},
+    {"code": "hardness", "value": 17.6, "uom": "dh"}
+  ]
+},
+{
+  "name": "Neustadt a. d. Weinstraße 2014",
+  "zone": "neustadt_a_d_weinstrasse",
+  "year": "2014",
+  "observations": [
+    {"code": "natrium", "value": 10.5, "uom": "mg_l"},
+    {"code": "kalium", "value": 2.5, "uom": "mg_l"},
+    {"code": "calcium", "value": 29.7, "uom": "mg_l"},
+    {"code": "magnesium", "value": 5.3, "uom": "mg_l"},
+    {"code": "chloride", "value": 10.9, "uom": "mg_l"},
+    {"code": "sulfate", "value": 17.7, "uom": "mg_l"},
+    {"code": "hardness", "value": 5.4, "uom": "dh"}
+  ]
+},
+{
+  "name": "Speyer 2014",
+  "zone": "speyer",
+  "year": "2014",
+  "observations": [
+    {"code": "natrium", "value": 12.5, "uom": "mg_l"},
+    {"code": "kalium", "value": 2.3, "uom": "mg_l"},
+    {"code": "calcium", "value": 79.7, "uom": "mg_l"},
+    {"code": "magnesium", "value": 11.8, "uom": "mg_l"},
+    {"code": "nitrate", "value": 1.1, "uom": "mg_l"},
+    {"code": "hardness", "value": 13.9, "uom": "dh"}
   ]
 }]

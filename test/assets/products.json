@@ -13,29 +13,38 @@
       { "value": 8.1, "uom": "mg_l", "code": "sulfate" },
       { "value": 6.3, "uom": "mg_l", "code": "nitrate" }
     ],
-    "sources": ["https://world.openfoodfacts.org/product/3057640117008/volvic"],
+    "sources": [
+      "https://world.openfoodfacts.org/product/3057640117008/volvic",
+      "http://books.google.de/books?id=lzEoGWyqMBwC&pg=PA198&lpg=PA198&dq=volvic+nitratgehalt&source=bl&ots=pJEE0i9HwK&sig=OI_PeSr_QGBCfpeVCu70N4ohy8g&hl=de&ei=4-yvSuHrJ8jK_gbV0p3ZDA&sa=X&oi=book_result&ct=result&resnum=6#v=onepage&q&f=false"
+    ],
     "vendor": "volvic"
   }, {
     "name": "Vittel",
     "volume": 1,
     "observations": [
       { "value": 5, "uom": "mg_l", "code": "natrium" },
+      { "value": 5.2, "uom": "mg_l", "code": "kalium" },
       { "value": 203.8, "uom": "mg_l", "code": "calcium" },
       { "value": 43.1, "uom": "mg_l", "code": "magnesium" },
       { "value": 328.9, "uom": "mg_l", "code": "sulfate" },
+      { "value": 3.8, "uom": "mg_l", "code": "chloride" },
       { "value": 4.3, "uom": "mg_l", "code": "nitrate" }
     ],
-    "sources": ["https://world.openfoodfacts.org/product/3179732333919/vittel-eau-mineral-naturel-1l"],
+    "sources": [
+      "https://world.openfoodfacts.org/product/3179732333919/vittel-eau-mineral-naturel-1l",
+      "http://books.google.de/books?id=lzEoGWyqMBwC&pg=PA198&lpg=PA198&dq=volvic+nitratgehalt&source=bl&ots=pJEE0i9HwK&sig=OI_PeSr_QGBCfpeVCu70N4ohy8g&hl=de&ei=4-yvSuHrJ8jK_gbV0p3ZDA&sa=X&oi=book_result&ct=result&resnum=6#v=onepage&q&f=false"
+    ],
     "vendor": "vittel"
   },
   {
+    "code": "heiligenquelleclassic",
     "name": "Heiligenquelle Classic",
     "observations": [
       { "value": 10.7, "uom": "mg_l", "code": "natrium" },
       { "value": 2.6, "uom": "mg_l", "code": "kalium" },
       { "value": 118, "uom": "mg_l", "code": "calcium" },
       { "value": 48, "uom": "mg_l", "code": "magnesium" },
-      { "value": 0.22, "uom": "mg_l", "code": "fluorid" },
+      { "value": 0.22, "uom": "mg_l", "code": "fluoride" },
       { "value": 43, "uom": "mg_l", "code": "chlorid" },
       { "value": 68, "uom": "mg_l", "code": "sulfat" },
       { "value": 455, "uom": "mg_l", "code": "hydrogene" }

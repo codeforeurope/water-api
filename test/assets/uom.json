@@ -1,0 +1,30 @@
+[
+  {
+    "code": "mg_l",
+    "value": {
+      "en": "mg/L"
+    },
+    "label": {
+      "en": "mg/L"
+    },
+    "definition": {
+      "en": "Milligram per liter, Mass concentration unit. Conversion to SI unit: 1 kg/m3 = 10^3 mg/L"
+    }
+  }, {
+    "code": "dh",
+    "value": {
+      "en": "°dH"
+    },
+    "label": {
+      "en": "°dH"
+    }
+  }, {
+    "code": "mg",
+    "value": {
+      "en": "mg"
+    },
+    "label": {
+      "en": "mg"
+    }
+  }
+]

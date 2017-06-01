@@ -2,17 +2,24 @@
 require("./testSwagger");
 
 // Model testing
-require("./testUom");
-require("./testCode");
-require("./testLimit");
-require("./testObservation");
+//require("./testUom");
+describe('Preparing data', function() {
+  require("./testUom");
+  require("./testCode");
+  require("./testCompany");
+  require("./testProduct");
+  require("./testLimits");
+  require("./testZone");
+  require("./testObservation");
+  require("./testReport");
+});
 
-// API testing
-require("./testLegalLimits");
-require("./testJurisdiction");
-require("./testCompany");
-require("./testProduct");
-require("./testLocation");
-require("./testZone");
-require("./testReport");
-require("./testObservationAverage");
+describe('Updating', function() {
+  require("./testLocation");
+});
+
+describe('Testing GET routes', function() {
+  require("./testGet");
+  require("./testJurisdiction");
+  require("./testObservationAverage");
+});
