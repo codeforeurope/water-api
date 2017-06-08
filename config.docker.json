@@ -1,0 +1,17 @@
+{
+  "development": {
+    "db": "mongodb://__MONGO_SERVER__/__DB_PREFIX___development",
+    "secret": "__SECRET__",
+    "locales": ["de", "en", "nl", "fr"]
+  },
+  "test": {
+    "db": "mongodb://__MONGO_SERVER__/__DB_PREFIX___test",
+    "secret": "__SECRET__",
+    "locales": ["de", "en", "nl", "fr"]
+  },
+  "production": {
+    "db": "mongodb://__MONGO_SERVER__/__DB_PREFIX___production",
+    "secret": "__SECRET__",
+    "locales": ["de", "en", "nl", "fr"]
+  }
+}
