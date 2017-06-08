@@ -35,7 +35,7 @@
     "supertest": "^3.0.0"
   },
   "scripts": {
-    "start": "export PORT=8081 && node index.js",
+    "start": "node index.js",
     "test": "export NODE_ENV=test && mocha --timeout 10000 test/index.js"
   }
 }
