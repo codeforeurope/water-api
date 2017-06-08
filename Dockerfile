@@ -16,7 +16,7 @@ COPY . /water-api
 
 RUN npm install .
 
-COPY config-docker.json /water-api/config.json
+COPY config-docker.json /water-api/config/config.json
 # Add image configuration and scripts
 COPY start.sh /start.sh
 RUN chmod 755 /*.sh
