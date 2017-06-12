@@ -5,7 +5,7 @@ var request = require('supertest');
 var app = require('../server');
 var models = require('../models');
 
-var testdata = require('./assets/zones.json');
+var testdata = require('./assets/zones/heilbronn.json');
 
 describe('inserting zones', function() {
   var token;

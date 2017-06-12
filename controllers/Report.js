@@ -10,9 +10,6 @@
   var moment = require('tz-business-time');
   // Options for the mongoose query
   var populateoptions = [{
-    path: 'zone',
-    select: 'name -_id'
-  },{
     path: 'observations',
     select: 'value uom code -_id',
     match: { value: { $ne: null }},
@@ -32,16 +29,19 @@
       type: "Point",
       coordinates: [ params.lon.value, params.lat.value ]
     };
-    var zone = {};
+    var zone;
+    var out = {};
+
     models.Zone.model.findOne().where('geometry').near({center: point, maxDistance:0}).
     exec(function(err, result){
       if(err){
         next(err);
       }
-      var out = {};
       if(result) {
-        models.Report.model.findOne().where({'zone': result._id }).
-        select('name authority zone observations year').
+        zone = result;
+        //get the report for this zone
+        models.Report.model.findOne().where({'zones': {$in: [result._id] }}).
+        select('name authority observations year').
         populate(populateoptions).exec(function(err, report){
           if(err){
             next(err);
@@ -50,6 +50,7 @@
             var _year = moment(report.year).local().format("YYYY");
             out = utils.cleanObservations(report, req.locale);
             out.year = _year;
+            out.zone = {name: zone.name, id: zone._id};
             res.setHeader('content-type', 'application/json');
             res.setHeader('charset', 'utf-8');
             res.end(JSON.stringify(out, null, 2));
@@ -59,7 +60,6 @@
             res.end(JSON.stringify(out, null, 2));
           }
         });
-        //get the report for this zone
       } else {
         //return empty for now
         res.setHeader('content-type', 'application/json');
@@ -75,11 +75,21 @@
   module.exports.postreport = function(req, res, next) {
     var input = req.swagger.params.body.value;
     var _observations = [];
-    var zone;
-    var authority;
+    var _zones = [];
+    var _year;
+    var _authority;
+
+    input.zones = input.zones || [];
+    if(input.year){
+      _year = moment(input.year, "YYYY").toDate();
+    }
+    if(input.zone){
+      input.zones.push(input.zone);
+    }
+
     async.each(input.observations,
       function(observation, callback) {
-        utils.createObservation(observation, req.user, 'Zone', function(err, output){
+        utils.createObservation(observation, req.user, 'Zone', function(err, output) {
           // Do not handle the error, skip faulty Observations
           if (!err){
             _observations.push(output);
@@ -88,43 +98,42 @@
         });
       },
       function(err) {
-        // Get the zone and then the authority, it should be an existing company
-        var year;
-        models.Zone.model.findById(input.zone, function(err, _zone){
-          if(err){
-            next(err);
-          } else {
-            zone = _zone;
-          }
-          models.Company.model.findOne({code: input.authority}, function(err, _authority) {
-            if(err){
-              next(err);
-            } else {
-              authority = _authority;
-            }
-            if(input.year){
-              year = moment(input.year, "YYYY").toDate();
-            }
-            models.Report.model.create({
-              name: input.name,
-              observations: _observations,
-              sources: input.sources || null,
-              authority: authority || null,
-              year: year || null,
-              zone: zone || null,
-              entered_by: req.user
-            }, function(err, result) {
-              if (err) next(err);
-              res.setHeader('content-type', 'application/json');
-              res.setHeader('charset', 'utf-8');
-              res.end(JSON.stringify({
-                name: result.name,
-                id: result._id
-              }, null, 2));
+        async.each(input.zones,
+          function(zone, callback) {
+            models.Zone.model.findOne({name: zone}, function(err, output) {
+              if(!err){
+                _zones.push(output);
+              }
+              callback();
             });
-          });
+          },
+          function(err){
+            models.Company.model.findOne({code: input.authority}, function(err, output) {
+              if(err){
+                next(err);
+              } else {
+                _authority = output;
+              }
+              models.Report.model.create({
+                name: input.name,
+                observations: _observations,
+                sources: input.sources || null,
+                authority: _authority || null,
+                year: _year || null,
+                zones: _zones,
+                entered_by: req.user
+              }, function(err, result) {
+                if (err) next(err);
+                res.setHeader('content-type', 'application/json');
+                res.setHeader('charset', 'utf-8');
+                res.end(JSON.stringify({
+                  name: result.name,
+                  id: result._id
+                }, null, 2));
+              });
+            }
+          );
         });
-      }
-    );
+    });
   };
 }());

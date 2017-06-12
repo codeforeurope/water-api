@@ -859,6 +859,10 @@ definitions:
         type: "string"
       zone:
         type: "string"
+      zones:
+        type: "array"
+        items:
+          type: "string"
       year:
         type: "string"
       observations:
