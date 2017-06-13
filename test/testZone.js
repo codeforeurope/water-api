@@ -49,6 +49,19 @@ describe('inserting zones', function() {
       });
   });
 
+  it('should post Zones', function(done) {
+    request(app).
+    post('/api/zones').
+    set('x-access-token', token).
+    attach('file', './test/assets/zones/mannheim.json').
+    expect(200).
+    end(function(err, res) {
+      var data = JSON.parse(res.text);
+      assert.equal(data.zones.length, 3);
+      done();
+    });
+  });
+
   testdata.features.forEach(function(instance) {
     it('should return ' + instance.properties.name, function(done) {
       request(app).

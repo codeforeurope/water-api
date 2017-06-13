@@ -2,6 +2,23 @@
   'use strict';
   var models = require('../models');
   var utils = require('../helpers/util.js');
+  var async = require("async");
+
+
+  var saveZone = function(params, callback){
+    var tempzone = new models.Zone.model(params);
+    tempzone.save(function (err, zone, count) {
+      if(err){
+        callback(err, null);
+      } else {
+        var final = {
+          "name": zone.name,
+          "id": zone._id
+        };
+        callback(null, final);
+      }
+    });
+  };
 
   module.exports.getzone = function(req, res, next) {
     var params = req.swagger.params;
@@ -28,8 +45,7 @@
   module.exports.postzone = function(req, res, next) {
     var params = req.swagger.params.body.value;
     params.entered_by = req.user;
-    var tempzone = new models.Zone.model(params);
-    tempzone.save(function (err, zone, count) {
+    saveZone(params, function(err, result){
       res.setHeader('content-type', 'application/json');
       if (err) {
         if (err.code === 11000) {
@@ -41,11 +57,7 @@
         }
         next(err);
       } else {
-        zone = {
-          "name": zone.name,
-          "id": zone._id
-        };
-        res.end(JSON.stringify(zone, null, 2));
+        res.end(JSON.stringify(result, null, 2));
       }
     });
   };
@@ -57,5 +69,60 @@
       var params = req.swagger.params;
       res.setHeader('content-type', 'application/json');
       res.end(JSON.stringify({"operation": "DELETE"}, null, 2));
+  };
+
+  // Upload a json file with zones
+  module.exports.postzones = function(req, res, next){
+    var final;
+    var params = req.swagger.params;
+    if (params.file) {
+      if(params.file.value.mimetype !== 'application/json' && params.file.value.mimetype !== 'application/geo+json'){
+        next({
+          "code": 404,
+          "name": "InvalidMimeTypeError",
+          "message": "Cannot process " + params.file.value.mimetype
+        });
+      } else {
+        var data = JSON.parse(params.file.value.buffer);
+        if(!data.features){
+          next({
+            "code": 404,
+            "name": "noGeoJsonError",
+            "message": "File contains no geojson features"
+          });
+        }
+        var errors = [];
+        var processed = [];
+        async.each(data.features,
+          function(feature, callback){
+            feature.entered_by = req.user;
+            feature.name = feature.properties.name;
+            saveZone(feature, function(err, output){
+              if (!err){
+                processed.push(output);
+              } else {
+                errors.push(err);
+              }
+              callback();
+            });
+          }, function(err){
+            if(err) next(err);
+            var final = {
+              "errors": errors,
+              "zones": processed
+            };
+            res.setHeader('content-type', 'application/json');
+            res.setHeader('charset', 'utf-8');
+            res.end(JSON.stringify(final, null, 2));
+          }
+        );
+      }
+    } else {
+      next({
+        "code": 404,
+        "name": "UploadError",
+        "message": "No file attached"
+      });
+    }
   };
 })();

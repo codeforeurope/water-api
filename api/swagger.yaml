@@ -360,6 +360,34 @@ paths:
         400:
           description: "Invalid status value"
       x-swagger-router-controller: "Legallimits"
+  /zones:
+    post:
+      tags:
+      - "zone"
+      operationId: "postzones"
+      consumes:
+        - "multipart/form-data"
+        - "application/x-www-form-urlencoded"
+      parameters:
+        - in: "header"
+          name: x-access-token
+          required: true
+          type: string
+          description: "access-token as provided by issuer"
+        - in: "formData"
+          name: "file"
+          type: file
+          description: "json file containing zone definitions"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Zone"
+        400:
+          description: "Invalid status value"
+      x-swagger-router-controller: "Zone"
   /zone:
     get:
       tags:
