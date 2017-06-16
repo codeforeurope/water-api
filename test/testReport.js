@@ -51,4 +51,17 @@ describe('inserting reports', function() {
       });
     });
   });
+  it('should post Reports', function(done) {
+    request(app).
+    post('/api/reports').
+    set('x-access-token', token).
+    attach('file', './test/assets/reports/mannheim.json').
+    expect(200).
+    end(function(err, res) {
+      var data = JSON.parse(res.text);
+      console.log(res.text);
+      assert.equal(data.reports.length, 2);
+      done();
+    });
+  });
 });

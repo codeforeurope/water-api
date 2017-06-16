@@ -4,10 +4,77 @@
  */
 (function () {
   'use strict';
-  var async = require("async");
   var models = require('../models');
   var utils = require('../helpers/util.js');
   var moment = require('tz-business-time');
+  var async = require("async");
+
+  var saveReport = function(params, callback){
+    var _observations = [];
+    var _zones = [];
+    var _year;
+    var _authority;
+
+    params.zones = params.zones || [];
+    if(params.year){
+      _year = moment(params.year, "YYYY").toDate();
+    }
+    if(params.zone){
+      params.zones.push(params.zone);
+    }
+
+    async.each(params.observations,
+      function(observation, cb2) {
+        utils.createObservation(observation, params.entered_by, 'Zone', function(err, output) {
+          // Do not handle the error, skip faulty Observations
+          if (!err){
+            _observations.push(output);
+          }
+          cb2();
+        });
+      },
+      function(err) {
+        async.each(params.zones,
+          function(zone, cb3) {
+            models.Zone.model.findOne({name: zone}, function(err, output) {
+              if(!err){
+                _zones.push(output);
+              }
+              cb3();
+            });
+          },
+          function(err) {
+            models.Company.model.findOne({code: params.authority}, function(err, output) {
+              if(err){
+                callback(err, null);
+              } else {
+                _authority = output;
+                var _report = {
+                  name: params.name,
+                  observations: _observations,
+                  sources: params.sources || null,
+                  authority: _authority || null,
+                  year: _year || null,
+                  zones: _zones,
+                  entered_by: params.entered_by
+                };
+                models.Report.model.create(_report, function(err, result) {
+                  if (err) {
+                    callback(err, null);
+                  } else {
+                    callback(null,{
+                      name: result.name,
+                      id: result._id
+                    });
+                  }
+                });
+              }
+            }
+          );
+        });
+    });
+  };
+
   // Options for the mongoose query
   var populateoptions = [{
     path: 'observations',
@@ -73,67 +140,77 @@
    * Post a report.
    */
   module.exports.postreport = function(req, res, next) {
-    var input = req.swagger.params.body.value;
-    var _observations = [];
-    var _zones = [];
-    var _year;
-    var _authority;
+    var params = req.swagger.params.body.value;
+    params.entered_by = req.user;
+    saveReport(params, function(err, result){
+      res.setHeader('content-type', 'application/json');
+      res.setHeader('charset', 'utf-8');
+      if (err) {
+        if (err.code === 11000) {
+          err = {
+            code: 404,
+            name: "duplicateError",
+            message: "Report exists"
+          };
+        }
+        next(err);
+      } else {
+        res.end(JSON.stringify(result, null, 2));
+      }
+    });
+  };
 
-    input.zones = input.zones || [];
-    if(input.year){
-      _year = moment(input.year, "YYYY").toDate();
-    }
-    if(input.zone){
-      input.zones.push(input.zone);
-    }
-
-    async.each(input.observations,
-      function(observation, callback) {
-        utils.createObservation(observation, req.user, 'Zone', function(err, output) {
-          // Do not handle the error, skip faulty Observations
-          if (!err){
-            _observations.push(output);
-          }
-          callback();
+  // Upload a json file with zones
+  module.exports.postreports = function(req, res, next){
+    var final;
+    var params = req.swagger.params;
+    if (params.file) {
+      if(params.file.value.mimetype !== 'application/json'){
+        next({
+          "code": 404,
+          "name": "InvalidMimeTypeError",
+          "message": "Cannot process " + params.file.value.mimetype
         });
-      },
-      function(err) {
-        async.each(input.zones,
-          function(zone, callback) {
-            models.Zone.model.findOne({name: zone}, function(err, output) {
-              if(!err){
-                _zones.push(output);
+      } else {
+        var data = JSON.parse(params.file.value.buffer);
+        if(!Array.isArray(data)){
+          next({
+            "code": 404,
+            "name": "noArrayJsonError",
+            "message": "File should contain an array"
+          });
+        }
+        var errors = [];
+        var processed = [];
+        async.each(data,
+          function(report, callback){
+            report.entered_by = req.user;
+            saveReport(report, function(err, output){
+              if (!err){
+                processed.push(output);
+              } else {
+                errors.push(err);
               }
               callback();
             });
-          },
-          function(err){
-            models.Company.model.findOne({code: input.authority}, function(err, output) {
-              if(err){
-                next(err);
-              } else {
-                _authority = output;
-              }
-              models.Report.model.create({
-                name: input.name,
-                observations: _observations,
-                sources: input.sources || null,
-                authority: _authority || null,
-                year: _year || null,
-                zones: _zones,
-                entered_by: req.user
-              }, function(err, result) {
-                if (err) next(err);
-                res.setHeader('content-type', 'application/json');
-                res.setHeader('charset', 'utf-8');
-                res.end(JSON.stringify({
-                  name: result.name,
-                  id: result._id
-                }, null, 2));
-              });
-            }
-          );
-        });
-    });
+          }, function(err){
+            if(err) next(err);
+            var final = {
+              "errors": errors,
+              "reports": processed
+            };
+            res.setHeader('content-type', 'application/json');
+            res.setHeader('charset', 'utf-8');
+            res.end(JSON.stringify(final, null, 2));
+          }
+        );
+      }
+    } else {
+      next({
+        "code": 404,
+        "name": "UploadError",
+        "message": "No file attached"
+      });
+    }
   };
 }());

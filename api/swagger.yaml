@@ -660,7 +660,7 @@ paths:
               $ref: "#/definitions/Report"
         400:
           description: "Invalid status value"
-      x-swagger-router-controller: "Zone"
+      x-swagger-router-controller: "Report"
   /report:
     get:
       tags:

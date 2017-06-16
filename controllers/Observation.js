@@ -32,7 +32,6 @@
             if(err){
               next(err);
             }
-            //console.log(populatedTransactions);
             for (var x in populatedTransactions) {
               var code = populatedTransactions[x]._id.toJSONLocalizedOnly(req.locale, 'en');
               var _observation = {
@@ -41,7 +40,6 @@
               };
               _observations.push(_observation);
             }
-            //console.log(populatedTransactions);
             res.setHeader('content-type', 'application/json');
             res.setHeader('charset', 'utf-8');
             res.end(JSON.stringify(_observations, null, 2));
