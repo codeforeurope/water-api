@@ -17,6 +17,9 @@
     },
     "label": {
       "en": "°dH"
+    },
+    "definition": {
+      "en": "Deutsche Härte (German Hardness, degrees of water hardness)"
     }
   }, {
     "code": "mg",
@@ -25,6 +28,34 @@
     },
     "label": {
       "en": "mg"
+    },
+    "definition": {
+      "en": "Milligram"
+    }
+  }, {
+    "code": "mmol_l",
+    "value": {
+      "en": "mmol/L"
+    },
+    "label": {
+      "en": "mmol/L"
+    },
+    "definition": {
+      "en": "Millimol per liter"
+    }
+  }, {
+    "code": "ph",
+    "value": {
+      "en": "pH",
+      "nl": "pH"
+    },
+    "label": {
+      "en": "pH",
+      "nl": "pH"
+    },
+    "definition": {
+      "en": "Potential of Hydrogen (Acidity)",
+      "nl": "Zuurgraad"
     }
   }
 ]
