@@ -59,8 +59,8 @@ describe('inserting reports', function() {
     expect(200).
     end(function(err, res) {
       var data = JSON.parse(res.text);
-      console.log(res.text);
-      assert.equal(data.reports.length, 2);
+      //console.log(res.text);
+      assert.equal(data.reports.length, 11);
       done();
     });
   });

@@ -27,7 +27,7 @@
       function(observation, cb2) {
         utils.createObservation(observation, params.entered_by, 'Zone', function(err, output) {
           // Do not handle the error, skip faulty Observations
-          if (!err){
+          if (!err && output){
             _observations.push(output);
           }
           cb2();
@@ -37,7 +37,7 @@
         async.each(params.zones,
           function(zone, cb3) {
             models.Zone.model.findOne({name: zone}, function(err, output) {
-              if(!err){
+              if(!err && output){
                 _zones.push(output);
               }
               cb3();
@@ -55,7 +55,7 @@
                   sources: params.sources || null,
                   authority: _authority || null,
                   year: _year || null,
-                  zones: _zones,
+                  zones: _zones || null,
                   entered_by: params.entered_by
                 };
                 models.Report.model.create(_report, function(err, result) {
@@ -189,7 +189,7 @@
               if (!err){
                 processed.push(output);
               } else {
-                errors.push(err);
+                errors.push({"name": err.name,"message": err._message});
               }
               callback();
             });
