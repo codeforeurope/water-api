@@ -97,6 +97,7 @@
           function(feature, callback){
             feature.entered_by = req.user;
             feature.name = feature.properties.name;
+            feature.alternatives = feature.properties.alternatives || null;
             saveZone(feature, function(err, output){
               if (!err){
                 processed.push(output);

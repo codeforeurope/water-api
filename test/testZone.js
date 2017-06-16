@@ -57,7 +57,20 @@ describe('inserting zones', function() {
     expect(200).
     end(function(err, res) {
       var data = JSON.parse(res.text);
-      assert.equal(data.zones.length, 3);
+      assert.equal(data.zones.length, 9);
+      done();
+    });
+  });
+
+  it('should post Zones in geojson', function(done) {
+    request(app).
+    post('/api/zones').
+    set('x-access-token', token).
+    attach('file', './test/assets/zones/brabantwater.geojson').
+    expect(200).
+    end(function(err, res) {
+      var data = JSON.parse(res.text);
+      assert.equal(data.zones.length, 69);
       done();
     });
   });
