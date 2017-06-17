@@ -1,0 +1,78 @@
+[
+  {
+    "name": "Halsteren April 2016",
+    "zones": [],
+    "plants": ["halsteren"],
+    "year": "2016",
+    "sources": ["https://www.evides.nl/-/media/files/waterkwaliteit/evides-waterkwaliteit-halsteren.pdf"],
+    "observations": []
+  },
+  {
+    "name": "Midden Zeeland April 2016",
+    "zones": [],
+    "plants": ["huijbergen","ossendrecht"],
+    "year": "2016",
+    "sources": ["https://www.evides.nl/-/media/files/waterkwaliteit/evides-waterkwaliteit-midden-zeeland.pdf"],
+    "observations": []
+  },
+  {
+    "name": "Haamstede April 2016",
+    "zones": [],
+    "plants": ["haamstede"],
+    "year": "2016",
+    "sources": [
+      "https://www.evides.nl/-/media/files/waterkwaliteit/evides-waterkwaliteit-haamstede.pdf",
+      "https://www.evides.nl/webapi/v1/postcode/waterkwaliteit?postcode=4321TT"],
+    "observations": []
+  },
+  {
+    "name": "Braakman April 2016",
+    "zones": [],
+    "plants": ["braakman"],
+    "year": "2016",
+    "sources": [
+      "https://www.evides.nl/-/media/files/waterkwaliteit/evides-waterkwaliteit-braakman.pdf"
+    ],
+    "observations": []
+  },
+  {
+    "name": "Ouddorp April 2016",
+    "zones": [],
+    "plants": ["ouddorp"],
+    "year": "2016",
+    "sources": [
+      "https://www.evides.nl/-/media/files/waterkwaliteit/evides-waterkwaliteit-ouddorp.pdf"
+    ],
+    "observations": []
+  },
+  {
+    "name": "Berenplaat April 2016",
+    "zones": [],
+    "plants": ["berenplaat"],
+    "year": "2016",
+    "sources": [
+      "https://www.evides.nl/-/media/files/waterkwaliteit/evides-waterkwaliteit-berenplaat.pdf"
+    ],
+    "observations": []
+  },
+  {
+    "name": "Baanhoek April 2016",
+    "zones": [],
+    "plants": ["baanhoek"],
+    "year": "2016",
+    "sources": [
+      "https://www.evides.nl/-/media/files/waterkwaliteit/evides-waterkwaliteit-baanhoek.pdf"
+    ],
+    "observations": []
+  },
+  {
+    "name": "Kralingen April 2016",
+    "zones": [],
+    "plants": ["kralingen"],
+    "year": "2016",
+    "sources": [
+      "https://www.evides.nl/-/media/files/waterkwaliteit/evides-waterkwaliteit-kralingen.pdf"
+    ],
+    "observations": []
+  }
+]

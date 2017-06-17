@@ -8,14 +8,14 @@
   },
   {
     "name": "Bergen op Zoom 2016 .Q3 en 4",
-    "zones": [],
+    "zones": ["bergen_op_zoom"],
     "year": "2016",
     "sources": ["https://www.brabantwater.nl/PompStationInfo/Bergen%20op%20Zoom.pdf"],
     "observations": []
   },
   {
     "name": "Budel 2015",
-    "zones": [],
+    "zones": ["bergen_op_zoom"],
     "year": "2015",
     "sources": ["https://brabantwater.nl/PompStationInfo/Drinkwaterkwaliteit%20Budel%202015.pdf"],
     "observations": []
@@ -29,14 +29,14 @@
   },
   {
     "name": "Dorst 2015",
-    "zones": [],
+    "zones": ["breda","alphen_chaam"],
     "year": "2015",
     "sources": ["https://brabantwater.nl/PompStationInfo/Drinkwaterkwaliteit%20Dorst%202015.pdf"],
     "observations": []
   },
   {
     "name": "Dorst 2016 .Q3 en 4",
-    "zones": [],
+    "zones": ["breda","alphen_chaam"],
     "year": "2016",
     "sources": ["https://www.brabantwater.nl/PompStationInfo/Dorst.pdf"],
     "observations": []
@@ -80,56 +80,56 @@
   },
   {
     "name": "Haaren 2015",
-    "zones": [],
+    "zones": ["tilburg"],
     "year": "2015",
     "sources": ["https://brabantwater.nl/PompStationInfo/Drinkwaterkwaliteit%20Haaren%202015.pdf"],
     "observations": []
   },
   {
     "name": "Haaren 2016 .Q4",
-    "zones": [],
+    "zones": ["tilburg"],
     "year": "2016",
     "sources": ["https://www.brabantwater.nl/PompStationInfo/Haaren.pdf"],
     "observations": []
   },
   {
     "name": "Helmond 2015",
-    "zones": ["laarbeek"],
+    "zones": ["laarbeek","gemert_bakel"],
     "year": "2015",
     "sources": ["https://brabantwater.nl/PompStationInfo/Drinkwaterkwaliteit%20Helmond%202015.pdf"],
     "observations": []
   },
   {
     "name": "Helmond 2016 .Q3 en 4",
-    "zones": ["laarbeek"],
+    "zones": ["laarbeek","gemert_bakel"],
     "year": "2016",
     "sources": ["https://www.brabantwater.nl/PompStationInfo/Helmond.pdf"],
     "observations": []
   },
   {
     "name": "Lieshout 2015",
-    "zones": ["laarbeek"],
+    "zones": ["laarbeek","gemert_bakel"],
     "year": "2015",
     "sources": ["https://brabantwater.nl/PompStationInfo/Drinkwaterkwaliteit%20Lieshout%202015.pdf"],
     "observations": []
   },
   {
     "name": "Lieshout 2016 .Q4",
-    "zones": ["laarbeek"],
+    "zones": ["laarbeek","gemert_bakel"],
     "year": "2016",
     "sources": ["https://www.brabantwater.nl/PompStationInfo/Lieshout.pdf"],
     "observations": []
   },
   {
     "name": "Lith 2015",
-    "zones": [],
+    "zones": ["oss"],
     "year": "2015",
     "sources": ["https://brabantwater.nl/PompStationInfo/Drinkwaterkwaliteit%20Lith%202015.pdf"],
     "observations": []
   },
   {
     "name": "Lith 2016 .Q3",
-    "zones": [],
+    "zones": ["oss"],
     "year": "2016",
     "sources": ["https://www.brabantwater.nl/PompStationInfo/Lith.pdf"],
     "observations": []
@@ -150,42 +150,42 @@
   },
   {
     "name": "Luyksgestel 2015",
-    "zones": [],
+    "zones": ["bergeijk"],
     "year": "2015",
     "sources": ["https://brabantwater.nl/PompStationInfo/Drinkwaterkwaliteit%20Luyksgestel%202015.pdf"],
     "observations": []
   },
   {
     "name": "Luyksgestel 2016 .Q4",
-    "zones": [],
+    "zones": ["bergeijk"],
     "year": "2016",
     "sources": ["https://www.brabantwater.nl/PompStationInfo/Luyksgestel.pdf"],
     "observations": []
   },
   {
     "name": "Macharen",
-    "zones": [],
+    "zones": ["oss"],
     "year": "2015",
     "sources": ["https://brabantwater.nl/PompStationInfo/Drinkwaterkwaliteit%20Macharen%202015.pdf"],
     "observations": []
   },
   {
     "name": "Macharen 2016 .Q3 en 4",
-    "zones": [],
+    "zones": ["oss"],
     "year": "2016",
     "sources": ["https://www.brabantwater.nl/PompStationInfo/Macharen.pdf"],
     "observations": []
   },
   {
     "name": "Nuland 2015",
-    "zones": [],
+    "zones": ["sint_michielsgestel"],
     "year": "2015",
     "sources": ["https://brabantwater.nl/PompStationInfo/Drinkwaterkwaliteit%20Nuland%202015.pdf"],
     "observations": []
   },
   {
     "name": "Nuland 2016 .Q4",
-    "zones": [],
+    "zones": ["sint_michielsgestel"],
     "year": "2016",
     "sources": ["https://www.brabantwater.nl/PompStationInfo/Nuland.pdf"],
     "observations": []
@@ -304,14 +304,14 @@
   },
   {
     "name": "Son 2015",
-    "zones": ["best"],
+    "zones": ["best","gemert_bakel","laarbeek"],
     "year": "2015",
     "sources": ["https://brabantwater.nl/PompStationInfo/Drinkwaterkwaliteit%20Son%202015.pdf"],
     "observations": []
   },
   {
     "name": "Son 2016 .Q4",
-    "zones": ["best"],
+    "zones": ["best","gemert_bakel","laarbeek"],
     "year": "2016",
     "sources": ["https://www.brabantwater.nl/PompStationInfo/Son.pdf"],
     "observations": []
@@ -332,28 +332,28 @@
   },
   {
     "name": "Veghel 2015",
-    "zones": [],
+    "zones": ["cuijk"],
     "year": "2015",
     "sources": ["https://brabantwater.nl/PompStationInfo/Drinkwaterkwaliteit%20Veghel%202015.pdf"],
     "observations": []
   },
   {
     "name": "Veghel 2016 .Q4",
-    "zones": [],
+    "zones": ["cuijk"],
     "year": "2016",
     "sources": ["https://www.brabantwater.nl/PompStationInfo/Veghel.pdf"],
     "observations": []
   },
   {
     "name": "Vessem 2015",
-    "zones": ["best","hilvarenbeek"],
+    "zones": ["best","hilvarenbeek","bergeijk"],
     "year": "2015",
     "sources": ["https://brabantwater.nl/PompStationInfo/Drinkwaterkwaliteit%20Vessem%202015.pdf"],
     "observations": []
   },
   {
     "name": "Vessem 2016 .Q4",
-    "zones": ["best","hilvarenbeek"],
+    "zones": ["best","hilvarenbeek","bergeijk"],
     "year": "2016",
     "sources": ["https://www.brabantwater.nl/PompStationInfo/Vessem.pdf"],
     "observations": []
@@ -402,14 +402,14 @@
   },
   {
     "name": "Wouw 2015",
-    "zones": ["tholen"],
+    "zones": ["tholen","bergen_op_zoom"],
     "year": "2015",
     "sources": ["https://brabantwater.nl/PompStationInfo/Drinkwaterkwaliteit%20Wouw%202015.pdf"],
     "observations": []
   },
   {
     "name": "Wouw 2016 .Q4",
-    "zones": ["tholen"],
+    "zones": ["tholen","bergen_op_zoom"],
     "year": "2016",
     "sources": ["https://www.brabantwater.nl/PompStationInfo/Wouw.pdf"],
     "observations": []
