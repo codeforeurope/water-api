@@ -3,7 +3,8 @@ module.exports = function(mongoose) {
 
     var Schema = new mongoose.Schema({
       name: String,
-      alternatives: Array,
+      operator: {type: ObjectId, ref: 'Company'}, //The watercompany that services this zone
+      alternatives: Array, //Alternative names for this zones or sub-zone names used to generate this zone.
       entered_at: {type: Date, required: true, default: Date},
       entered_by: {type: ObjectId, ref: 'User', required: true},
       geometry: {

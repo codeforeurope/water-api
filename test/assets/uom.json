@@ -1,5 +1,116 @@
 [
   {
+    "code": "meq_l",
+    "value": {
+      "en": "mEq/L"
+    },
+    "label": {
+      "en": "mEq/L"
+    },
+    "definition": {
+      "en": "Milliequivalent per meter"
+    }
+  },
+  {
+    "code": "cfu_100ml",
+    "value": {
+      "en": "CFU/100mL",
+      "de": "KBE/100mL",
+      "en": "KVE/100mL"
+    },
+    "label": {
+      "en": "CFU/100mL",
+      "de": "KBE/100mL",
+      "en": "KVE/100mL"
+    },
+    "definition": {
+      "nl": "Kolonievormende eenheden per 100 milliliter",
+      "de": "Koloniebildende einheiten per 100 milliliter",
+      "en": "Colonie forming units per 100 milliliter"
+    }
+  },
+  {
+    "code": "cfu_ml",
+    "value": {
+      "en": "CFU/mL",
+      "de": "KBE/mL",
+      "en": "KVE/mL"
+    },
+    "label": {
+      "en": "CFU/mL",
+      "de": "KBE/mL",
+      "en": "KVE/mL"
+    },
+    "definition": {
+      "nl": "Kolonievormende eenheden per milliliter",
+      "de": "Koloniebildende einheiten per milliliter",
+      "en": "Colonie forming units per milliliter"
+    }
+  },
+  {
+    "code": "mug_l",
+    "value": {
+      "en": "μg/L"
+    },
+    "label": {
+      "en": "μg/L"
+    },
+    "definition": {
+      "en": "Microgram per liter"
+    }
+  },
+  {
+    "code": "ms_m",
+    "value": {
+      "en": "mS/m"
+    },
+    "label": {
+      "en": "mS/m"
+    },
+    "definition": {
+      "en": "Millisiemens per meter"
+    }
+  },
+  {
+    "code": "deg_c",
+    "value": {
+      "en": "°C"
+    },
+    "label": {
+      "en": "°C"
+    },
+    "definition": {
+      "en": "Degrees Celsius",
+      "nl": "Graden Celsius"
+    }
+  },
+  {
+    "code": "fte",
+    "value": {
+      "en": "FTE"
+    },
+    "label": {
+      "en": "FTE"
+    },
+    "definition": {
+      "en": "Formazine turbidity units",
+      "nl": "Formazine troebelingseenheden"
+    }
+  },
+
+  {
+    "code": "bq_l",
+    "value": {
+      "en": "Bq/L"
+    },
+    "label": {
+      "en": "Bq/L"
+    },
+    "definition": {
+      "en": "Becquerel per liter"
+    }
+  },
+  {
     "code": "mg_l",
     "value": {
       "en": "mg/L"
@@ -19,7 +130,9 @@
       "en": "°dH"
     },
     "definition": {
-      "en": "Deutsche Härte (German Hardness, degrees of water hardness)"
+      "en": "Deutsche Härte (German Hardness, degrees of water hardness)",
+      "de": "Deutsche Härte",
+      "nl": "Duitse hardheid"
     }
   }, {
     "code": "mg",

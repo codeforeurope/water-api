@@ -1,5 +1,42 @@
 [
   {
+    "code": "watertemperature",
+    "standard": "NA",
+    "value": "watertemperature",
+    "label": {
+      "en": "Watertemperature",
+      "de": "Wassertemperatuur",
+      "nl": "Watertemperatuur"
+    }
+  },
+  {
+    "code": "turbidity",
+    "standard": "NA",
+    "value": "turbidity",
+    "label": {
+      "en": "Turbidity",
+      "nl": "Troebelingsgraad"
+    }
+  },{
+    "code": "oxygen",
+    "standard": "CAS",
+    "value": "7782-44-7",
+    "label": {
+      "en": "Oxygen",
+      "de": "Sauerstof",
+      "nl": "Zuurstof"
+    }
+  },{
+    "code": "tritium",
+    "standard": "CAS",
+    "value": "10028-17-8",
+    "label": {
+      "en": "Tritium",
+      "de": "Tritium",
+      "nl": "Tritium"
+    }
+  },
+  {
     "code": "natrium",
     "standard": "CAS",
     "value": "7440-23-5",
@@ -82,6 +119,15 @@
       "en": "Mycobacteria",
       "nl": "Microbacteriën",
       "de": "Microbacteria"
+    }
+  }, {
+    "code": "hardness",
+    "standard": "NA",
+    "value": "hardness",
+    "label": {
+      "en": "Hardness",
+      "nl": "Hardheid",
+      "de": "Härte"
     }
   }, {
     "code": "bicarbonate",
