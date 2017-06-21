@@ -5,7 +5,7 @@ var request = require('supertest');
 var app = require('../server');
 var models = require('../models');
 
-var testdata = require('./assets/products.json');
+var testdata = require('../assets/products.json');
 
 describe('inserting products', function() {
   var token;

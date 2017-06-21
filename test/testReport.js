@@ -5,7 +5,7 @@ var request = require('supertest');
 var app = require('../server');
 var models = require('../models');
 
-var testdata = require('./assets/reports/heilbronn.json');
+var testdata = require('../assets/reports/heilbronn.json');
 
 describe('inserting reports', function() {
   var token;
@@ -55,7 +55,7 @@ describe('inserting reports', function() {
     request(app).
     post('/api/reports').
     set('x-access-token', token).
-    attach('file', './test/assets/reports/mannheim.json').
+    attach('file', './assets/reports/mannheim.json').
     expect(200).
     end(function(err, res) {
       var data = JSON.parse(res.text);

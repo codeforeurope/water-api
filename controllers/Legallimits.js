@@ -11,8 +11,7 @@
   // Options for the mongoose query
   var populateoptions = {
     path: 'limits',
-    select: 'value uom code -_id',
-    match: { value: { $ne: null }},
+    select: 'value min max uom code -_id',
     populate: [{
       path: 'uom',
       model: 'Uom',

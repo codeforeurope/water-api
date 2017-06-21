@@ -5,7 +5,7 @@ var request = require('supertest');
 var app = require('../server');
 var models = require('../models');
 
-var testdata = require('./assets/zones/heilbronn.json');
+var testdata = require('../assets/zones/heilbronn.json');
 
 describe('inserting zones', function() {
   var token;
@@ -53,7 +53,7 @@ describe('inserting zones', function() {
     request(app).
     post('/api/zones').
     set('x-access-token', token).
-    attach('file', './test/assets/zones/mannheim.json').
+    attach('file', './assets/zones/mannheim.json').
     expect(200).
     end(function(err, res) {
       var data = JSON.parse(res.text);
@@ -66,7 +66,7 @@ describe('inserting zones', function() {
     request(app).
     post('/api/zones').
     set('x-access-token', token).
-    attach('file', './test/assets/zones/brabantwater.geojson').
+    attach('file', './assets/zones/brabantwater.geojson').
     expect(200).
     end(function(err, res) {
       var data = JSON.parse(res.text);

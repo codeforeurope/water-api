@@ -8,9 +8,10 @@ module.exports = function(mongoose) {
     var ObjectId = mongoose.Schema.ObjectId;
 
     var Schema = new mongoose.Schema({
-        value: {type: Number, required: true},
+        value: Number,
         min: Number,
         max: Number,
+        samples: Number,
         uom: {type: ObjectId, ref: 'Uom', required: true},
         code: {type: ObjectId, ref: 'Code', required: true},
         type: {

@@ -326,7 +326,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Product"
+              $ref: "#/definitions/Limit"
         400:
           description: "Invalid status value"
       x-swagger-router-controller: "Legallimits"
@@ -811,7 +811,6 @@ definitions:
     required:
     - "code"
     - "uom"
-    - "value"
     properties:
       value:
         type: "number"

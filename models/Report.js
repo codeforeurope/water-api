@@ -11,7 +11,7 @@ module.exports = function(mongoose) {
         description: String,
         year: {type: Date, required: true, default: Date},
         issued: {type: Date, default: Date}, //Date on which the report is issued. If month or quarter is given, set to last day of month/quarter
-        operator: {type: ObjectId, ref: 'Company'},// Watercompany that is auditted
+        operators: [{type: ObjectId, ref: 'Company'}],// Watercompany that is auditted
         authority: {type: ObjectId, ref: 'Company'},//Authority responsible for the report
         zones: [{type: ObjectId, ref: 'Zone'}], //Zone for which the report is valid
         observations: [{type: ObjectId, ref: 'Observation'}], //Array of water quality indicators in the report

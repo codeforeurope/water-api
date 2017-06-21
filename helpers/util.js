@@ -52,6 +52,9 @@ exports.createObservation = function(jsonObject, user, type, cb){
         code = _code;
         var _observation = models.Observation.model.create({
           value: jsonObject.value,
+          min: jsonObject.min,
+          max: jsonObject.max,
+          samples: jsonObject.samples,
           uom: uom,
           code: code,
           type: type,
@@ -95,7 +98,10 @@ exports.cleanObservations = function(source, locale){
     var _observation = {
       uom: _outputobservations[x].uom.label,
       code: _outputobservations[x].code.label,
-      value: _outputobservations[x].value
+      value: _outputobservations[x].value,
+      min: _outputobservations[x].min,
+      max: _outputobservations[x].max,
+      samples: _outputobservations[x].samples
     };
     _observations.push(_observation);
   }

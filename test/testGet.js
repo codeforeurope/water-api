@@ -29,13 +29,13 @@ it('GET Company should return wueteria', function(done) {
   });
 });
 
-it('GET limits should return array of 5 limits', function(done) {
+it('GET limits should return array of 3 limits', function(done) {
   request(app).
   get('/api/limits').
   expect(200).
   end(function(err, res) {
       var data = JSON.parse(res.text);
-      assert.equal(data.length, 2);
+      assert.equal(data.length, 3);
       done();
     });
 });
