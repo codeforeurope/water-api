@@ -5,7 +5,7 @@ var request = require('supertest');
 var app = require('../server');
 var models = require('../models');
 
-var testdata = require('./assets/uom.json');
+var testdata = require('../assets/uom.json');
 
 describe('inserting units of measure', function() {
   var token;
