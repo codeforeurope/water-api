@@ -32,6 +32,7 @@ describe('inserting reports', function() {
       done();
     });
   });
+
   testdata.forEach(function(instance) {
     it('should return ' + instance.name, function(done) {
       if(zones[instance.zone]){
@@ -51,7 +52,8 @@ describe('inserting reports', function() {
       });
     });
   });
-  it('should post Reports', function(done) {
+
+  it('should post Reports for Mannheim', function(done) {
     request(app).
     post('/api/reports').
     set('x-access-token', token).
@@ -61,6 +63,42 @@ describe('inserting reports', function() {
       var data = JSON.parse(res.text);
       //console.log(res.text);
       assert.equal(data.reports.length, 11);
+      done();
+    });
+  });
+  it('should post Reports for Brabant Water', function(done) {
+    request(app).
+    post('/api/reports').
+    set('x-access-token', token).
+    attach('file', './assets/reports/brabantwater.json').
+    expect(200).
+    end(function(err, res) {
+      var data = JSON.parse(res.text);
+      assert.equal(data.reports.length, 58);
+      done();
+    });
+  });
+  it('should post Reports for Dunea', function(done) {
+    request(app).
+    post('/api/reports').
+    set('x-access-token', token).
+    attach('file', './assets/reports/dunea.json').
+    expect(200).
+    end(function(err, res) {
+      var data = JSON.parse(res.text);
+      assert.equal(data.reports.length, 15);
+      done();
+    });
+  });
+  it('should post Reports for Evides', function(done) {
+    request(app).
+    post('/api/reports').
+    set('x-access-token', token).
+    attach('file', './assets/reports/evides.json').
+    expect(200).
+    end(function(err, res) {
+      var data = JSON.parse(res.text);
+      assert.equal(data.reports.length, 8);
       done();
     });
   });

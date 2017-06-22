@@ -34,7 +34,6 @@ describe('inserting limits', function() {
       send(instance).
       expect(200).
       end(function(err, res) {
-        console.log(res.text);
         var data = JSON.parse(res.text);
         assert.equal(data.name, instance.name);
         done();

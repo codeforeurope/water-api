@@ -49,7 +49,7 @@ describe('inserting zones', function() {
       });
   });
 
-  it('should post Zones', function(done) {
+  it('should post Zones for Mannheim, Germany', function(done) {
     request(app).
     post('/api/zones').
     set('x-access-token', token).
@@ -62,7 +62,7 @@ describe('inserting zones', function() {
     });
   });
 
-  it('should post Zones in geojson', function(done) {
+  it('should post Zones for Brabant water, the Netherlands', function(done) {
     request(app).
     post('/api/zones').
     set('x-access-token', token).
@@ -71,6 +71,32 @@ describe('inserting zones', function() {
     end(function(err, res) {
       var data = JSON.parse(res.text);
       assert.equal(data.zones.length, 69);
+      done();
+    });
+  });
+
+  it('should post Zones for Evides, the Netherlands', function(done) {
+    request(app).
+    post('/api/zones').
+    set('x-access-token', token).
+    attach('file', './assets/zones/evides.geojson').
+    expect(200).
+    end(function(err, res) {
+      var data = JSON.parse(res.text);
+      assert.equal(data.zones.length, 11);
+      done();
+    });
+  });
+
+  it('should post Zones Dunea, the Netherlands', function(done) {
+    request(app).
+    post('/api/zones').
+    set('x-access-token', token).
+    attach('file', './assets/zones/dunea.geojson').
+    expect(200).
+    end(function(err, res) {
+      var data = JSON.parse(res.text);
+      assert.equal(data.zones.length, 17);
       done();
     });
   });
