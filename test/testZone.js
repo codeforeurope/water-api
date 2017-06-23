@@ -82,9 +82,8 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/evides.geojson').
     expect(200).
     end(function(err, res) {
-      console.log(res.text);
       var data = JSON.parse(res.text);
-      assert.equal(data.zones.length, 11);
+      assert.equal(data.zones.length, 10);
       done();
     });
   });
@@ -98,6 +97,45 @@ describe('inserting zones', function() {
     end(function(err, res) {
       var data = JSON.parse(res.text);
       assert.equal(data.zones.length, 17);
+      done();
+    });
+  });
+
+  it('should post Zone for Bonaire', function(done) {
+    request(app).
+    post('/api/zones').
+    set('x-access-token', token).
+    attach('file', './assets/zones/bq.geojson').
+    expect(200).
+    end(function(err, res) {
+      var data = JSON.parse(res.text);
+      assert.equal(data.zones.length, 1);
+      done();
+    });
+  });
+
+  it('should post Zone for Sint Maarten', function(done) {
+    request(app).
+    post('/api/zones').
+    set('x-access-token', token).
+    attach('file', './assets/zones/sx.geojson').
+    expect(200).
+    end(function(err, res) {
+      var data = JSON.parse(res.text);
+      assert.equal(data.zones.length, 1);
+      done();
+    });
+  });
+
+  it('should post Zone for Curacao', function(done) {
+    request(app).
+    post('/api/zones').
+    set('x-access-token', token).
+    attach('file', './assets/zones/cw.geojson').
+    expect(200).
+    end(function(err, res) {
+      var data = JSON.parse(res.text);
+      assert.equal(data.zones.length, 1);
       done();
     });
   });
