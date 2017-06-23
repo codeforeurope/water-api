@@ -79,7 +79,6 @@
   var populateoptions = [{
     path: 'observations',
     select: 'value uom code -_id',
-    match: { value: { $ne: null }},
     populate: [{
       path: 'uom',
       model: 'Uom',
@@ -108,6 +107,7 @@
         zone = result;
         //get the report for this zone
         models.Report.model.findOne().where({'zones': {$in: [result._id] }}).
+        sort({"issued": -1, "year": -1}).
         select('name authority observations year').
         populate(populateoptions).exec(function(err, report){
           if(err){
