@@ -10,7 +10,7 @@ it('GET Companies should return array with companies', function(done) {
   expect(200).
   end(function(err, res) {
       var data = JSON.parse(res.text);
-      assert.equal(data.length, 5);
+      assert.equal(data.length, 23);
       done();
     });
 });
@@ -24,7 +24,7 @@ it('GET Company should return wueteria', function(done) {
     var data = JSON.parse(res.text);
     assert.equal(data.code, 'wueteria');
     assert.equal(data.url, 'http://wueteria.de');
-    assert.equal(data.country, 'Germany');
+    assert.equal(data.country, 'DE');
     done();
   });
 });
