@@ -76,6 +76,7 @@
         name: params.name,
         url: params.url || null,
         country: params.country || null,
+        type: params.type || 'unknown',
         entered_by: req.user
       });
       tempcompany.save(function (err, company, count) {
