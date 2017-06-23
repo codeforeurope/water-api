@@ -4,4 +4,7 @@ sed -i "s^__SECRET__^$SECRET^g" /water-api/config/config.json
 sed -i "s^__DB_PREFIX__^$DB_PREFIX^g" /water-api/config/config.json
 
 cd /water-api
+cd /assets
+git pull
+cd ..
 npm start
