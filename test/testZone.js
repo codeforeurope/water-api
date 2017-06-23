@@ -82,13 +82,14 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/evides.geojson').
     expect(200).
     end(function(err, res) {
+      console.log(res.text);
       var data = JSON.parse(res.text);
       assert.equal(data.zones.length, 11);
       done();
     });
   });
 
-  it('should post Zones Dunea, the Netherlands', function(done) {
+  it('should post Zones for Dunea, the Netherlands', function(done) {
     request(app).
     post('/api/zones').
     set('x-access-token', token).
