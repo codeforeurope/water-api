@@ -66,7 +66,7 @@ describe('inserting zones', function() {
     request(app).
     post('/api/zones').
     set('x-access-token', token).
-    attach('file', './assets/zones/brabantwater.geojson').
+    attach('file', './assets/zones/brabantwater.json').
     expect(200).
     end(function(err, res) {
       var data = JSON.parse(res.text);
