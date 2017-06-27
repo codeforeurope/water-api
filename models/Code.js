@@ -15,7 +15,7 @@ module.exports = function(mongoose) {
         },
         standard: {
           type: String,
-          enum: ['CAS', 'EC', 'ICSC', 'RTECS', 'UN', 'UNII', 'EEA', 'NA'],
+          enum: ['CAS', 'EC', 'ICSC', 'RTECS', 'UN', 'UNII', 'EEA', 'NA','microbiology_society'],
         },
         value: String,
         label: {
