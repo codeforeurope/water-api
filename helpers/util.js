@@ -28,7 +28,42 @@ clean = function(data, keep) {
   return trim_nulls(obj2);
 };
 
+arrayMin = function (arr) {
+  var len = arr.length, min = Infinity;
+  while (len--) {
+    if (Number(arr[len]) < min) {
+      min = Number(arr[len]);
+    }
+  }
+  return min;
+};
+arrayMax = function(arr) {
+  var len = arr.length, max = -Infinity;
+  while (len--) {
+    if (Number(arr[len]) > max) {
+      max = Number(arr[len]);
+    }
+  }
+  return max;
+};
+arrayAverage = function(arr){
+  var sum = arr.reduce(function(a, b) { return a + b; });
+  var avg = sum / arr.length;
+  return avg;
+};
+
+getUomLabel = function(uoms,code,locale){
+  for(var i=0; i<uoms.length; i++) {
+    if(uoms[i].code === code){
+      return uoms[i].label.locale || uoms[i].label.en;
+    }
+  }
+};
+
 exports.clean = clean;
+exports.arrayMin = arrayMin;
+exports.arrayMax = arrayMax;
+exports.arrayAverage = arrayAverage;
 
 /**
  * Try to create an observation from the json object
@@ -107,4 +142,82 @@ exports.cleanObservations = function(source, locale){
   }
   output[_outputArrayName] = _observations;
   return output;
+};
+exports.getAggregatedObject = function(arr, obj) {
+  for(var i=0; i<arr.length; i++) {
+    if (arr[i].code.label == obj.code.label){
+      //Do something smart, return the array
+      if(arr[i].uom.label !== obj.uom.label){
+        //console.log(obj);
+        var vals = [];
+        //get the code values, unit transform and add to array of values
+        switch(true){
+          case arr[i].uom.code === 'mg_l' && obj.uom.code === 'mug_l':
+            vals = obj.values;
+            //divide by 1000
+            for(var j=0; j<vals.length; j++) {
+              arr[i].values.push(vals[j]/1000);
+            }
+            break;
+          case arr[i].uom.code === 'mug_l' && obj.uom.code === 'mg_l':
+            vals = obj.values;
+            //divide by 1000
+            for(var k=0; k<vals.length; k++) {
+              arr[i].values.push(vals[k]*1000);
+            }
+            break;
+          case arr[i].uom.code === 'dh' && obj.uom.code === 'mmol_l':
+            vals = obj.values;
+            //divide by 1000
+            for(var l=0; l<vals.length; l++) {
+              arr[i].values.push(vals[l]*5.6);
+            }
+            break;
+          case arr[i].uom.code === 'mmol_l' && obj.uom.code === 'dh':
+            vals = obj.values;
+            //divide by 1000
+            for(var m=0; m<vals.length; m++) {
+              arr[i].values.push(vals[m]/5.6);
+            }
+            break;
+          default:
+            console.log("Different " + arr[i].uom.code + ' and ' + obj.uom.code + " for " + obj.code.code);
+        }
+      }
+      return arr;
+    }
+  }
+    // Not found, new object
+    arr.push(obj);
+    return arr;
+};
+
+exports.parseObservation = function(observation, uoms, locale){
+  // Is the values object present and an array?
+  if(observation.values){
+    var values = observation.values;
+    var uom = observation.uom.label;
+    if(observation.uom.code === 'cfu_100ml'){
+      uom = getUomLabel(uoms, "cfu_l", locale);
+      values = observation.values.map(function(value){
+        return value * 10;
+      });
+    }
+    if(observation.uom.code === 'mug_l'){
+      uom = getUomLabel(uoms, "mg_l", locale);
+      values = observation.values.map(function(value){
+        return value / 1000;
+      });
+    }
+
+    return {
+      code: observation.code.label,
+      uom:  uom,
+      min: arrayMin(values),
+      average: arrayAverage(values),
+      max: arrayMax(values),
+      count: values.length
+    };
+  }
+  // Else, is it a regular observation?
 };
