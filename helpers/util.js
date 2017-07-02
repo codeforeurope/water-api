@@ -136,7 +136,9 @@ exports.cleanObservations = function(source, locale){
       value: _outputobservations[x].value,
       min: _outputobservations[x].min,
       max: _outputobservations[x].max,
-      samples: _outputobservations[x].samples
+      samples: _outputobservations[x].samples,
+      description: _outputobservations[x].code.description,
+
     };
     _observations.push(_observation);
   }

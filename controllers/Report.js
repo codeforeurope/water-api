@@ -86,7 +86,7 @@
     },{
       path: 'code',
       model: 'Code',
-      select: 'label -_id'
+      select: 'label description -_id'
     }]
   }];
   module.exports.getreport = function(req, res, next) {

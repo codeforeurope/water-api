@@ -22,7 +22,7 @@ module.exports = function(mongoose) {
             type: String,
             i18n:true
         },
-        definition: {
+        description: {
             type: String,
             i18n:true
         },
