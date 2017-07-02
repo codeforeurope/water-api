@@ -142,7 +142,14 @@ exports.cleanObservations = function(source, locale){
     };
     _observations.push(_observation);
   }
-  output[_outputArrayName] = _observations;
+  var presort = _observations.slice(0);
+  output[_outputArrayName] = presort.sort(
+    function(a,b){
+      var x = a.code.toLowerCase();
+      var y = b.code.toLowerCase();
+      return x < y ? -1 : x > y ? 1 : 0;
+    }
+  );
   return output;
 };
 exports.getAggregatedObject = function(arr, obj) {
