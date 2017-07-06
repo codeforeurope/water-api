@@ -1,4 +1,11 @@
 var models = require('../models');
+var math = require('mathjs');
+math.createUnit('dH', '0.179 mmol/L'); //Deutsche Härte
+math.createUnit('cfu'); //Colony forming units
+math.createUnit('ftu'); //Formazine turbidity units
+math.createUnit('pH'); //Potential of Hydrogen (Acidity)
+math.createUnit('Eq'); //equivalent
+math.createUnit('Bq'); //Becquerel per liter, might be convertable, need to investigate
 
 function trim_nulls(data) {
   var y;
@@ -48,8 +55,12 @@ arrayMax = function(arr) {
 };
 arrayAverage = function(arr){
   var sum = arr.reduce(function(a, b) { return a + b; });
-  var avg = sum / arr.length;
-  return avg;
+  if(arr.length === 0){
+    return 0.0;
+  } else {
+    var avg = sum / arr.length;
+    return parseFloat(avg.toFixed(3));
+  }
 };
 
 getUomLabel = function(uoms,code,locale){
@@ -163,42 +174,16 @@ exports.getAggregatedObject = function(arr, obj) {
   for(var i=0; i<arr.length; i++) {
     if (arr[i].code.label == obj.code.label){
       //Do something smart, return the array
-      if(arr[i].uom.label !== obj.uom.label){
-        var vals = [];
+      if(arr[i].uom.code !== obj.uom.code){
+        var vals = obj.values;
         //get the code values, unit transform and add to array of values
-        switch(true){
-          case arr[i].uom.code === 'mg_l' && obj.uom.code === 'mug_l':
-            vals = obj.values;
-            //divide by 1000
-            for(var j=0; j<vals.length; j++) {
-              arr[i].values.push(vals[j]/1000);
-            }
-            break;
-          case arr[i].uom.code === 'mug_l' && obj.uom.code === 'mg_l':
-            vals = obj.values;
-            //divide by 1000
-            for(var k=0; k<vals.length; k++) {
-              arr[i].values.push(vals[k]*1000);
-            }
-            break;
-          case arr[i].uom.code === 'dh' && obj.uom.code === 'mmol_l':
-            vals = obj.values;
-            //divide by 1000
-            for(var l=0; l<vals.length; l++) {
-              arr[i].values.push(vals[l]*5.6);
-            }
-            break;
-          case arr[i].uom.code === 'mmol_l' && obj.uom.code === 'dh':
-            vals = obj.values;
-            //divide by 1000
-            for(var m=0; m<vals.length; m++) {
-              arr[i].values.push(vals[m]/5.6);
-            }
-            break;
-          default:
-            console.log("Different " + arr[i].uom.code + ' and ' + obj.uom.code + " for " + obj.code.code);
+        for(var j=0; j<vals.length; j++) {
+          var conversion = vals[j] + ' ' + obj.uom.code + ' to ' + arr[i].uom.code;
+          var converted = math.eval(conversion);
+          arr[i].values.push(parseFloat(converted.to(arr[i].uom.code).toString().split(' ')[0]).toFixed(3));
         }
       }
+      //console.log(arr);
       return arr;
     }
   }
