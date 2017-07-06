@@ -9,7 +9,7 @@
       {
         $match: {
           type: {
-            $nin: ["Limit","Label", "Unknown"] //exclude Limit as it is for reports
+            $nin: ["Norm","Label", "Unknown"] //exclude Norm as it is for reports
           }
         }
       },{

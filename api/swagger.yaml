@@ -2,7 +2,7 @@
 swagger: "2.0"
 info:
   description: "This is a the API for The Code For Europe Transparent Water Initiative"
-  version: "1.0.0"
+  version: "1.0.1"
   title: "Water-api"
   contact:
     name: "info@codefor.eu"
@@ -258,23 +258,6 @@ paths:
         400:
           description: "Invalid status value"
       x-swagger-router-controller: "Location"
-  /limits:
-    get:
-      tags:
-      - "limits"
-      summary: "Get legal limits"
-      description: "Get an array of legal limits (US, EU)"
-      operationId: "getlimits"
-      produces:
-      - "application/json"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/Product"
-        400:
-          description: "Invalid status value"
-      x-swagger-router-controller: "Legallimits"
   /unit:
     post:
       tags:
@@ -302,13 +285,38 @@ paths:
         400:
           description: "Invalid status value"
       x-swagger-router-controller: "Uom"
+  /limits:
+    get:
+      deprecated: true
+      tags:
+      - "limits"
+      summary: "Get norms set by various authorities"
+      description: "Get an array of norms (US, EU)"
+      operationId: "getnorms"
+      parameters:
+      - name: "lang"
+        in: "query"
+        type: "string"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Limit"
+        400:
+          description: "Invalid status value"
+      x-swagger-router-controller: "Norms"
   /limit:
     get:
+      deprecated: true
       tags:
       - "limit"
-      summary: "Get legal limits for given Code"
-      description: "Get an legal limit (US, EU or otherwise defined in the database)"
-      operationId: "getlimit"
+      summary: "Get legal norms for given Code"
+      description: "Get an norm (US, EU or otherwise defined in the database)"
+      operationId: "getnorm"
       parameters:
       - name: "code"
         in: "query"
@@ -329,13 +337,14 @@ paths:
               $ref: "#/definitions/Limit"
         400:
           description: "Invalid status value"
-      x-swagger-router-controller: "Legallimits"
+      x-swagger-router-controller: "Norms"
     post:
+      deprecated: true
       tags:
       - "limit"
-      summary: "Post new legal limit"
-      description: "Post a new legal limit"
-      operationId: "postlimit"
+      summary: "Post new norm"
+      description: "Post a new norm"
+      operationId: "postnorm"
       parameters:
       - in: "header"
         name: x-access-token
@@ -344,10 +353,10 @@ paths:
         description: "access-token as provided by issuer"
       - in: "body"
         name: "body"
-        description: "Limit set that needs to be added to the database"
+        description: "Observation norm set that needs to be added to the database"
         required: true
         schema:
-          $ref: "#/definitions/Limit"
+          $ref: "#/definitions/postNorm"
       produces:
       - "application/json"
       responses:
@@ -356,10 +365,91 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Product"
+              $ref: "#/definitions/Norm"
         400:
           description: "Invalid status value"
-      x-swagger-router-controller: "Legallimits"
+      x-swagger-router-controller: "Norms"
+  /norms:
+    get:
+      tags:
+      - "norms"
+      summary: "Get norms set by various authorities"
+      description: "Get an array of norms (US, EU)"
+      operationId: "getnorms"
+      parameters:
+      - name: "lang"
+        in: "query"
+        type: "string"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Norm"
+        400:
+          description: "Invalid status value"
+      x-swagger-router-controller: "Norms"
+  /norm:
+    get:
+      tags:
+      - "norm"
+      summary: "Get legal norms for given Code"
+      description: "Get an norm (US, EU or otherwise defined in the database)"
+      operationId: "getnorm"
+      parameters:
+      - name: "code"
+        in: "query"
+        description: "code value that needs to be considered for filter"
+        required: true
+        type: "string"
+      - name: "lang"
+        in: "query"
+        type: "string"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Norm"
+        400:
+          description: "Invalid status value"
+      x-swagger-router-controller: "Norms"
+    post:
+      tags:
+      - "norm"
+      summary: "Post new norm"
+      description: "Post a new norm"
+      operationId: "postnorm"
+      parameters:
+      - in: "header"
+        name: x-access-token
+        required: true
+        type: string
+        description: "access-token as provided by issuer"
+      - in: "body"
+        name: "body"
+        description: "Observation norm set that needs to be added to the database"
+        required: true
+        schema:
+          $ref: "#/definitions/postNorm"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Norm"
+        400:
+          description: "Invalid status value"
+      x-swagger-router-controller: "Norms"
   /zones:
     post:
       tags:
@@ -432,7 +522,7 @@ paths:
         description: "access-token as provided by issuer"
       - in: "body"
         name: "body"
-        description: "Limit set that needs to be added to the database"
+        description: "Zone that needs to be added to the database"
         required: true
         schema:
           $ref: "#/definitions/Zone"
@@ -572,7 +662,7 @@ paths:
         description: "Product object with observations that needs to be added to the database"
         required: false
         schema:
-          $ref: "#/definitions/Product"
+          $ref: "#/definitions/postProduct"
       responses:
         405:
           description: "Invalid input"
@@ -714,7 +804,7 @@ paths:
         description: "Report object with observations that needs to be added to the database"
         required: true
         schema:
-          $ref: "#/definitions/Report"
+          $ref: "#/definitions/postReport"
       responses:
         405:
           description: "Invalid input"
@@ -779,8 +869,24 @@ definitions:
         type: "string"
       country:
         type: "string"
+  postNorm:
+    description: "A given standard for the maximum allowed quantity of observations of a certain type. There are different norms for instance for Europe and the US. Other norms can be added."
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      authority:
+        type: "string"
+      observations:
+        type: "array"
+        items:
+          $ref: "#/definitions/postObservation"
+      sources:
+        type: "array"
+        items:
+          type: "string"
   Limit:
-    description: "A given standard for the maximum allowed quantity of observations of a certain type. There are different limits for instance for Europe and the US. Other limits can be added."
+    description: "A given standard for the maximum allowed quantity of observations of a certain type. There are different norms for instance for Europe and the US. Other norms can be added."
     type: "object"
     properties:
       name:
@@ -788,6 +894,22 @@ definitions:
       authority:
         type: "string"
       limits:
+        type: "array"
+        items:
+          $ref: "#/definitions/oldObservation"
+      sources:
+        type: "array"
+        items:
+          type: "string"
+  Norm:
+    description: "A given standard for the maximum allowed quantity of observations of a certain type. There are different norms for instance for Europe and the US. Other norms can be added."
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      authority:
+        type: "string"
+      observations:
         type: "array"
         items:
           $ref: "#/definitions/Observation"
@@ -807,8 +929,8 @@ definitions:
         example: "Measurement location"
       geometry:
         $ref: "#/definitions/Point"
-  Observation:
-    description: "An observation of quantities of a certain entity, given in unit of measure. Observations can be part of limits, reports and products."
+  postObservation:
+    description: "An observation of quantities of a certain entity, given in unit of measure. Observations can be part of norms, reports and products."
     type: "object"
     required:
     - "code"
@@ -828,10 +950,69 @@ definitions:
         example: 2.0
       uom:
         type: "string"
-        example: "mg_l"
+        example: "mg/l"
       code:
         type: "string"
         example: "natrium"
+  oldObservation:
+    description: "An observation of quantities of a certain entity, given in unit of measure. Observations can be part of norms, reports and products."
+    type: "object"
+    required:
+    - "code"
+    - "uom"
+    properties:
+      value:
+        type: "number"
+        format: "float"
+        example: 1.5
+      min:
+        type: "number"
+        format: "float"
+        example: 0.5
+      max:
+        type: "number"
+        format: "float"
+        example: 2.0
+      uom:
+        type: "string"
+        example: "μg/L"
+      code:
+        type: "string"
+        example: "natrium"
+  Observation:
+    description: "An observation of quantities of a certain entity, given in unit of measure. Observations can be part of norms, reports and products."
+    type: "object"
+    required:
+    - "code"
+    - "uom"
+    properties:
+      value:
+        type: "number"
+        format: "float"
+        example: 1.5
+      min:
+        type: "number"
+        format: "float"
+        example: 0.5
+      max:
+        type: "number"
+        format: "float"
+        example: 2.0
+      uom:
+        $ref: "#/definitions/getUom"
+      code:
+        type: "string"
+        example: "natrium"
+  getUom:
+    description: "A unit of measure"
+    type: "object"
+    properties:
+      code:
+        type: "string"
+        example: "ug/l"
+      label:
+        type: "string"
+        example: "μg/l"
   Point:
     description: "geojson [Point](http://geojson.org/geojson-spec.html#id2)"
     type: "object"
@@ -885,6 +1066,25 @@ definitions:
         $ref: "#/definitions/i18nString"
       definition:
         $ref: "#/definitions/i18nString"
+  postProduct:
+    description: "A bottled water product. Observations on a product are what people can read from labels or measure themselves with a device."
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      vendor:
+        type: "string"
+      volume:
+        type: "number"
+        format: "float"
+      observations:
+        type: "array"
+        items:
+          $ref: "#/definitions/postObservation"
+      sources:
+        type: "array"
+        items:
+          type: "string"
   Product:
     description: "A bottled water product. Observations on a product are what people can read from labels or measure themselves with a device."
     type: "object"
@@ -900,6 +1100,32 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/Observation"
+      sources:
+        type: "array"
+        items:
+          type: "string"
+  postReport:
+    description: "An (official) report regarding water quality in a certain zone or on a location."
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      description:
+        type: "string"
+      authority:
+        type: "string"
+      zone:
+        type: "string"
+      zones:
+        type: "array"
+        items:
+          type: "string"
+      year:
+        type: "string"
+      observations:
+        type: "array"
+        items:
+          $ref: "#/definitions/postObservation"
       sources:
         type: "array"
         items:

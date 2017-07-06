@@ -21,7 +21,7 @@ describe('inserting observation', function() {
   });
 
   it('should return Kalium', function(done) {
-    models.Uom.model.findOne({ "code": "mg_l" }, function(err, mgl){
+    models.Uom.model.findOne({ "code": "mg/l" }, function(err, mgl){
       models.Code.model.findOne({standard: 'CAS', value: '7440-09-7'},function(err, potassium){
         var testObservation = models.Observation.model({ value: 200, uom: mgl, code: potassium, entered_by: user });
         testObservation.save(function(err, result, count){

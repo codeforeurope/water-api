@@ -16,7 +16,7 @@ module.exports = function(mongoose) {
         code: {type: ObjectId, ref: 'Code', required: true},
         type: {
           type: String,
-          enum: ['Report', 'Limit', 'Location', 'Zone', 'Unknown', 'Label'],
+          enum: ['Report', 'Norm', 'Location', 'Zone', 'Unknown', 'Label'],
           default: 'Unknown',
           required: true
         },

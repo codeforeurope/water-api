@@ -29,9 +29,9 @@ it('GET Company should return wueteria', function(done) {
   });
 });
 
-it('GET limits should return array of 3 limits', function(done) {
+it('GET norms should return array of 3 norms', function(done) {
   request(app).
-  get('/api/limits').
+  get('/api/norms').
   expect(200).
   end(function(err, res) {
       var data = JSON.parse(res.text);
@@ -40,9 +40,9 @@ it('GET limits should return array of 3 limits', function(done) {
     });
 });
 
-it('GET limit should return EU limit', function(done) {
+it('GET norm should return EU norm', function(done) {
   request(app).
-  get('/api/limit').
+  get('/api/norm').
   query({ code: 'EU' }).
   expect(200).
   end(function(err, res) {

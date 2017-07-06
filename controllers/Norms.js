@@ -1,5 +1,5 @@
 /**
- * Contains legal limits per standard regarding water quality
+ * Contains legal values per norm regarding water quality
  * For guage.js
  */
 (function () {
@@ -10,12 +10,12 @@
 
   // Options for the mongoose query
   var populateoptions = {
-    path: 'limits',
+    path: 'observations',
     select: 'value min max uom code -_id',
     populate: [{
       path: 'uom',
       model: 'Uom',
-      select: 'label -_id'
+      select: 'label code -_id'
     },{
       path: 'code',
       model: 'Code',
@@ -23,19 +23,23 @@
     }]
   };
 
-  module.exports.getlimits = function (req, res, next) {
+  module.exports.getnorms = function (req, res, next) {
     var params = req.swagger.params;
-    //find a limit from the database
-    models.Limit.model.find().
-    select('name authority sources limits -_id').
-    populate(populateoptions).exec(function(err, limits){
+    var flatten;
+    if(req.swagger.apiPath.indexOf('/limits') != -1){
+      flatten = true;
+    }
+    //find a norm from the database
+    models.Norm.model.find().
+    select('name authority sources observations -_id').
+    populate(populateoptions).exec(function(err, norms){
       var final = [];
       if(err){
         next(err);
       }
 
-      for (var limit in limits) {
-        var output = utils.cleanObservations(limits[limit], req.locale);
+      for (var y in norms) {
+        var output = utils.cleanObservations(norms[y], req.locale, flatten);
         final.push(output);
       }
 
@@ -45,19 +49,23 @@
     });
   };
 
-  module.exports.getlimit = function (req, res, next) {
+  module.exports.getnorm = function (req, res, next) {
     var params = req.swagger.params;
-    //find a limit from the database
-    models.Limit.model.findOne({name: params.code.value}).
-    select('name authority sources limits -_id').
-    populate(populateoptions).exec(function(err, limit){
+    var flatten;
+    if(req.swagger.apiPath.indexOf('/limit') != -1){
+      flatten = true;
+    }
+    //find a norm from the database
+    models.Norm.model.findOne({name: params.code.value}).
+    select('name authority sources observations -_id').
+    populate(populateoptions).exec(function(err, norm){
       if(err){
         next(err);
       }
-      if(limit){
+      if(norm){
         res.setHeader('content-type', 'application/json');
         res.setHeader('charset', 'utf-8');
-        res.end(JSON.stringify(utils.cleanObservations(limit, req.locale).limits, null, 2));
+        res.end(JSON.stringify(utils.cleanObservations(norm, req.locale, flatten).observations, null, 2));
       } else {
         err = {
           code: 402,
@@ -68,12 +76,12 @@
       }
     });
   };
-  module.exports.postlimit = function(req, res, next) {
+  module.exports.postnorm = function(req, res, next) {
     var input = req.swagger.params.body.value;
     var _observations = [];
-    async.each(input.limits,
-      function(limit, callback){
-        utils.createObservation(limit, req.user, 'Limit', function(err, output){
+    async.each(input.observations,
+      function(observation, callback){
+        utils.createObservation(observation, req.user, 'Norm', function(err, output){
           if (!err){
             _observations.push(output);
           }
@@ -81,9 +89,9 @@
         });
       }, function(err){
         if(err) next(err);
-        var _final = models.Limit.model({
+        var _final = models.Norm.model({
           name: input.name,
-          limits: _observations,
+          observations: _observations,
           sources: input.sources || null,
           authority: input.authority || null
         });

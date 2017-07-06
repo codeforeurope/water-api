@@ -85,7 +85,7 @@ exports.createObservation = function(jsonObject, user, type, cb){
         cb(err, null);
       } else {
         code = _code;
-        var _observation = models.Observation.model.create({
+        var obs = {
           value: jsonObject.value,
           min: jsonObject.min,
           max: jsonObject.max,
@@ -94,7 +94,11 @@ exports.createObservation = function(jsonObject, user, type, cb){
           code: code,
           type: type,
           entered_by: user
-        }, function(err,result) {
+        };
+        if(jsonObject.entered_at){
+          obs.entered_at = jsonObject.entered_at;
+        }
+        var _observation = models.Observation.model.create(obs, function(err,result) {
           if (err) {
             cb(err, null);
           } else {
@@ -111,35 +115,38 @@ exports.createObservation = function(jsonObject, user, type, cb){
  * Representation that can be sent as
  * a response.
  */
-exports.cleanObservations = function(source, locale){
+exports.cleanObservations = function(source, locale, flatten){
   var output = source.toJSONLocalizedOnly(locale, 'en');
   output = clean(output, true);
   if(output.vendor){
     output.vendor = clean(output.vendor, true);
   }
-
-  if(output.limits){
-    _outputArrayName = "limits";
-    _outputobservations = output.limits;
-  } else if (output.observations){
-    _outputArrayName = "observations";
+  _outputArrayName = "observations";
+  if(output.observations){
     _outputobservations = output.observations;
   } else {
-    return output;
+    _outputobservations = [];
   }
   var _observations = [];
 
   for (var x in _outputobservations) {
     var _observation = {
-      uom: _outputobservations[x].uom.label,
+      uom: {
+        "label":_outputobservations[x].uom.label,
+        "code": _outputobservations[x].uom.code
+      },
       code: _outputobservations[x].code.label,
       value: _outputobservations[x].value,
       min: _outputobservations[x].min,
       max: _outputobservations[x].max,
       samples: _outputobservations[x].samples,
       description: _outputobservations[x].code.description,
-
     };
+    if(flatten){
+      _outputArrayName = "limits";
+      _observation.uom = _outputobservations[x].uom.label;
+      delete output.observations;
+    }
     _observations.push(_observation);
   }
   var presort = _observations.slice(0);
@@ -157,7 +164,6 @@ exports.getAggregatedObject = function(arr, obj) {
     if (arr[i].code.label == obj.code.label){
       //Do something smart, return the array
       if(arr[i].uom.label !== obj.uom.label){
-        //console.log(obj);
         var vals = [];
         //get the code values, unit transform and add to array of values
         switch(true){
@@ -205,19 +211,13 @@ exports.parseObservation = function(observation, uoms, locale){
   // Is the values object present and an array?
   if(observation.values){
     var values = observation.values;
-    var uom = observation.uom.label;
-    if(observation.uom.code === 'cfu_100ml'){
-      uom = getUomLabel(uoms, "cfu_l", locale);
-      values = observation.values.map(function(value){
-        return value * 10;
-      });
-    }
-    if(observation.uom.code === 'mug_l'){
-      uom = getUomLabel(uoms, "mg_l", locale);
-      values = observation.values.map(function(value){
-        return value / 1000;
-      });
-    }
+    var uom = {
+      code: observation.uom.code,
+      label: observation.uom.label,
+    };
+    // values = observation.values.map(function(value){
+    //   return value * 10;
+    // });
 
     return {
       code: observation.code.label,

@@ -5,9 +5,9 @@ var request = require('supertest');
 var app = require('../server');
 var models = require('../models');
 
-var testdata = require('../assets/limits.json');
+var testdata = require('../assets/norms.json');
 
-describe('inserting limits', function() {
+describe('inserting norms', function() {
   var token;
   var user;
 
@@ -29,7 +29,7 @@ describe('inserting limits', function() {
   testdata.forEach(function(instance) {
     it('should return ' + instance.name, function(done) {
       request(app).
-      post('/api/limit').
+      post('/api/norm').
       set('x-access-token', token).
       send(instance).
       expect(200).

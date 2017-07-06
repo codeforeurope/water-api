@@ -1,6 +1,5 @@
 /**
- * Contains legal limits per standard regarding water quality
- * For guage.js
+ * Reports
  */
 (function () {
   'use strict';
@@ -25,7 +24,10 @@
 
     async.each(params.observations,
       function(observation, cb2) {
-        utils.createObservation(observation, params.entered_by, 'Zone', function(err, output) {
+        if(params.issued){
+          observation.entered_at = params.issued;
+        }
+        utils.createObservation(observation, params.entered_by, 'Report', function(err, output) {
           // Do not handle the error, skip faulty Observations
           if (!err && output){
             _observations.push(output);
@@ -82,7 +84,7 @@
     populate: [{
       path: 'uom',
       model: 'Uom',
-      select: 'label -_id'
+      select: 'label code -_id'
     },{
       path: 'code',
       model: 'Code',

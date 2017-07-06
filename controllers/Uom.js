@@ -1,6 +1,5 @@
 /**
- * Contains legal limits per standard regarding water quality
- * For guage.js
+ * Uoms
  */
 (function () {
   'use strict';

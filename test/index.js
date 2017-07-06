@@ -2,13 +2,13 @@
 require("./testSwagger");
 
 // Model testing
-//require("./testUom");
+
 describe('Preparing data', function() {
   require("./testUom");
   require("./testCode");
   require("./testCompany");
   require("./testProduct");
-  require("./testLimits");
+  require("./testNorms");
   require("./testZone");
   require("./testObservation");
   require("./testReport");

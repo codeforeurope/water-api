@@ -1,6 +1,5 @@
 /**
- * Contains legal limits per standard regarding water quality
- * For guage.js
+ * Products
  */
 (function () {
   'use strict';
@@ -29,7 +28,7 @@
 
   module.exports.getproducts = function (req, res, next) {
     var params = req.swagger.params;
-    //find a limit from the database
+    //find a Product from the database
     models.Product.model.find().
     select('name vendor volume').
     populate(populateoptions).
@@ -50,7 +49,6 @@
 
   module.exports.getproductbycode = function (req, res, next) {
     var params = req.swagger.params;
-    //find a limit from the database
     models.Product.model.findOne({code: params.code.value}).
     select('name vendor volume sources observations').
     populate(populateoptions).exec(function(err, product){
@@ -74,7 +72,6 @@
 
   module.exports.getproduct = function (req, res, next) {
     var params = req.swagger.params;
-    //find a limit from the database
     models.Product.model.findById(params.id.value).
     select('name vendor volume sources observations').
     populate(populateoptions).exec(function(err, product){
