@@ -75,6 +75,19 @@ describe('inserting zones', function() {
     });
   });
 
+  it('should post Zones for PWN, the Netherlands', function(done) {
+    request(app).
+    post('/api/zones').
+    set('x-access-token', token).
+    attach('file', './assets/zones/pwn.geojson').
+    expect(200).
+    end(function(err, res) {
+      var data = JSON.parse(res.text);
+      assert.equal(data.zones.length, 5);
+      done();
+    });
+  });
+
   it('should post Zones for Evides, the Netherlands', function(done) {
     request(app).
     post('/api/zones').
@@ -83,7 +96,7 @@ describe('inserting zones', function() {
     expect(200).
     end(function(err, res) {
       var data = JSON.parse(res.text);
-      assert.equal(data.zones.length, 10);
+      assert.equal(data.zones.length, 11);
       done();
     });
   });

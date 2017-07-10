@@ -9,6 +9,7 @@ describe('Preparing data', function() {
   require("./testCompany");
   require("./testProduct");
   require("./testNorms");
+  require("./testLocation");
   require("./testZone");
   require("./testObservation");
   require("./testReport");

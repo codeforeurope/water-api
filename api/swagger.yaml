@@ -231,6 +231,33 @@ paths:
           description: "Validation exception"
       x-swagger-router-controller: "Location"
   /locations:
+    post:
+      tags:
+      - "locations"
+      operationId: "postlocations"
+      consumes:
+        - "multipart/form-data"
+        - "application/x-www-form-urlencoded"
+      parameters:
+        - in: "header"
+          name: x-access-token
+          required: true
+          type: string
+          description: "access-token as provided by issuer"
+        - in: "formData"
+          name: "file"
+          type: file
+          description: "json file containing location definitions"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Location"
+        400:
+          description: "Invalid status value"
+      x-swagger-router-controller: "Location"
     get:
       tags:
       - "locations"
@@ -771,6 +798,12 @@ paths:
         required: true
         type: "number"
         format: "float"
+      - in: "query"
+        name: "geometry"
+        description: "If set, return geometry for zones and plants."
+        required: false
+        type: boolean
+        allowEmptyValue: true
       produces:
       - "application/json"
       responses:

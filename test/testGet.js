@@ -10,7 +10,7 @@ it('GET Companies should return array with companies', function(done) {
   expect(200).
   end(function(err, res) {
       var data = JSON.parse(res.text);
-      assert.equal(data.length, 23);
+      assert.equal(data.length, 24);
       done();
     });
 });
@@ -29,13 +29,13 @@ it('GET Company should return wueteria', function(done) {
   });
 });
 
-it('GET norms should return array of 3 norms', function(done) {
+it('GET norms should return array of 5 norms', function(done) {
   request(app).
   get('/api/norms').
   expect(200).
   end(function(err, res) {
       var data = JSON.parse(res.text);
-      assert.equal(data.length, 3);
+      assert.equal(data.length, 5);
       done();
     });
 });
@@ -47,7 +47,7 @@ it('GET norm should return EU norm', function(done) {
   expect(200).
   end(function(err, res) {
       var data = JSON.parse(res.text);
-      assert.equal(data.length, 8);
+      assert.equal(data.length, 17);
       done();
     });
 });

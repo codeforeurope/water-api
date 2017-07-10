@@ -15,8 +15,8 @@ module.exports = function(mongoose) {
         country: String,
         type: {
           type: String,
-          enum: ['access', 'provider', 'infrastructure', 'vendor', 'unknown', 'government'],
-          default: 'unknown',
+          enum: ['Access', 'Provider', 'Infrastructure', 'Vendor', 'Unknown', 'Government'],
+          default: 'Unknown',
           required: true
         },
         entered_at: {type: Date, required: true, default: Date},

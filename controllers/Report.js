@@ -93,6 +93,7 @@
   }];
   module.exports.getreport = function(req, res, next) {
     var params = req.swagger.params;
+    console.log(params);
     var point = {
       type: "Point",
       coordinates: [ params.lon.value, params.lat.value ]
@@ -110,7 +111,7 @@
         //get the report for this zone
         models.Report.model.findOne().where({'zones': {$in: [result._id] }}).
         sort({"issued": -1, "year": -1}).
-        select('name authority observations year').
+        select('name authority observations plants year').
         populate(populateoptions).exec(function(err, report){
           if(err){
             next(err);
@@ -119,7 +120,19 @@
             var _year = moment(report.year).local().format("YYYY");
             out = utils.cleanObservations(report, req.locale);
             out.year = _year;
-            out.zone = {name: zone.name, id: zone._id};
+            if(params.geometry.value){
+              out.zone = {
+                "type": "Feature",
+                "properties":{
+                  id: zone._id,
+                  name: zone.name,
+                  alternatives: zone.alternatives
+                },
+                geometry: zone.geometry,
+              };
+            } else {
+              delete out.zone;
+            }
             res.setHeader('content-type', 'application/json');
             res.setHeader('charset', 'utf-8');
             res.end(JSON.stringify(out, null, 2));

@@ -6,18 +6,40 @@
 
 
   var saveZone = function(params, callback){
-    var tempzone = new models.Zone.model(params);
-    tempzone.save(function (err, zone, count) {
-      if(err){
-        callback(err, null);
-      } else {
-        var final = {
-          "name": zone.name,
-          "id": zone._id
-        };
-        callback(null, final);
-      }
-    });
+    if(!params.operator){
+      var tempzone = new models.Zone.model(params);
+      tempzone.save(function (err, zone, count) {
+        if(err){
+          callback(err, null);
+        } else {
+          var final = {
+            "name": zone.name,
+            "id": zone._id
+          };
+          callback(null, final);
+        }
+      });
+    } else {
+      models.Company.model.findOne({code: params.operator}, function(err, output) {
+        if(err) {
+          callback(err, null);
+        } else {
+          params.operator = output;
+          var tempzone = new models.Zone.model(params);
+          tempzone.save(function (err, zone, count) {
+            if(err){
+              callback(err, null);
+            } else {
+              var final = {
+                "name": zone.name,
+                "id": zone._id
+              };
+              callback(null, final);
+            }
+          });
+        }
+      });
+    }
   };
 
   module.exports.getzone = function(req, res, next) {
@@ -97,6 +119,7 @@
           function(feature, callback){
             feature.entered_by = req.user;
             feature.name = feature.properties.name;
+            feature.operator = feature.properties.operator;
             feature.alternatives = feature.properties.alternatives || null;
             saveZone(feature, function(err, output){
               if (!err){

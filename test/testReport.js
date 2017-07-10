@@ -89,6 +89,18 @@ describe('inserting reports', function() {
       done();
     });
   });
+  it('should post Reports for PWN', function(done) {
+    request(app).
+    post('/api/reports').
+    set('x-access-token', token).
+    attach('file', './assets/reports/pwn.json').
+    expect(200).
+    end(function(err, res) {
+      var data = JSON.parse(res.text);
+      assert.equal(data.reports.length, 48);
+      done();
+    });
+  });
   it('should post Reports for Evides', function(done) {
     request(app).
     post('/api/reports').
