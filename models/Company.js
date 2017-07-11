@@ -15,7 +15,7 @@ module.exports = function(mongoose) {
         country: String,
         type: {
           type: String,
-          enum: ['Access', 'Provider', 'Infrastructure', 'Vendor', 'Unknown', 'Government'],
+          enum: ['Access', 'Provider', 'Infrastructure', 'Vendor', 'Unknown', 'Government', 'Quality'],
           default: 'Unknown',
           required: true
         },

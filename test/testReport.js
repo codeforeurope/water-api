@@ -73,7 +73,7 @@ describe('inserting reports', function() {
     expect(200).
     end(function(err, res) {
       var data = JSON.parse(res.text);
-      assert.equal(data.reports.length, 57);
+      assert.equal(data.reports.length, 58);
       done();
     });
   });
@@ -98,6 +98,18 @@ describe('inserting reports', function() {
     end(function(err, res) {
       var data = JSON.parse(res.text);
       assert.equal(data.reports.length, 48);
+      done();
+    });
+  });
+  it('should post Reports for Waternet', function(done) {
+    request(app).
+    post('/api/reports').
+    set('x-access-token', token).
+    attach('file', './assets/reports/waternet.json').
+    expect(200).
+    end(function(err, res) {
+      var data = JSON.parse(res.text);
+      assert.equal(data.reports.length, 1);
       done();
     });
   });

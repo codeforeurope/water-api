@@ -10,7 +10,7 @@ it('GET Companies should return array with companies', function(done) {
   expect(200).
   end(function(err, res) {
       var data = JSON.parse(res.text);
-      assert.equal(data.length, 24);
+      assert.equal(data.length, 26);
       done();
     });
 });

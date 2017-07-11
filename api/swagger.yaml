@@ -1147,9 +1147,15 @@ definitions:
         type: "string"
       authority:
         type: "string"
+      operator:
+        type: "string"
       zone:
         type: "string"
       zones:
+        type: "array"
+        items:
+          type: "string"
+      plants:
         type: "array"
         items:
           type: "string"

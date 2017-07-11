@@ -114,6 +114,19 @@ describe('inserting zones', function() {
     });
   });
 
+  it('should post Zones for Waternet, the Netherlands', function(done) {
+    request(app).
+    post('/api/zones').
+    set('x-access-token', token).
+    attach('file', './assets/zones/waternet.geojson').
+    expect(200).
+    end(function(err, res) {
+      var data = JSON.parse(res.text);
+      assert.equal(data.zones.length, 2);
+      done();
+    });
+  });
+
   it('should post Zone for Bonaire', function(done) {
     request(app).
     post('/api/zones').
