@@ -31,7 +31,7 @@ describe('inserting locations', function() {
     expect(200).
     end(function(err, res) {
       var data = JSON.parse(res.text);
-      assert.equal(data.locations.length, 172);
+      assert.equal(data.locations.length, 173);
       done();
     });
   });

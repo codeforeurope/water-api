@@ -3,6 +3,57 @@
   var async = require("async");
   var models = require('../models');
   var utils = require('../helpers/util.js');
+  var async = require("async");
+  var populateoptions = [
+    {
+      path: 'uom',
+      model: 'Uom',
+      select: 'label code -_id'
+    },{
+      path: 'code',
+      model: 'Code',
+      select: 'label description -_id'
+    }
+  ];
+  module.exports.getobservationserrors = function (req, res, next) {
+    models.Observation.model.find({$where: "this.value > this.max"}).
+    populate(populateoptions).
+    exec(function(err, result){
+      if(err){
+        next(err);
+      }
+      if(result){
+        var final = {};
+        //get the report per observation
+        async.each(result,
+          function(feature, callback){
+            var temp = {
+              "code": feature.code.label.en,
+              value: feature.value,
+              max: feature.max,
+              min: feature.min
+            };
+            models.Report.model.find({ observations: { $in: [feature] } }).exec(function(err,result2){
+              if(err){
+                next(err);
+              }
+              if(result2){
+                final[result2[0].name] = final[result2[0].name] || {report:result2[0].sources[0], errors:[]};
+                final[result2[0].name].errors.push(temp);
+                callback()
+              }
+            });
+          }, function(err){
+            res.setHeader('content-type', 'application/json');
+            res.setHeader('charset', 'utf-8');
+            res.end(JSON.stringify(final, null, 2));
+          }
+        );
+
+
+      }
+    });
+  };
 
   module.exports.getobservationsavg = function (req, res, next) {
     models.Observation.model.aggregate(
@@ -48,7 +99,8 @@
               // Now parse observations (once more);
               var formattedobservations = [];
               for(var i=0; i<_observations.length; i++) {
-                formattedobservations.push(utils.parseObservation(_observations[i], uoms, req.locale));
+                var parsed = utils.parseObservation(_observations[i], uoms, req.locale)
+                formattedobservations.push(parsed);
               }
               res.setHeader('content-type', 'application/json');
               res.setHeader('charset', 'utf-8');

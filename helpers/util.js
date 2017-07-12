@@ -54,12 +54,12 @@ arrayMax = function(arr) {
   return max;
 };
 arrayAverage = function(arr){
-  var sum = arr.reduce(function(a, b) { return a + b; });
+  var sum = arr.reduce(function(a, b) { return parseFloat(a) + parseFloat(b); });
   if(arr.length === 0){
     return 0.0;
   } else {
     var avg = sum / arr.length;
-    return parseFloat(avg.toFixed(3));
+    return avg;
   }
 };
 
@@ -170,41 +170,42 @@ exports.cleanObservations = function(source, locale, flatten){
   );
   return output;
 };
+
 exports.getAggregatedObject = function(arr, obj) {
+
   for(var i=0; i<arr.length; i++) {
-    if (arr[i].code.label == obj.code.label){
-      //Do something smart, return the array
+    if (arr[i].code.label == obj.code.label) {
+      var vals = obj.values;
+      var convertedVals = [];
       if(arr[i].uom.code !== obj.uom.code){
-        var vals = obj.values;
-        //get the code values, unit transform and add to array of values
+        // We need to transform
         for(var j=0; j<vals.length; j++) {
           var conversion = vals[j] + ' ' + obj.uom.code + ' to ' + arr[i].uom.code;
           var converted = math.eval(conversion);
-          arr[i].values.push(parseFloat(converted.to(arr[i].uom.code).toString().split(' ')[0]).toFixed(3));
+          var convertedValue = parseFloat(converted.to(arr[i].uom.code).toString().split(' ')[0]);
+          //console.log(conversion + ' = ' + convertedValue);
+          convertedVals.push(convertedValue);
         }
+      } else {
+        convertedVals = vals;// No transform needed, push
       }
-      //console.log(arr);
+      arr[i].values.push(convertedVals);
       return arr;
     }
   }
-    // Not found, new object
-    arr.push(obj);
-    return arr;
+  arr.push(obj);
+  return arr;
 };
 
 exports.parseObservation = function(observation, uoms, locale){
-  // Is the values object present and an array?
   if(observation.values){
     var values = observation.values;
     var uom = {
       code: observation.uom.code,
       label: observation.uom.label,
     };
-    // values = observation.values.map(function(value){
-    //   return value * 10;
-    // });
-
-    return {
+    var avg = arrayAverage(values);
+    var out = {
       code: observation.code.label,
       uom:  uom,
       min: arrayMin(values),
@@ -212,6 +213,6 @@ exports.parseObservation = function(observation, uoms, locale){
       max: arrayMax(values),
       count: values.length
     };
+    return out;
   }
-  // Else, is it a regular observation?
 };

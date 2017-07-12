@@ -565,6 +565,29 @@ paths:
         400:
           description: "Invalid status value"
       x-swagger-router-controller: "Zone"
+  /observations/errors:
+    get:
+      tags:
+      - "observations"
+      summary: "Get observations that are in error"
+      description: "Get the observations that have value > max in the db"
+      operationId: "getobservationserrors"
+      parameters:
+        - name: "lang"
+          in: "query"
+          type: "string"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Observation"
+        400:
+          description: "Invalid status value"
+      x-swagger-router-controller: "Observation"
   /observations/average:
     get:
       tags:
