@@ -19,10 +19,9 @@ describe('inserting zones', function() {
       email: chance.email(),
       token: token
     };
-    new models.User.model(testuser).save(function(err, result, count) {
+    new models.User.model(testuser).save(function(err) {
       if(err) done(err);
-      user = result;
-      done();
+      else done();
     });
   });
 
@@ -45,7 +44,7 @@ describe('inserting zones', function() {
     expect(200).
     end(function(err, res) {
       if(err) done(err);
-      done();
+      else done();
     });
   });
 
@@ -56,10 +55,13 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/mannheim.json').
     expect(200).
     end(function(err, res) {
-      if(err) done(err);
-      var data = JSON.parse(res.text);
-      assert.equal(data.zones.length, 9);
-      done();
+      if(err) {
+        done(err);
+      } else {
+        var data = JSON.parse(res.text);
+        assert.equal(data.zones.length, 9);
+        done();
+      }
     });
   });
 
@@ -70,10 +72,13 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/brabantwater.json').
     expect(200).
     end(function(err, res) {
-      if(err) done(err);
-      var data = JSON.parse(res.text);
-      assert.equal(data.zones.length, 69);
-      done();
+      if(err) {
+        done(err);
+      } else {
+        var data = JSON.parse(res.text);
+        assert.equal(data.zones.length, 69);
+        done();
+      }
     });
   });
 
@@ -84,10 +89,13 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/pwn.geojson').
     expect(200).
     end(function(err, res) {
-      if(err) done(err);
-      var data = JSON.parse(res.text);
-      assert.equal(data.zones.length, 5);
-      done();
+      if(err) {
+        done(err);
+      } else {
+        var data = JSON.parse(res.text);
+        assert.equal(data.zones.length, 5);
+        done();
+      }
     });
   });
 
@@ -98,10 +106,13 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/evides.geojson').
     expect(200).
     end(function(err, res) {
-      if(err) done(err);
-      var data = JSON.parse(res.text);
-      assert.equal(data.zones.length, 11);
-      done();
+      if(err) {
+        done(err);
+      } else {
+        var data = JSON.parse(res.text);
+        assert.equal(data.zones.length, 11);
+        done();
+      }
     });
   });
 
@@ -112,10 +123,13 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/dunea.geojson').
     expect(200).
     end(function(err, res) {
-      if(err) done(err);
-      var data = JSON.parse(res.text);
-      assert.equal(data.zones.length, 17);
-      done();
+      if(err) {
+        done(err);
+      } else {
+        var data = JSON.parse(res.text);
+        assert.equal(data.zones.length, 17);
+        done();
+      }
     });
   });
 
@@ -126,10 +140,13 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/waternet.geojson').
     expect(200).
     end(function(err, res) {
-      if(err) done(err);
-      var data = JSON.parse(res.text);
-      assert.equal(data.zones.length, 2);
-      done();
+      if(err) {
+        done(err);
+      } else {
+        var data = JSON.parse(res.text);
+        assert.equal(data.zones.length, 2);
+        done();
+      }
     });
   });
 
@@ -140,10 +157,13 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/bq.geojson').
     expect(200).
     end(function(err, res) {
-      if(err) done(err);
-      var data = JSON.parse(res.text);
-      assert.equal(data.zones.length, 1);
-      done();
+      if(err) {
+        done(err);
+      } else {
+        var data = JSON.parse(res.text);
+        assert.equal(data.zones.length, 1);
+        done();
+      }
     });
   });
 
@@ -154,10 +174,13 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/sx.geojson').
     expect(200).
     end(function(err, res) {
-      if(err) done(err);
-      var data = JSON.parse(res.text);
-      assert.equal(data.zones.length, 1);
-      done();
+      if(err) {
+        done(err);
+      } else {
+        var data = JSON.parse(res.text);
+        assert.equal(data.zones.length, 1);
+        done();
+      }
     });
   });
 
@@ -168,10 +191,13 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/cw.geojson').
     expect(200).
     end(function(err, res) {
-      if(err) done(err);
-      var data = JSON.parse(res.text);
-      assert.equal(data.zones.length, 1);
-      done();
+      if(err) {
+        done(err);
+      } else {
+        var data = JSON.parse(res.text);
+        assert.equal(data.zones.length, 1);
+        done();
+      }
     });
   });
 
@@ -186,10 +212,13 @@ describe('inserting zones', function() {
       }).
       expect(200).
       end(function(err, res) {
-        if(err) done(err);
-        var data = JSON.parse(res.text);
-        assert.equal(data.name, instance.properties.name);
-        done();
+        if(err) {
+          done(err);
+        } else {
+          var data = JSON.parse(res.text);
+          assert.equal(data.name, instance.properties.name);
+          done();
+        }
       });
     });
   });

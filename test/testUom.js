@@ -9,7 +9,6 @@ var testdata = require('../assets/uom.json');
 
 describe('inserting units of measure', function() {
   var token;
-  var user;
 
   before(function(done) {
     var Chance = require('chance');
@@ -23,8 +22,7 @@ describe('inserting units of measure', function() {
     var user = new models.User.model(testuser);
     user.save(function(err, user, count) {
       if (err) done(err);
-      user = user;
-      done();
+      else done();
     });
   });
   testdata.forEach(function(instance) {
@@ -35,10 +33,13 @@ describe('inserting units of measure', function() {
       send(instance).
       expect(200).
       end(function(err, res) {
-        if (err) done(err);
-        var data = JSON.parse(res.text);
-        assert.equal(data.code, instance.code);
-        done();
+        if (err) {
+          done(err);
+        } else {
+          var data = JSON.parse(res.text);
+          assert.equal(data.code, instance.code);
+          done();
+        }
       });
     });
   });

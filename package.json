@@ -37,6 +37,6 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "export NODE_ENV=test && mocha --timeout 10000 test/index.js"
+    "test": "mocha --exit --timeout 10000 test/index.js"
   }
 }
