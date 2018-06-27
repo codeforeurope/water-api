@@ -35,10 +35,11 @@ describe('inserting companies', function() {
       end(function(err, res) {
         if(err){
           done(err);
+        } else {
+          var data = JSON.parse(res.text);
+          assert.equal(data.name, instance.name);
+          done();
         }
-        var data = JSON.parse(res.text);
-        assert.equal(data.name, instance.name);
-        done();
       });
     });
   });

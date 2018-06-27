@@ -7,7 +7,7 @@ var env = process.env.NODE_ENV || 'development';
 var config = require('../config/config.json')[env];
 
 // Connect to mongodb
-mongoose.connect(config.db, { useMongoClient: true }).then(
+mongoose.connect(config.db).then(
   () => {
     /**
      * initializes all models and sources them as .model-name

@@ -11,9 +11,10 @@ it('GET /observation/average should return an array', function(done) {
   end(function(err, res) {
     if(err){
       done(err);
+    } else {
+      var data = JSON.parse(res.text);
+      assert.equal(typeof data, "object");
+      done();
     }
-    var data = JSON.parse(res.text);
-    assert.equal(typeof data, "object");
-    done();
   });
 });
