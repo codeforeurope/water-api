@@ -30,6 +30,7 @@ describe('inserting locations', function() {
     attach('file', './assets/plants.json').
     expect(200).
     end(function(err, res) {
+      if (err) done(err);
       var data = JSON.parse(res.text);
       assert.equal(data.locations.length, 173);
       done();
@@ -43,6 +44,7 @@ describe('inserting locations', function() {
     attach('file', './assets/taps.json').
     expect(200).
     end(function(err, res) {
+      if (err) done(err);
       var data = JSON.parse(res.text);
       assert.equal(data.locations.length, 655);
       done();
@@ -55,6 +57,7 @@ describe('inserting locations', function() {
     send({}).
     expect(402).
     end(function(err, res) {
+      if (err) done(err);
       var data = JSON.parse(res.text);
       assert.equal(data.name, 'AuthenticationError');
       assert.equal(data.message, 'No token provided');

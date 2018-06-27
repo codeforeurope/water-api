@@ -9,6 +9,9 @@ it('GET /observation/average should return an array', function(done) {
   get('/api/observations/average').
   expect(200).
   end(function(err, res) {
+    if(err){
+      done(err);
+    }
     var data = JSON.parse(res.text);
     assert.equal(typeof data, "object");
     done();

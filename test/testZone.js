@@ -9,7 +9,6 @@ var testdata = require('../assets/zones/heilbronn.json');
 
 describe('inserting zones', function() {
   var token;
-  var user;
 
   before(function(done) {
     var Chance = require('chance');
@@ -21,6 +20,7 @@ describe('inserting zones', function() {
       token: token
     };
     new models.User.model(testuser).save(function(err, result, count) {
+      if(err) done(err);
       user = result;
       done();
     });
@@ -44,9 +44,9 @@ describe('inserting zones', function() {
     }).
     expect(200).
     end(function(err, res) {
-        var data = JSON.parse(res.text);
-        done();
-      });
+      if(err) done(err);
+      done();
+    });
   });
 
   it('should post Zones for Mannheim, Germany', function(done) {
@@ -56,6 +56,7 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/mannheim.json').
     expect(200).
     end(function(err, res) {
+      if(err) done(err);
       var data = JSON.parse(res.text);
       assert.equal(data.zones.length, 9);
       done();
@@ -69,6 +70,7 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/brabantwater.json').
     expect(200).
     end(function(err, res) {
+      if(err) done(err);
       var data = JSON.parse(res.text);
       assert.equal(data.zones.length, 69);
       done();
@@ -82,6 +84,7 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/pwn.geojson').
     expect(200).
     end(function(err, res) {
+      if(err) done(err);
       var data = JSON.parse(res.text);
       assert.equal(data.zones.length, 5);
       done();
@@ -95,6 +98,7 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/evides.geojson').
     expect(200).
     end(function(err, res) {
+      if(err) done(err);
       var data = JSON.parse(res.text);
       assert.equal(data.zones.length, 11);
       done();
@@ -108,6 +112,7 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/dunea.geojson').
     expect(200).
     end(function(err, res) {
+      if(err) done(err);
       var data = JSON.parse(res.text);
       assert.equal(data.zones.length, 17);
       done();
@@ -121,6 +126,7 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/waternet.geojson').
     expect(200).
     end(function(err, res) {
+      if(err) done(err);
       var data = JSON.parse(res.text);
       assert.equal(data.zones.length, 2);
       done();
@@ -134,6 +140,7 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/bq.geojson').
     expect(200).
     end(function(err, res) {
+      if(err) done(err);
       var data = JSON.parse(res.text);
       assert.equal(data.zones.length, 1);
       done();
@@ -147,6 +154,7 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/sx.geojson').
     expect(200).
     end(function(err, res) {
+      if(err) done(err);
       var data = JSON.parse(res.text);
       assert.equal(data.zones.length, 1);
       done();
@@ -160,6 +168,7 @@ describe('inserting zones', function() {
     attach('file', './assets/zones/cw.geojson').
     expect(200).
     end(function(err, res) {
+      if(err) done(err);
       var data = JSON.parse(res.text);
       assert.equal(data.zones.length, 1);
       done();
@@ -177,6 +186,7 @@ describe('inserting zones', function() {
       }).
       expect(200).
       end(function(err, res) {
+        if(err) done(err);
         var data = JSON.parse(res.text);
         assert.equal(data.name, instance.properties.name);
         done();

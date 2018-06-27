@@ -1,6 +1,6 @@
 {
   "development": {
-    "db": "mongodb://localhost/water_development",
+    "db": "mongodb://localhost/water_test",
     "secret": "developmentrocks",
     "locales": ["de", "en", "nl", "fr"]
   },

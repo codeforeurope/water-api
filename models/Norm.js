@@ -1,11 +1,5 @@
-/**
- * Legal limits
- * This is basically a set of observation from labels on the bottle
- */
-
 module.exports = function(mongoose) {
     var ObjectId = mongoose.Schema.ObjectId;
-
     var Schema = new mongoose.Schema({
         name: {
             type: String,
@@ -18,6 +12,5 @@ module.exports = function(mongoose) {
         sources: Array, //url references to sources for this information
         entered_at: {type: Date, required: true, default: Date}
     });
-
     return Schema;
 };

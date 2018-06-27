@@ -1,7 +1,6 @@
 (function () {
   'use strict';
   var models = require('../models');
-  var utils = require('../helpers/util.js');
   var async = require("async");
 
   var saveLocation = function(params, callback){
@@ -42,14 +41,12 @@
   };
 
   module.exports.getlocation = function(req, res, next) {
-      var params = req.swagger.params;
       res.setHeader('content-type', 'application/json');
       res.end(JSON.stringify({"operation": "GET"}, null, 2));
   };
 
   // Upload a json file with locations
   module.exports.postlocations = function(req, res, next){
-    var final;
     var params = req.swagger.params;
     if (params.file) {
       if(params.file.value.mimetype !== 'application/json' && params.file.value.mimetype !== 'application/geo+json'){
@@ -110,7 +107,6 @@
       next(new Error('Not Implemented'));
   };
   module.exports.deletelocation = function(req, res, next) {
-      var params = req.swagger.params;
       res.setHeader('content-type', 'application/json');
       res.end(JSON.stringify({"operation": "DELETE"}, null, 2));
   };

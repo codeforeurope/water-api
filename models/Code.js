@@ -1,13 +1,10 @@
-/**
- * Taken from the WISE Code lists
- * http://www.eea.europa.eu/data-and-maps/data/waterbase-water-quality#tab-additional-information
- *
- * Code list FieldName: observedPropertyDeterminandCode
- */
-
 module.exports = function(mongoose) {
-    var ObjectId = mongoose.Schema.ObjectId;
-
+    /**
+     * Taken from the WISE Code lists
+     * http://www.eea.europa.eu/data-and-maps/data/waterbase-water-quality#tab-additional-information
+     *
+     * Code list FieldName: observedPropertyDeterminandCode
+     */
     var Schema = new mongoose.Schema({
         code: {
           type: String,

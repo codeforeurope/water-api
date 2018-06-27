@@ -1,13 +1,11 @@
-/**
- * Taken from the WISE Code lists
- * http://www.eea.europa.eu/data-and-maps/data/waterbase-water-quality#tab-additional-information
- *
- * Code list FieldName: resultUom
- */
-
 module.exports = function(mongoose) {
+    /**
+     * Taken from the WISE Code lists
+     * http://www.eea.europa.eu/data-and-maps/data/waterbase-water-quality#tab-additional-information
+     *
+     * Code list FieldName: resultUom
+     */
     var ObjectId = mongoose.Schema.ObjectId;
-
     var Schema = new mongoose.Schema({
         code: {type: String, unique: true},
         value: {
@@ -25,6 +23,5 @@ module.exports = function(mongoose) {
         entered_at: {type: Date, required: true, default: Date},
         entered_by: {type: ObjectId, ref: 'User', required: true}
     });
-
     return Schema;
 };

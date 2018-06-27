@@ -10,6 +10,7 @@ it('GET local government by coordinates should return Vught', function(done) {
   query({ "lat": 51.6362, "lon": 5.2981 }).
   expect(200).
   end(function(err, res) {
+    if (err) done(err);
     var data = JSON.parse(res.text);
     assert.equal(data.jurisdiction, 'Vught');
     assert.equal(data.type, 'local government');
@@ -24,6 +25,7 @@ it('GET local government by coordinates should return Eindhoven', function(done)
   query({ "lat": 51.4547, "lon": 5.4212 }).
   expect(200).
   end(function(err, res) {
+    if (err) done(err);
     var data = JSON.parse(res.text);
     assert.equal(data.jurisdiction, 'Eindhoven');
     assert.equal(data.type, 'local government');
@@ -38,6 +40,7 @@ it('GET local government by coordinates should return Eindhoven', function(done)
   query({ "lat": 51.4202, "lon": 5.4976 }).
   expect(200).
   end(function(err, res) {
+    if (err) done(err);
     var data = JSON.parse(res.text);
     assert.equal(data.jurisdiction, 'Eindhoven');
     assert.equal(data.type, 'local government');
@@ -52,6 +55,7 @@ it('GET local government by address should return Eindhoven', function(done) {
   query({ "q": "eindhoven" }).
   expect(200).
   end(function(err, res) {
+    if (err) done(err);
     var data = JSON.parse(res.text);
     assert.equal(data.jurisdiction, 'Eindhoven');
     assert.equal(data.type, 'local government');
@@ -66,12 +70,13 @@ it('GET local government by address should return Vught', function(done) {
   query({ "q": "beukenlaan 2 vught" }).
   expect(200).
   end(function(err, res) {
-      var data = JSON.parse(res.text);
-      assert.equal(data.jurisdiction, 'Vught');
-      assert.equal(data.type, 'local government');
-      assert.equal(data.country, 'nl');
-      done();
-    });
+    if (err) done(err);
+    var data = JSON.parse(res.text);
+    assert.equal(data.jurisdiction, 'Vught');
+    assert.equal(data.type, 'local government');
+    assert.equal(data.country, 'nl');
+    done();
+  });
 });
 
 it('GET local government by address should return Rotterdam', function(done) {
@@ -80,6 +85,7 @@ it('GET local government by address should return Rotterdam', function(done) {
   query({ "q": "rotterdam" }).
   expect(200).
   end(function(err, res) {
+    if (err) done(err);
     var data = JSON.parse(res.text);
     assert.equal(data.jurisdiction, 'Rotterdam');
     assert.equal(data.country, 'nl');
@@ -93,6 +99,7 @@ it('GET local government by coordinates should return Dublin', function(done) {
   query({ "lat": 53.35457385, "lon": -6.28105931973511 }).
   expect(200).
   end(function(err, res) {
+    if (err) done(err);
     var data = JSON.parse(res.text);
     assert.equal(data.jurisdiction, 'Dublin');
     assert.equal(data.type, 'local government');
@@ -107,6 +114,7 @@ it('GET local government by address should return Dublin', function(done) {
   query({ "q": "donnybrook close" }).
   expect(200).
   end(function(err, res) {
+    if (err) done(err);
     var data = JSON.parse(res.text);
     assert.equal(data.jurisdiction, 'Dublin');
     assert.equal(data.country, 'ie');

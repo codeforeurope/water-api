@@ -9,7 +9,6 @@ var testdata = require('../assets/companies.json');
 
 describe('inserting companies', function() {
   var token;
-  var user;
 
   before(function(done) {
     var Chance = require('chance');
@@ -21,10 +20,11 @@ describe('inserting companies', function() {
       token: token
     };
     new models.User.model(testuser).save(function(err, result, count) {
-      user = result;
-      done();
+      if(err) done(err);
+      else done();
     });
   });
+
   testdata.forEach(function(instance) {
     it('should return ' + instance.name, function(done) {
       request(app).
@@ -33,6 +33,9 @@ describe('inserting companies', function() {
       send(instance).
       expect(200).
       end(function(err, res) {
+        if(err){
+          done(err);
+        }
         var data = JSON.parse(res.text);
         assert.equal(data.name, instance.name);
         done();

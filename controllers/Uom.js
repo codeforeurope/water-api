@@ -1,11 +1,6 @@
-/**
- * Uoms
- */
 (function () {
   'use strict';
-  var async = require("async");
   var models = require('../models');
-  var utils = require('../helpers/util.js');
 
   module.exports.postuom = function(req, res, next) {
     var input = req.swagger.params.body.value;

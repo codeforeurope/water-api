@@ -1,11 +1,9 @@
 (function() {
     'use strict';
     var models = require('../models');
-    var Company = models.Company;
     var utils = require('../helpers/util.js');
 
     module.exports.getcompanies = function(req, res, next) {
-      var params = req.swagger.params;
       models.Company.model.find().
       select('name').
       exec(function(err, companies){
@@ -71,7 +69,7 @@
     module.exports.postcompany = function(req, res, next) {
       var params = req.swagger.params.body.value;
       var code = params.code || params.name.replace(/[`~!@#$%^&*()\ \_|+\-=÷¿?;:'",.<>\{\}\[\]\\\/]/gi, '').toLowerCase();
-      var tempcompany = new Company.model({
+      var tempcompany = new models.Company.model({
         code: code,
         name: params.name,
         url: params.url || null,
@@ -98,15 +96,15 @@
     };
 
     module.exports.putcompany = function(req, res, next) {
-        var params = req.swagger.params;
         res.setHeader('content-type', 'application/json');
         res.setHeader('charset', 'utf-8');
         res.end(JSON.stringify({"operation": "PUT"}, null, 2));
+        next();
     };
     module.exports.deletecompany = function(req, res, next) {
-        var params = req.swagger.params;
         res.setHeader('content-type', 'application/json');
         res.setHeader('charset', 'utf-8');
         res.end(JSON.stringify({"operation": "DELETE"}, null, 2));
+        next();
     };
 }());

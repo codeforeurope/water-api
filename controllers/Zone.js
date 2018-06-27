@@ -3,8 +3,6 @@
   var models = require('../models');
   var utils = require('../helpers/util.js');
   var async = require("async");
-
-
   var saveZone = function(params, callback){
     if(!params.operator){
       var tempzone = new models.Zone.model(params);
@@ -95,7 +93,6 @@
 
   // Upload a json file with zones
   module.exports.postzones = function(req, res, next){
-    var final;
     var params = req.swagger.params;
     if (params.file) {
       if(params.file.value.mimetype !== 'application/json' && params.file.value.mimetype !== 'application/geo+json'){

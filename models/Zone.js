@@ -1,6 +1,5 @@
 module.exports = function(mongoose) {
     var ObjectId = mongoose.Schema.ObjectId;
-
     var Schema = new mongoose.Schema({
       name: String,
       operator: {type: ObjectId, ref: 'Company'}, //The watercompany that services this zone

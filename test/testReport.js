@@ -25,6 +25,7 @@ describe('inserting reports', function() {
     models.Zone.model.find().
     select('name code _id').
     exec(function(err, _zones){
+      if (err) done(err);
       zones = [];
       for (var zone in _zones) {
         zones[_zones[zone].name] = _zones[zone]._id;
@@ -46,6 +47,7 @@ describe('inserting reports', function() {
       send(instance).
       expect(200).
       end(function(err, res) {
+        if (err) done(err);
         var data = JSON.parse(res.text);
         assert.equal(data.name, instance.name);
         done();
@@ -60,6 +62,7 @@ describe('inserting reports', function() {
     attach('file', './assets/reports/mannheim.json').
     expect(200).
     end(function(err, res) {
+      if (err) done(err);
       var data = JSON.parse(res.text);
       assert.equal(data.reports.length, 11);
       done();
@@ -72,6 +75,7 @@ describe('inserting reports', function() {
     attach('file', './assets/reports/brabantwater.json').
     expect(200).
     end(function(err, res) {
+      if (err) done(err);
       var data = JSON.parse(res.text);
       assert.equal(data.reports.length, 58);
       done();
@@ -84,6 +88,7 @@ describe('inserting reports', function() {
     attach('file', './assets/reports/dunea.json').
     expect(200).
     end(function(err, res) {
+      if (err) done(err);
       var data = JSON.parse(res.text);
       assert.equal(data.reports.length, 15);
       done();
@@ -96,6 +101,7 @@ describe('inserting reports', function() {
     attach('file', './assets/reports/pwn.json').
     expect(200).
     end(function(err, res) {
+      if (err) done(err);
       var data = JSON.parse(res.text);
       assert.equal(data.reports.length, 48);
       done();
@@ -108,6 +114,7 @@ describe('inserting reports', function() {
     attach('file', './assets/reports/waternet.json').
     expect(200).
     end(function(err, res) {
+      if (err) done(err);
       var data = JSON.parse(res.text);
       assert.equal(data.reports.length, 1);
       done();
@@ -120,6 +127,7 @@ describe('inserting reports', function() {
     attach('file', './assets/reports/evides.json').
     expect(200).
     end(function(err, res) {
+      if (err) done(err);
       var data = JSON.parse(res.text);
       assert.equal(data.reports.length, 96);
       done();

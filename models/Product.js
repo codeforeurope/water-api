@@ -1,11 +1,9 @@
-/**
- * Bottled water product
- * This is basically a set of observation from labels on the bottle
- */
-
 module.exports = function(mongoose) {
+    /**
+     * Bottled water product
+     * This is basically a set of observation from labels on the bottle
+     */
     var ObjectId = mongoose.Schema.ObjectId;
-
     var Schema = new mongoose.Schema({
         code: {type: String, required: true},
         name: {type: String, required: true},

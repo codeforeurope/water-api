@@ -1,6 +1,5 @@
 module.exports = function(mongoose) {
     var ObjectId = mongoose.Schema.ObjectId;
-
     var Schema = new mongoose.Schema({
         operator: {type: ObjectId, ref: 'Operator'},
         operator_id: String,

@@ -15,6 +15,7 @@ describe('inserting observation', function() {
       token: chance.guid()
     };
     new models.User.model(testuser).save(function(err, result, count) {
+      if (err) done(err);
       user = result;
       done();
     });
@@ -25,6 +26,7 @@ describe('inserting observation', function() {
       models.Code.model.findOne({standard: 'CAS', value: '7440-09-7'},function(err, potassium){
         var testObservation = models.Observation.model({ value: 200, uom: mgl, code: potassium, entered_by: user });
         testObservation.save(function(err, result, count){
+          if (err) done(err);
           var out = result.toJSONLocalizedOnly('nl','en');
           assert.equal(out.code.label, 'Kalium');
           done();

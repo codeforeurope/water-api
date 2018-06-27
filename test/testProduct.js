@@ -21,6 +21,7 @@ describe('inserting products', function() {
       token: token
     };
     new models.User.model(testuser).save(function(err, result, count) {
+      if (err) done(err);
       user = result;
       done();
     });
@@ -33,6 +34,7 @@ describe('inserting products', function() {
       send(instance).
       expect(200).
       end(function(err, res) {
+        if (err) done(err);
         var data = JSON.parse(res.text);
         assert.equal(data.name, instance.name);
         done();

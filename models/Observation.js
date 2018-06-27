@@ -1,12 +1,9 @@
-/**
- * Contains individual observations regarding water quality
- * Can also be from the label of bottled water (official producer values)
- *
- */
-
 module.exports = function(mongoose) {
+    /**
+     * Contains individual observations regarding water quality
+     * Can also be from the label of bottled water (official producer values)
+     */
     var ObjectId = mongoose.Schema.ObjectId;
-
     var Schema = new mongoose.Schema({
         value: Number,
         min: Number,
@@ -23,6 +20,5 @@ module.exports = function(mongoose) {
         entered_at: {type: Date, required: true, default: Date},
         entered_by: {type: ObjectId, ref: 'User', required: true}
     });
-
     return Schema;
 };

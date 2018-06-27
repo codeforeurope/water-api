@@ -1,9 +1,8 @@
-/**
- * Report from a company regarding waterquality in a zone
- * This is basically a set of observation from labels on the bottle
- */
-
 module.exports = function(mongoose) {
+    /**
+     * Report from a company regarding waterquality in a zone
+     * This is basically a set of observation from labels on the bottle
+     */
     var ObjectId = mongoose.Schema.ObjectId;
 
     var Schema = new mongoose.Schema({

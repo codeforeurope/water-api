@@ -22,6 +22,7 @@ describe('inserting units of measure', function() {
     };
     var user = new models.User.model(testuser);
     user.save(function(err, user, count) {
+      if (err) done(err);
       user = user;
       done();
     });
@@ -34,6 +35,7 @@ describe('inserting units of measure', function() {
       send(instance).
       expect(200).
       end(function(err, res) {
+        if (err) done(err);
         var data = JSON.parse(res.text);
         assert.equal(data.code, instance.code);
         done();
